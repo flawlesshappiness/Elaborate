@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bydky68bekqcu"]
+
+[ext_resource type="PackedScene" uid="uid://p2j5vmw0p5gr" path="res://UI/Views/PauseView/PauseView.tscn" id="2_62uqm"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_ovt1d"]
+script/source = "using Godot;
+
+public partial class UIController : Control
+{
+    public static UIController Instance { get; private set; }
+
+    public static void CreateInstance(Node node)
+    {
+        if (Instance != null) return;
+
+        var scene = GD.Load(\"res://UI/UIController.tscn\") as PackedScene;
+        var packed_scene = scene.Instantiate();
+        node.GetTree().Root.AddChild(packed_scene);
+        var script = packed_scene.GetNodeInChildren<UIController>();
+        Instance = script;
+    }
+}
+"
+
+[node name="UIController" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("CSharpScript_ovt1d")
+
+[node name="PauseView" parent="." instance=ExtResource("2_62uqm")]
+layout_mode = 1

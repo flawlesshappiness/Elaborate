@@ -1,0 +1,6 @@
+[
+	{ "id": "DEBUG_001", "next": "DEBUG_002", "text": "This is the first debug dialogue text." },
+	{ "id": "DEBUG_002", "next": "DEBUG_003", "text": "The second debug text looks like this. If you wanted to, you can click [url=DEBUG_004]here[/url]." },
+	{ "id": "DEBUG_003", "text": "And this is the third debug text." },
+	{ "id": "DEBUG_004", "text": "You got to the fourth debug text by clicking the text." }
+]
