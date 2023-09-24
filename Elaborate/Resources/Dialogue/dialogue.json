@@ -1,6 +1,47 @@
 [
-	{ "id": "DEBUG_001", "next": "DEBUG_002", "text": "This is the first debug dialogue text." },
-	{ "id": "DEBUG_002", "next": "DEBUG_003", "text": "The second debug text looks like this. If you wanted to, you can click [url=DEBUG_004]here[/url]." },
-	{ "id": "DEBUG_003", "text": "And this is the third debug text." },
-	{ "id": "DEBUG_004", "text": "You got to the fourth debug text by clicking the text." }
+	{
+		"id": "DEBUG_001",
+		"next": "DEBUG_002",
+		"text": "This is the first debug dialogue text."
+	},
+	{
+		"id": "DEBUG_002",
+		"next": "DEBUG_003",
+		"text": "The second debug text looks like this. If you wanted to, you can click [url=DEBUG_004]here[/url]."
+	},
+	{
+		"id": "DEBUG_003",
+		"text": "And this is the third debug text."
+	},
+	{
+		"id": "DEBUG_004",
+		"text": "You got to the fourth debug text by clicking the text."
+	},
+	{
+		"id": "HOME_BOOKCASE_001",
+		"next": "HOME_BOOKCASE_002",
+		"text": "Judging by how many books I own, it's easy to see how smart I am."
+	},
+	{
+		"id": "HOME_BOOKCASE_002",
+		"text": "I'll try reading one of them next week."
+	},
+	{
+		"id": "HOME_BED_001",
+		"next": "HOME_BED_002",
+		"text": "I hate to think about how much time I spend lying there."
+	},
+	{
+		"id": "HOME_BED_002",
+		"next": "HOME_BED_003",
+		"text": "Once I reach godhood, my first miracle will be to eradicate the need for sleep."
+	},
+	{
+		"id": "HOME_BED_003",
+		"text": "My second miracle.{pause=500}.{pause=500}.{pause=500} Free donuts."
+	},
+	{
+		"id": "WORRIED_001",
+		"text": "I'm too worried to do that."
+	}
 ]

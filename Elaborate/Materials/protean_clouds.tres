@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bfva15fl263vx"]
+
+[ext_resource type="Shader" path="res://Shaders/Protean Clouds.gdshader" id="1_cjq5i"]
+
+[resource]
+shader = ExtResource("1_cjq5i")
+shader_parameter/is_card = false
+shader_parameter/iTime = 0.0
+shader_parameter/iChannelResolution1 = null

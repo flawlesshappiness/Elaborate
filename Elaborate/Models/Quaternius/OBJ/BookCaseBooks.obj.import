@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://g1pulmpj8ce1"
+path="res://.godot/imported/BookCaseBooks.obj-5eade1629dfb5c0c940615c315224d6d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BookCaseBooks.obj-5eade1629dfb5c0c940615c315224d6d.mesh"]
+
+source_file="res://Models/Quaternius/OBJ/BookCaseBooks.obj"
+dest_files=["res://.godot/imported/BookCaseBooks.obj-5eade1629dfb5c0c940615c315224d6d.mesh", "res://.godot/imported/BookCaseBooks.obj-5eade1629dfb5c0c940615c315224d6d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

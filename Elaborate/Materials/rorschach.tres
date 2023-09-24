@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dwli84hot4yoh"]
+
+[ext_resource type="Shader" path="res://Shaders/Rorschach Ink Test.gdshader" id="1_xbemh"]
+
+[resource]
+shader = ExtResource("1_xbemh")
+shader_parameter/is_card = false
+shader_parameter/iTime = 0.0
+shader_parameter/time_offset = null
+shader_parameter/tint = Vector3(255, 68, 23)
+shader_parameter/ink_color_1 = Vector3(0, 0, 0)
+shader_parameter/ink_color_2 = Vector3(255, 0, 0)
+shader_parameter/paper_color = Vector3(50, 60, 70)

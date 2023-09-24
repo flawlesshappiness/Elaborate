@@ -28,7 +28,7 @@ public static class NodeExtensions
                 return script;
             }
 
-            current = current.GetNode("../");
+            current = current.GetParent();
         }
 
         return null;

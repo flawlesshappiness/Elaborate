@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce7w76lrklkn6"]
+
+[ext_resource type="Material" uid="uid://dwli84hot4yoh" path="res://Materials/rorschach.tres" id="1_jeqdf"]
+[ext_resource type="Script" path="res://UI/Rorschach.cs" id="2_6boh8"]
+
+[node name="Rorschach" type="ColorRect"]
+visible = false
+material = ExtResource("1_jeqdf")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -600.0
+offset_right = 600.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_6boh8")
+Speed = 0.25

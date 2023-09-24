@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c02o14xe35xvy"]
+
+[ext_resource type="ArrayMesh" uid="uid://c8ulvj7h3rtk6" path="res://Models/Quaternius/OBJ/Window_Small2.obj" id="1_obwii"]
+[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_light_001.tres" id="2_hmfws"]
+
+[node name="WindowSmall2" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14081, 0, -3.61822)
+mesh = ExtResource("1_obwii")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_hmfws")
+surface_material_override/1 = ExtResource("2_hmfws")

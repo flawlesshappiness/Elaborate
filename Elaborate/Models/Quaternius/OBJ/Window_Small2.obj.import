@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c8ulvj7h3rtk6"
+path="res://.godot/imported/Window_Small2.obj-c67ec90278f4064307e69b3b5320ed2d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Window_Small2.obj-c67ec90278f4064307e69b3b5320ed2d.mesh"]
+
+source_file="res://Models/Quaternius/OBJ/Window_Small2.obj"
+dest_files=["res://.godot/imported/Window_Small2.obj-c67ec90278f4064307e69b3b5320ed2d.mesh", "res://.godot/imported/Window_Small2.obj-c67ec90278f4064307e69b3b5320ed2d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

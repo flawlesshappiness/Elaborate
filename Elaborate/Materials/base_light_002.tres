@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cjflevrn682wk"]
+
+[ext_resource type="Shader" path="res://Shaders/Thick 3D Screen Space – Depth – & Normal – Based Outline Shader.gdshader" id="1_a3o85"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rkrs"]
+albedo_color = Color(0.85, 0.85, 0.85, 1)
+
+[resource]
+render_priority = 0
+next_pass = SubResource("StandardMaterial3D_6rkrs")
+shader = ExtResource("1_a3o85")
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_thickness = 2.0

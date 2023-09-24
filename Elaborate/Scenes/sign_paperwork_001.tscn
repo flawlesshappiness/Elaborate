@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqmvdn0bu8omc"]
+
+[ext_resource type="Script" path="res://Scenes/sign_paperwork_001.cs" id="1_5awwu"]
+[ext_resource type="Script" path="res://Draw/DrawController.cs" id="2_5wmx7"]
+[ext_resource type="PackedScene" uid="uid://ce7w76lrklkn6" path="res://UI/rorschach.tscn" id="2_xslms"]
+
+[sub_resource type="Environment" id="Environment_e5bgt"]
+background_mode = 1
+ambient_light_source = 2
+
+[node name="sign_paperwork_001" type="Node3D"]
+script = ExtResource("1_5awwu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+environment = SubResource("Environment_e5bgt")
+
+[node name="Canvas2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rorschach" parent="Canvas2" instance=ExtResource("2_xslms")]
+visible = true
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="DrawController" type="Node2D" parent="Canvas2"]
+
+[node name="Line2D" type="Line2D" parent="Canvas2/DrawController"]
+points = PackedVector2Array(377, 400, 583, 150, 926, 373, 694, 554, 628, 344)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+script = ExtResource("2_5wmx7")

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dl6yu12t8u28k"
+path="res://.godot/imported/Couch_Medium1.obj-7febf01f473eefed24443fde61023ecf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Couch_Medium1.obj-7febf01f473eefed24443fde61023ecf.mesh"]
+
+source_file="res://Models/Quaternius/OBJ/Couch_Medium1.obj"
+dest_files=["res://.godot/imported/Couch_Medium1.obj-7febf01f473eefed24443fde61023ecf.mesh", "res://.godot/imported/Couch_Medium1.obj-7febf01f473eefed24443fde61023ecf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cg087yaipj50m"]
+
+[ext_resource type="Shader" path="res://Shaders/Thick 3D Screen Space – Depth – & Normal – Based Outline Shader.gdshader" id="1_qoc2d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rkrs"]
+
+[resource]
+render_priority = 0
+next_pass = SubResource("StandardMaterial3D_6rkrs")
+shader = ExtResource("1_qoc2d")
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_thickness = 2.0

@@ -1,8 +1,13 @@
 using Godot;
 using System.Collections;
+using System.Linq;
 
 public partial class DialogueView : View
 {
+    private const bool DEBUG = true;
+
+    private bool _first_frame;
+
     private RichTextLabel dialogue_label;
     private TextureButton dialogue_button;
 
@@ -13,6 +18,8 @@ public partial class DialogueView : View
     private const ulong MSEC_PER_CHAR = 15;
 
     public bool IsAnimatingDialogue => !(_cr_dialogue_text?.HasEnded ?? false);
+
+    public System.Action<string> OnDialogueStarted, OnDialogueEnded;
 
     public override void _Ready()
     {
@@ -39,25 +46,36 @@ public partial class DialogueView : View
     {
         base._Input(@event);
         InputMouseButton(@event as InputEventMouseButton);
+        InputAction();
     }
 
     private void InputMouseButton(InputEventMouseButton e)
     {
         if (e == null) return;
+        if (!Visible) return;
 
         if (e.IsReleased() && e.ButtonIndex == MouseButton.Left)
         {
-            if (Visible)
+            if (IsAnimatingDialogue)
             {
-                if (IsAnimatingDialogue)
-                {
-                    EndAnimateDialogueText();
-                }
+                EndAnimateDialogueText();
+            }
+        }
+    }
+
+    private void InputAction()
+    {
+        if (!Visible) return;
+
+        if (Input.IsActionJustPressed(PlayerControls.UI_Accept))
+        {
+            if (IsAnimatingDialogue)
+            {
+                EndAnimateDialogueText();
             }
             else
             {
-                ShowDialogueBox();
-                SetDialogueNode("DEBUG_001");
+                NextDialogueText();
             }
         }
     }
@@ -66,6 +84,7 @@ public partial class DialogueView : View
     {
         Input.MouseMode = Input.MouseModeEnum.Visible;
         Scene.PauseLock.AddLock(nameof(DialogueView));
+        Player.InteractLock.AddLock(nameof(DialogueView));
         Visible = true;
     }
 
@@ -73,6 +92,7 @@ public partial class DialogueView : View
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
         Scene.PauseLock.RemoveLock(nameof(DialogueView));
+        Player.InteractLock.RemoveLock(nameof(DialogueView));
         Visible = false;
     }
 
@@ -87,46 +107,68 @@ public partial class DialogueView : View
     }
 
     public void SetDialogueNode(string id) =>
-        SetDialogueNode(DialogueController.Instance.GetNode(id));
+         SetDialogueNode(DialogueController.Instance.GetNode(id));
 
     public void SetDialogueNode(DialogueNode node)
     {
+        Debug.Log(DEBUG, $"DialogueView.SetDialogueNode({node})");
+
+        if (_current_node == null && node != null)
+        {
+            Debug.Log(DEBUG, $"Dialogue started: {node.Id}");
+            OnDialogueStarted?.Invoke(node.Id);
+            ShowDialogueBox();
+        }
+
+        var previous_node = _current_node;
         _current_node = node;
 
-        if (node == null)
+        if (_current_node == null)
         {
+            if (previous_node != null)
+            {
+                Debug.Log(DEBUG, $"Dialogue ended: {previous_node.Id}");
+                OnDialogueEnded?.Invoke(previous_node.Id);
+            }
+
             HideDialogueBox();
             return;
         }
 
+        Debug.Log(DEBUG, $"Dialogue node: {_current_node.Id}");
+
+        var text = new DialogueText(node);
+
         HideDialogueButton();
-        SetDialogueText(node.Text);
-        AnimateDialogueText(MSEC_PER_CHAR);
+        SetDialogueText(text);
+        AnimateDialogueText(text, MSEC_PER_CHAR);
     }
 
-    public void SetDialogueText(string text)
+    public void SetDialogueText(DialogueText text)
     {
-        dialogue_label.Text = text;
+        dialogue_label.Text = text.Text;
         dialogue_label.VisibleCharacters = -1;
     }
 
     private void NextDialogueText() =>
         SetDialogueNode(_current_node.Next);
 
-    private Coroutine AnimateDialogueText(ulong msec_per_char)
+    private Coroutine AnimateDialogueText(DialogueText text, ulong msec_per_char)
     {
         dialogue_label.VisibleCharacters = 0;
+        _first_frame = true;
 
         Coroutine.Stop(_cr_dialogue_text);
-        _cr_dialogue_text = Coroutine.Start(AnimateDialogueTextCr(msec_per_char));
+        _cr_dialogue_text = Coroutine.Start(AnimateDialogueTextCr(text, msec_per_char));
         return _cr_dialogue_text;
     }
 
-    private IEnumerator AnimateDialogueTextCr(ulong msec_per_char)
+    private IEnumerator AnimateDialogueTextCr(DialogueText text, ulong msec_per_char)
     {
         var i = 0;
-        var max = dialogue_label.Text.GetLengthWithoutBBCode();
+        var max = text.TextLength;
         var time_current = Time.GetTicksMsec();
+        var force_increment_once = false;
 
         while (i < max)
         {
@@ -137,7 +179,22 @@ public partial class DialogueView : View
                 i++;
                 dialogue_label.VisibleCharacters = i;
                 time_current += msec_per_char;
+
+                // Animation
+                var animation = text.Animations.FirstOrDefault(a => a.Index == i);
+                if (animation != null)
+                {
+                    var pause = animation as DialogueText.PauseIndexAnimation;
+                    if (pause != null)
+                    {
+                        Debug.Log($"Waiting for {pause.DurationInMs}ms");
+                        time_current += (ulong)pause.DurationInMs;
+                        yield return new WaitForSeconds((float)pause.DurationInMs / 1000);
+                    }
+                }
             }
+
+            _first_frame = false;
         }
 
         OnAnimateDialogueTextEnd();
@@ -151,6 +208,7 @@ public partial class DialogueView : View
 
     private void EndAnimateDialogueText()
     {
+        if (_first_frame) return;
         Coroutine.Stop(_cr_dialogue_text);
         OnAnimateDialogueTextEnd();
     }

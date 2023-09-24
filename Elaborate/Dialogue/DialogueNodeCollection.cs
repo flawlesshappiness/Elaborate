@@ -1,3 +1,4 @@
+using Godot;
 using System.Collections.Generic;
 
 public class DialogueNodeCollection
@@ -25,7 +26,13 @@ public class DialogueNodeCollection
     public DialogueNode GetNode(string id)
     {
         if (id == null) return null;
-        if (!_nodes.ContainsKey(id)) return null;
+
+        if (!_nodes.ContainsKey(id))
+        {
+            GD.PrintErr($"DialogueNodeCollection: Failed to get node with id: {id}");
+            return null;
+        }
+
         return _nodes[id];
     }
 }

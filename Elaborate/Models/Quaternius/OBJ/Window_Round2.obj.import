@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dsiptke8wx1uw"
+path="res://.godot/imported/Window_Round2.obj-1b23cf83c0ac7009b809a2a0ff24421a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Window_Round2.obj-1b23cf83c0ac7009b809a2a0ff24421a.mesh"]
+
+source_file="res://Models/Quaternius/OBJ/Window_Round2.obj"
+dest_files=["res://.godot/imported/Window_Round2.obj-1b23cf83c0ac7009b809a2a0ff24421a.mesh", "res://.godot/imported/Window_Round2.obj-1b23cf83c0ac7009b809a2a0ff24421a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

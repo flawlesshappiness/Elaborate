@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://do4vfq8t8lwb8"]
+
+[ext_resource type="ArrayMesh" uid="uid://bl6ppd45vdtfr" path="res://Models/Quaternius/OBJ/Bed_Single.obj" id="1_j4uha"]
+[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_light_001.tres" id="2_o1p5a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1iujb"]
+size = Vector3(1.81082, 0.830423, 3.91979)
+
+[node name="BedSingle" type="MeshInstance3D"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -5.06318, -4.17233e-07, -4.42794)
+mesh = ExtResource("1_j4uha")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_o1p5a")
+surface_material_override/1 = ExtResource("2_o1p5a")
+surface_material_override/2 = ExtResource("2_o1p5a")
+surface_material_override/3 = ExtResource("2_o1p5a")
+surface_material_override/4 = ExtResource("2_o1p5a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.418174, 0)
+shape = SubResource("BoxShape3D_1iujb")

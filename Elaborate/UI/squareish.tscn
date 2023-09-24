@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhl2u2fv2iamc"]
+
+[ext_resource type="Material" uid="uid://cp0j2k2mp63gl" path="res://Materials/squareish.tres" id="1_wlr8f"]
+[ext_resource type="Script" path="res://UI/squareish.cs" id="2_io1pd"]
+
+[node name="Squareish" type="ColorRect"]
+material = ExtResource("1_wlr8f")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -600.0
+offset_right = 600.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_io1pd")
+Speed = 0.25

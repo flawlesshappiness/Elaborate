@@ -1,0 +1,83 @@
+[gd_scene load_steps=15 format=3 uid="uid://c8et3jbchcpiq"]
+
+[ext_resource type="Script" path="res://Scenes/home_001.cs" id="1_6gvod"]
+[ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/player.tscn" id="2_kxp2d"]
+[ext_resource type="PackedScene" uid="uid://bt800rhdk3pmv" path="res://Interior/floor.tscn" id="3_uths2"]
+[ext_resource type="PackedScene" uid="uid://cpj5061q1s535" path="res://Interior/ceiling.tscn" id="4_rwy86"]
+[ext_resource type="PackedScene" uid="uid://bk4u3k36pahhd" path="res://Interior/wall.tscn" id="5_0f4gi"]
+[ext_resource type="PackedScene" uid="uid://s850tyddk22e" path="res://Models/Quaternius/Prefabs/couch_medium_1.tscn" id="6_7ca4e"]
+[ext_resource type="PackedScene" uid="uid://do4vfq8t8lwb8" path="res://Models/Quaternius/Prefabs/bed_single.tscn" id="7_p1cwg"]
+[ext_resource type="PackedScene" uid="uid://k522cynkv3fs" path="res://Models/Quaternius/Prefabs/door_1.tscn" id="8_innhf"]
+[ext_resource type="PackedScene" uid="uid://dbayb7mnmrnvw" path="res://Models/Quaternius/Prefabs/table.tscn" id="9_6p22o"]
+[ext_resource type="Script" path="res://Entities/InteractableDialogue.cs" id="10_labri"]
+[ext_resource type="PackedScene" uid="uid://r10yptkyox78" path="res://Models/Quaternius/Prefabs/book_case_books.tscn" id="11_oo7yw"]
+[ext_resource type="PackedScene" uid="uid://di6wluwu1fy8" path="res://Models/Quaternius/Prefabs/plant.tscn" id="12_whfgm"]
+[ext_resource type="PackedScene" uid="uid://c02o14xe35xvy" path="res://Models/Quaternius/Prefabs/window_small_2.tscn" id="13_anyfx"]
+
+[sub_resource type="Environment" id="Environment_6e6rg"]
+background_mode = 1
+background_color = Color(0.698039, 0.839216, 0.662745, 1)
+
+[node name="room_001" type="Node3D"]
+script = ExtResource("1_6gvod")
+
+[node name="Player" parent="." instance=ExtResource("2_kxp2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.84787, -4.76837e-07, -0.852728)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6e6rg")
+
+[node name="room" type="Node3D" parent="."]
+
+[node name="floor" parent="room" instance=ExtResource("3_uths2")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, -3)
+skeleton = NodePath("../..")
+
+[node name="ceiling" parent="room" instance=ExtResource("4_rwy86")]
+
+[node name="wall" parent="room" instance=ExtResource("5_0f4gi")]
+transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 3, -6, 2, -3)
+skeleton = NodePath("../..")
+
+[node name="wall2" parent="room" instance=ExtResource("5_0f4gi")]
+transform = Transform3D(-8.74228e-08, -2, 2.62268e-07, -2, 8.74228e-08, -1.14641e-14, 0, -1.74846e-07, -3, 0, 2, -3)
+skeleton = NodePath("../..")
+
+[node name="wall3" parent="room" instance=ExtResource("5_0f4gi")]
+transform = Transform3D(-8.74228e-08, -8.74228e-08, -3, -2, 0, 1.31134e-07, 0, 2, -1.31134e-07, -3, 2, -6)
+skeleton = NodePath("../..")
+
+[node name="wall4" parent="room" instance=ExtResource("5_0f4gi")]
+transform = Transform3D(-8.74228e-08, 2.62268e-07, 3, -2, -7.64274e-15, -1.31134e-07, 0, -2, 3.93403e-07, -3, 2, 0)
+skeleton = NodePath("../..")
+
+[node name="furniture" type="Node3D" parent="."]
+
+[node name="CouchMedium1" parent="furniture" instance=ExtResource("6_7ca4e")]
+
+[node name="BedSingle" parent="furniture" instance=ExtResource("7_p1cwg")]
+
+[node name="Interact" type="Node3D" parent="furniture/BedSingle"]
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 4.48167, 5.96047e-07, 0.585071)
+script = ExtResource("10_labri")
+dialogue_id = "HOME_BED_001"
+
+[node name="Door1" parent="furniture" instance=ExtResource("8_innhf")]
+
+[node name="Interact" type="Node3D" parent="furniture/Door1"]
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, -0.828386, 0, -5.7109)
+script = ExtResource("10_labri")
+dialogue_id = "WORRIED_001"
+
+[node name="Table" parent="furniture" instance=ExtResource("9_6p22o")]
+
+[node name="BookCaseBooks" parent="furniture" instance=ExtResource("11_oo7yw")]
+
+[node name="Interact" type="Node3D" parent="furniture/BookCaseBooks"]
+script = ExtResource("10_labri")
+dialogue_id = "HOME_BOOKCASE_001"
+
+[node name="Plant" parent="furniture" instance=ExtResource("12_whfgm")]
+
+[node name="WindowSmall2" parent="furniture" instance=ExtResource("13_anyfx")]
+transform = Transform3D(0, 0, -1.5, 0, 1.5, 0, 1.5, 0, 0, -0.0575099, 0.976376, -2.8377)

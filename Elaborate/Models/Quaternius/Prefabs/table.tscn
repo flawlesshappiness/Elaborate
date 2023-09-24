@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbayb7mnmrnvw"]
+
+[ext_resource type="ArrayMesh" uid="uid://eekfmqxn2pxe" path="res://Models/Quaternius/OBJ/Table.obj" id="1_v63ge"]
+[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_light_001.tres" id="2_k37ci"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a52sv"]
+size = Vector3(1.06794, 0.617764, 1)
+
+[node name="Table" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92601, 0, -4.01839)
+mesh = ExtResource("1_v63ge")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_k37ci")
+surface_material_override/1 = ExtResource("2_k37ci")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31354, 0)
+shape = SubResource("BoxShape3D_a52sv")

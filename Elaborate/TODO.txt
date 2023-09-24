@@ -1,0 +1,28 @@
+Initial motivator: 
+You have to pay rent
+
+Story loop: 
+You need to get something from someone, who then asks for something else in return.
+
+Gameplay mechanic:
+When something bad happens the worry meter is increased
+Critical actions are disabled when worry meter gets too high
+Pray to a god to decrease the worry meter
+Praying to a god will trigger a minigame
+Each god has their own minigame
+Some minigames may give benefits if done successfully
+You can choose to pray to a specific god you know, or to an unspecific god (random)
+
+GAME START
+>Apartment: 
+Pray to THE STATE for money to pay rent (scripted fail)
+
+> Go outside (2D top down) to landlord's house
+
+> Landlord's house:
+Talk to landlord
+Landlord wants something that is locked in a safe.
+Upon inspection it appears locked.
+Landlord does not know the code, but his ex-wife does
+
+> Ex wife's house:

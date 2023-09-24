@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cp0j2k2mp63gl"]
+
+[ext_resource type="Shader" path="res://Shaders/Squareish.gdshader" id="1_i63sb"]
+
+[resource]
+shader = ExtResource("1_i63sb")
+shader_parameter/iTime = 0.0
+shader_parameter/color = Vector3(255, 255, 255)

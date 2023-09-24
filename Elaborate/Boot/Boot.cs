@@ -19,7 +19,7 @@ public partial class Boot : Node
         DialogueController.Create();
         View.CreateSingleton<PauseView>();
         View.CreateSingleton<DialogueView>();
-        Scene.CreateInstance<test_fps_3d_empty_world>();
+        Scene.CreateInstance<sign_paperwork_001>();
     }
 
     private void InitializeScene()

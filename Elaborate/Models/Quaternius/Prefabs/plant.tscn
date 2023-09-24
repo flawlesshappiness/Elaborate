@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://di6wluwu1fy8"]
+
+[ext_resource type="ArrayMesh" uid="uid://0c44sws5wcto" path="res://Models/Quaternius/OBJ/Plant.obj" id="1_5ll56"]
+[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_light_001.tres" id="2_yp08h"]
+
+[node name="Plant" type="MeshInstance3D"]
+transform = Transform3D(0.712861, 0, -1.31978, 0, 1.5, 0, 1.31978, 0, 0.712861, -1.86362, 0.593594, -4.05187)
+mesh = ExtResource("1_5ll56")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_yp08h")
+surface_material_override/1 = ExtResource("2_yp08h")
