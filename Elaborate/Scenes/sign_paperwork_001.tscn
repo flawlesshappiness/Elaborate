@@ -1,12 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqmvdn0bu8omc"]
+[gd_scene load_steps=8 format=3 uid="uid://dqmvdn0bu8omc"]
 
 [ext_resource type="Script" path="res://Scenes/sign_paperwork_001.cs" id="1_5awwu"]
-[ext_resource type="Script" path="res://Draw/DrawController.cs" id="2_5wmx7"]
 [ext_resource type="PackedScene" uid="uid://ce7w76lrklkn6" path="res://UI/rorschach.tscn" id="2_xslms"]
+[ext_resource type="Texture2D" uid="uid://urrexyfejlej" path="res://Textures/paper_001.png" id="3_3utdf"]
+[ext_resource type="PackedScene" uid="uid://b7j6mel55l0f5" path="res://UI/DrawController.tscn" id="4_imu77"]
 
 [sub_resource type="Environment" id="Environment_e5bgt"]
 background_mode = 1
 ambient_light_source = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_rjcc8"]
+font_size = 7
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qrq3p"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="sign_paperwork_001" type="Node3D"]
 script = ExtResource("1_5awwu")
@@ -34,11 +42,78 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
+Speed = 0.5
 
-[node name="DrawController" type="Node2D" parent="Canvas2"]
+[node name="Paper" type="TextureRect" parent="Canvas2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -289.0
+offset_right = 256.0
+offset_bottom = 289.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_3utdf")
 
-[node name="Line2D" type="Line2D" parent="Canvas2/DrawController"]
-points = PackedVector2Array(377, 400, 583, 150, 926, 373, 694, 554, 628, 344)
-width = 5.0
-default_color = Color(0, 0, 0, 1)
-script = ExtResource("2_5wmx7")
+[node name="TextLabel" type="Label" parent="Canvas2/Paper"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = -11.0
+offset_bottom = 502.0
+grow_horizontal = 2
+text = "NOTICE OF AIR ACCESS AGREEMENT
+This document (\"Agreement\") is entered into between the undersigned individual (\"User\") and The State, hereinafter collectively referred to as \"Parties.\"
+WHEREAS, The State is vested with the authority to regulate and control the distribution of atmospheric resources within its jurisdiction;
+WHEREAS, User acknowledges the inherent necessity of regulating access to and utilization of air for the well-being and equitable benefit of all citizens;
+NOW, THEREFORE, in consideration of the mutual covenants contained herein, the Parties agree as follows:
+1. DEFINITIONS
+1.1 \"Air\" shall refer to the gaseous mixture primarily composed of nitrogen, oxygen, carbon dioxide, and trace elements, necessary for respiration and sustenance of life.
+1.2 \"Air Access License\" shall mean the authorization granted by The State, permitting User to breathe air within the jurisdiction.
+1.3 \"Breathing Device\" shall mean any apparatus, equipment, or technology designed to facilitate the inhalation of air.
+2. AIR ACCESS LICENSE
+2.1 Subject to the terms and conditions of this Agreement, The State hereby grants User a non-transferable, non-exclusive license to breathe air within the jurisdiction.
+2.2 The Air Access License shall be issued by The State upon completion of the requisite application process, which may include but is not limited to, providing personal information, medical history, and payment of any associated fees.
+3. BREATHING DEVICES
+3.1 User may utilize Breathing Devices, provided that they are approved by The State and comply with all relevant regulations and standards.
+3.2 User shall be responsible for the proper maintenance, operation, and compliance of any Breathing Device used in conjunction with this Agreement.
+4. COMPLIANCE WITH REGULATIONS
+4.1 User agrees to abide by all laws, regulations, and directives promulgated by The State concerning the use of air resources.
+4.2 User acknowledges that any breach of the terms and conditions herein may result in suspension or revocation of the Air Access License.
+5. TERM AND TERMINATION
+5.1 This Agreement shall commence on the date of execution and shall remain in effect unless terminated pursuant to its terms.
+5.2 The State reserves the right to terminate this Agreement at any time for cause, including but not limited to non-compliance with applicable regulations or breach of any provision herein.
+6. MISCELLANEOUS
+6.1 Entire Agreement. This Agreement contains the entire understanding of the Parties concerning the subject matter hereof and supersedes all prior and contemporaneous agreements and understandings, whether oral or written.
+6.2 Governing Law. This Agreement shall be governed by the laws of The State.
+IN WITNESS WHEREOF, the Parties hereto have executed this Air Access Agreement as of the Effective Date."
+label_settings = SubResource("LabelSettings_rjcc8")
+autowrap_mode = 3
+
+[node name="SignLabel" type="Label" parent="Canvas2/Paper"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "SIGN HERE: __________________________________________________________"
+label_settings = SubResource("LabelSettings_qrq3p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawController" parent="Canvas2/Paper/SignLabel" instance=ExtResource("4_imu77")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

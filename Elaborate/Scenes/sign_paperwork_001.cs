@@ -1,12 +1,18 @@
-public partial class sign_paperwork_001 : Scene
+using Godot;
+
+public partial class sign_paperwork_001 : MinigameScene
 {
-    // Called when the node enters the scene tree for the first time.
+    private DrawController _draw;
+
     public override void _Ready()
     {
+        base._Ready();
+        _draw = this.GetNodeInChildren<DrawController>();
+        _draw.OnPointerUp += OnDraw;
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+    private void OnDraw(InputEventMouseButton e)
     {
+        CompleteMinigame();
     }
 }
