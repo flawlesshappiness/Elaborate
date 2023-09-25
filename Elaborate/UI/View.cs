@@ -12,15 +12,15 @@ public partial class View : Control
     private static string GetPath<T>() where T : View
     {
         var type = typeof(T).Name;
-        var path = $"UI/Views/{type}/{type}.tscn";
+        var path = $"UI/Views/{type}/{type}";
         return path;
     }
 
-    public static T CreateInstance<T>() where T : View =>
-        Singleton.CreateInstance<T>(GetPath<T>());
+    public static T LoadInstance<T>() where T : View =>
+        Singleton.LoadInstance<T>(GetPath<T>());
 
-    public static T CreateSingleton<T>() where T : View =>
-        Singleton.CreateSingleton<T>(GetPath<T>());
+    public static T LoadSingleton<T>() where T : View =>
+        Singleton.LoadSingleton<T>(GetPath<T>());
 
     public static T Get<T>() where T : View =>
         Singleton.Get<T>();

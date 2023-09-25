@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://x5neqfxwxg7s"]
+
+[ext_resource type="Script" path="res://Worry/WorryController.cs" id="1_cb16s"]
+
+[node name="WorryController" type="Node"]
+script = ExtResource("1_cb16s")

@@ -41,7 +41,16 @@
 		"text": "My second miracle.{pause=500}.{pause=500}.{pause=500} Free donuts."
 	},
 	{
-		"id": "WORRIED_001",
+		"id": "HOME_DOOR_001",
+		"text": "It's the door'"
+	},
+	{
+		"id": "WORRY_001",
+		"next": "WORRY_002",
 		"text": "I'm too worried to do that."
+	},
+	{
+		"id": "WORRY_002",
+		"text": "[url=PRAY]Praying[/url] could help me feel better."
 	}
 ]

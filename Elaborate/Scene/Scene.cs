@@ -27,11 +27,8 @@ public partial class Scene : Node
         OnInitialize();
     }
 
-    public static T CreateInstance<T>() where T : Scene
-    {
-        var path = $"Scenes/{typeof(T).Name}.tscn";
-        return Singleton.CreateInstance<T>(path);
-    }
+    public static T CreateInstance<T>() where T : Scene =>
+        Singleton.LoadInstance<T>($"Scenes/{typeof(T).Name}");
 
     public void Destroy() => Destroy(this);
 

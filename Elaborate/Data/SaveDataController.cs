@@ -7,7 +7,7 @@ public partial class SaveDataController : Node
     public static SaveDataController Instance => Singleton.TryGet<SaveDataController>(out var instance) ? instance : Create();
 
     public static SaveDataController Create() =>
-        Singleton.CreateSingleton<SaveDataController>($"Data/{nameof(SaveDataController)}.tscn");
+        Singleton.CreateSingleton<SaveDataController>($"Data/{nameof(SaveDataController)}");
 
     private Dictionary<System.Type, SaveData> data_objects = new Dictionary<System.Type, SaveData>();
 
@@ -19,8 +19,10 @@ public partial class SaveDataController : Node
         }
         else
         {
-            var filename = typeof(T).AssemblyQualifiedName;
-            var json = FileAccess.GetFileAsString($"user://{filename}.save");
+            var filename = typeof(T).Name;
+            var path = $"user://{filename}.save";
+            EnsureFileExists(path);
+            var json = FileAccess.GetFileAsString(path);
             T data = string.IsNullOrEmpty(json) ? new T() : JsonSerializer.Deserialize<T>(json);
             data_objects.Add(typeof(T), data);
             Save<T>();
@@ -46,8 +48,18 @@ public partial class SaveDataController : Node
     {
         var data = data_objects[type];
         var json = JsonSerializer.Serialize(data);
-        var filename = type.AssemblyQualifiedName;
-        using var saveGame = FileAccess.Open($"user://{filename}.save", FileAccess.ModeFlags.Write);
-        saveGame.StoreLine(json);
+        var filename = type.Name;
+        var path = $"user://{filename}.save";
+        using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
+        file.StoreLine(json);
+    }
+
+    private void EnsureFileExists(string path)
+    {
+        if (!FileAccess.FileExists(path))
+        {
+            Debug.Log($"Created file at path: {path}");
+            using (FileAccess.Open(path, FileAccess.ModeFlags.Write)) { }
+        }
     }
 }

@@ -17,9 +17,9 @@ public partial class Boot : Node
         _initialized = true;
         InitializeScene();
         DialogueController.Create();
-        View.CreateSingleton<PauseView>();
-        View.CreateSingleton<DialogueView>();
-        Scene.CreateInstance<sign_paperwork_001>();
+        View.LoadSingleton<PauseView>();
+        View.LoadSingleton<DialogueView>();
+        Scene.CreateInstance<home_001>();
     }
 
     private void InitializeScene()

@@ -15,7 +15,7 @@ public partial class InteractableDialogue : Interactable
         }
     }
 
-    public override void Interact()
+    protected override void Interact()
     {
         base.Interact();
         var view = View.Get<DialogueView>();

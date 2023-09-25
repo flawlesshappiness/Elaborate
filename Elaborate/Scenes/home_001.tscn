@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8et3jbchcpiq"]
+[gd_scene load_steps=16 format=3 uid="uid://c8et3jbchcpiq"]
 
 [ext_resource type="Script" path="res://Scenes/home_001.cs" id="1_6gvod"]
 [ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/player.tscn" id="2_kxp2d"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://do4vfq8t8lwb8" path="res://Models/Quaternius/Prefabs/bed_single.tscn" id="7_p1cwg"]
 [ext_resource type="PackedScene" uid="uid://k522cynkv3fs" path="res://Models/Quaternius/Prefabs/door_1.tscn" id="8_innhf"]
 [ext_resource type="PackedScene" uid="uid://dbayb7mnmrnvw" path="res://Models/Quaternius/Prefabs/table.tscn" id="9_6p22o"]
+[ext_resource type="Script" path="res://Entities/InteractableWorryCondition.cs" id="10_e0vtw"]
 [ext_resource type="Script" path="res://Entities/InteractableDialogue.cs" id="10_labri"]
 [ext_resource type="PackedScene" uid="uid://r10yptkyox78" path="res://Models/Quaternius/Prefabs/book_case_books.tscn" id="11_oo7yw"]
 [ext_resource type="PackedScene" uid="uid://di6wluwu1fy8" path="res://Models/Quaternius/Prefabs/plant.tscn" id="12_whfgm"]
@@ -64,10 +65,19 @@ dialogue_id = "HOME_BED_001"
 
 [node name="Door1" parent="furniture" instance=ExtResource("8_innhf")]
 
-[node name="Interact" type="Node3D" parent="furniture/Door1"]
+[node name="WorryCondition" type="Node3D" parent="furniture/Door1"]
+script = ExtResource("10_e0vtw")
+LessThan = 0.1
+
+[node name="InteractDoorExit" type="Node3D" parent="furniture/Door1/WorryCondition"]
 transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, -0.828386, 0, -5.7109)
 script = ExtResource("10_labri")
-dialogue_id = "WORRIED_001"
+dialogue_id = "HOME_DOOR_001"
+
+[node name="InteractWorry" type="Node3D" parent="furniture/Door1"]
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, -0.828386, 0, -5.7109)
+script = ExtResource("10_labri")
+dialogue_id = "WORRY_001"
 
 [node name="Table" parent="furniture" instance=ExtResource("9_6p22o")]
 

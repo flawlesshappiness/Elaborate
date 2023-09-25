@@ -40,7 +40,7 @@ public partial class PlayerInteract : RayCast3D
         if (e == null) return;
         if (e.ButtonIndex == MouseButton.Left && e.IsReleased())
         {
-            CurrentInteractable.Interact();
+            CurrentInteractable.TryInteract();
         }
     }
 
@@ -49,27 +49,27 @@ public partial class PlayerInteract : RayCast3D
         if (IsColliding())
         {
             var collider = GetCollider();
-            SetCollider(collider);
+            SetInteractable(collider);
         }
         else
         {
-            SetCollider(null);
+            SetInteractable(null);
         }
     }
 
-    private void SetCollider(GodotObject go)
+    private void SetInteractable(GodotObject go)
     {
         try
         {
             var node = go as Node3D;
-            var parent = node.GetParent();
-            var interactable = parent.GetNodeInChildren<Interactable>();
+            var parent = node.GetNodeInParents<MeshInstance3D>();
+            var interactable = GetValidInteractableFromNode(parent);
 
             if (interactable == CurrentInteractable) return;
 
             if (CurrentInteractable != null)
             {
-                Debug.Log(DEBUG, $"Interactable Exit: {CurrentInteractable.Name} ({CurrentInteractable.GetParent().Name})");
+                Debug.Log(DEBUG, $"Interactable Exit: {CurrentInteractable.Name} ({CurrentInteractable.GetNodeInParents<MeshInstance3D>().Name})");
                 OnInteractableExit?.Invoke(CurrentInteractable);
             }
 
@@ -85,6 +85,30 @@ public partial class PlayerInteract : RayCast3D
         {
             ClearInteractable();
         }
+    }
+
+    private Interactable GetValidInteractableFromNode(Node node)
+    {
+        if (node.TryGetNode<InteractableCondition>(out var condition) && !condition.CanInteract)
+        {
+            return null;
+        }
+
+        if (node.TryGetNode<Interactable>(out var interactable))
+        {
+            return interactable;
+        }
+
+        foreach (var child in node.GetChildren())
+        {
+            interactable = GetValidInteractableFromNode(child);
+            if (interactable != null)
+            {
+                return interactable;
+            }
+        }
+
+        return null;
     }
 
     private void ClearInteractable()

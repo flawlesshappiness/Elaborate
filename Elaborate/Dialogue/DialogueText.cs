@@ -35,6 +35,8 @@ public class DialogueText
         Text = "";
         TextLength = 0;
 
+        Debug.Log($"Parsing text: {str}");
+
         for (int i = 0; i < str.Length; i++)
         {
             // BBCode

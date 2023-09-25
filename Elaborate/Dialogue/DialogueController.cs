@@ -7,7 +7,7 @@ public partial class DialogueController : Node
     public static DialogueController Instance => Singleton.TryGet<DialogueController>(out var instance) ? instance : Create();
 
     public static DialogueController Create() =>
-        Singleton.CreateSingleton<DialogueController>($"Dialogue/{nameof(DialogueController)}.tscn");
+        Singleton.CreateSingleton<DialogueController>($"Dialogue/{nameof(DialogueController)}");
 
     private DialogueNodeCollection _collection;
 
@@ -32,8 +32,9 @@ public partial class DialogueController : Node
     {
         foreach (var node in nodes)
         {
-            node.Text = node.Text.Replace("[url", "[color=yellow][url");
-            node.Text = node.Text.Replace("[/url]", "[/url][/color]");
+            node.Text = node.Text
+                .Replace("[url", "[color=yellow][url")
+                .Replace("[/url]", "[/url][/color]");
         }
     }
 }
