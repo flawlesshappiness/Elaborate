@@ -38,8 +38,35 @@ public partial class DialogueView : View
 
     private void MetaClicked(Variant meta)
     {
-        var id = ((string)meta);
-        SetDialogueNode(id);
+        var text = (string)meta;
+        var id = text;
+        var parts = text.Split('-');
+
+        if (parts.Length == 2)
+        {
+            switch (parts[0])
+            {
+                case "ACTION":
+                    ParseAction(parts[1]);
+                    break;
+            }
+        }
+        else
+        {
+            SetDialogueNode(id);
+        }
+    }
+
+    private void ParseAction(string action)
+    {
+        switch (action)
+        {
+            case "PRAY":
+                Player.Instance.Pray.BeginPraying();
+                _current_node = null;
+                HideDialogueBox();
+                break;
+        }
     }
 
     public override void _Input(InputEvent @event)
@@ -82,7 +109,7 @@ public partial class DialogueView : View
 
     private void ShowDialogueBox()
     {
-        Input.MouseMode = Input.MouseModeEnum.Visible;
+        Player.Input.MouseVisibleLock.AddLock(nameof(PraySelectView));
         Scene.PauseLock.AddLock(nameof(DialogueView));
         Player.InteractLock.AddLock(nameof(DialogueView));
         Visible = true;
@@ -90,7 +117,7 @@ public partial class DialogueView : View
 
     private void HideDialogueBox()
     {
-        Input.MouseMode = Input.MouseModeEnum.Captured;
+        Player.Input.MouseVisibleLock.RemoveLock(nameof(PraySelectView));
         Scene.PauseLock.RemoveLock(nameof(DialogueView));
         Player.InteractLock.RemoveLock(nameof(DialogueView));
         Visible = false;
@@ -168,7 +195,6 @@ public partial class DialogueView : View
         var i = 0;
         var max = text.TextLength;
         var time_current = Time.GetTicksMsec();
-        var force_increment_once = false;
 
         while (i < max)
         {

@@ -6,6 +6,7 @@ public partial class Scene : Node
 
     public bool IsPaused => GetTree().Paused;
 
+    public static Scene Current { get; set; }
     public static SceneTree Tree { get; set; }
     public static Window Root { get; set; }
     public static MultiLock PauseLock { get; } = new();
@@ -27,8 +28,23 @@ public partial class Scene : Node
         OnInitialize();
     }
 
-    public static T CreateInstance<T>() where T : Scene =>
-        Singleton.LoadInstance<T>($"Scenes/{typeof(T).Name}");
+    public static T CreateInstance<T>(string path) where T : Scene =>
+        Singleton.LoadInstance<T>(path);
+
+    public static Scene Goto(string scenename)
+    {
+        if (Current != null)
+        {
+            Current.QueueFree();
+        }
+
+        var scene = CreateInstance<Scene>($"Scenes/{scenename}");
+        Current = scene;
+        return scene;
+    }
+
+    public static T Goto<T>() where T : Scene =>
+        Goto(typeof(T).Name) as T;
 
     public void Destroy() => Destroy(this);
 

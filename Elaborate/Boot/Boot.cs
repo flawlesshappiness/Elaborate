@@ -19,7 +19,10 @@ public partial class Boot : Node
         DialogueController.Create();
         View.LoadSingleton<PauseView>();
         View.LoadSingleton<DialogueView>();
-        Scene.CreateInstance<home_001>();
+        View.LoadSingleton<PraySelectView>();
+        Scene.Goto(Save.Game.Scene);
+
+        SaveDataController.Instance.SaveAll();
     }
 
     private void InitializeScene()

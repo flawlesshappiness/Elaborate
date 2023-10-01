@@ -1,5 +1,3 @@
-using Godot;
-
 public partial class sign_paperwork_001 : MinigameScene
 {
     private DrawController _draw;
@@ -7,12 +5,16 @@ public partial class sign_paperwork_001 : MinigameScene
     public override void _Ready()
     {
         base._Ready();
+
+        Player.Input.MouseVisibleLock.AddLock(nameof(sign_paperwork_001));
+
         _draw = this.GetNodeInChildren<DrawController>();
-        _draw.OnPointerUp += OnDraw;
+        _draw.OnDrawLine += _ => OnDraw();
     }
 
-    private void OnDraw(InputEventMouseButton e)
+    private void OnDraw()
     {
+        Player.Input.MouseVisibleLock.RemoveLock(nameof(sign_paperwork_001));
         CompleteMinigame();
     }
 }

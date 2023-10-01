@@ -18,6 +18,7 @@ public partial class PlayerInteract : RayCast3D
 
     private void ProcessInteract()
     {
+        if (Player.InteractLock.IsLocked) return;
         if (CurrentInteractable == null) return;
 
         /*
@@ -36,6 +37,7 @@ public partial class PlayerInteract : RayCast3D
 
     private void InputMouse(InputEventMouseButton e)
     {
+        if (Player.InteractLock.IsLocked) return;
         if (CurrentInteractable == null) return;
         if (e == null) return;
         if (e.ButtonIndex == MouseButton.Left && e.IsReleased())

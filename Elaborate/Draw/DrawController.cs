@@ -17,6 +17,7 @@ public partial class DrawController : Control
     private const float DIST_DRAG_POINT = 10;
 
     public event System.Action<InputEventMouseButton> OnPointerDown, OnPointerUp;
+    public event System.Action<Line2D> OnDrawLine;
 
     public override void _Ready()
     {
@@ -98,6 +99,11 @@ public partial class DrawController : Control
         _is_pointer_down = false;
         _last_position = null;
         OnPointerUp?.Invoke(e);
+
+        if (_current_line.GetPointCount() > 2)
+        {
+            OnDrawLine?.Invoke(_current_line);
+        }
     }
 
     private Line2D NextLine()

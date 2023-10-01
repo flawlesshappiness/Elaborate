@@ -28,7 +28,7 @@ public class MultiLock
         var was_locked = IsLocked;
         _locks.Remove(key);
 
-        if (was_locked)
+        if (was_locked && IsFree)
         {
             OnFree?.Invoke();
         }

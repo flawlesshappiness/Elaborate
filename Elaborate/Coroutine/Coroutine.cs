@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-public class Coroutine
+public class Coroutine : CustomYieldInstruction
 {
     public Guid Id { get; set; }
 
@@ -9,6 +9,8 @@ public class Coroutine
 
     public bool HasCompleted { get; set; }
     public bool HasEnded { get; set; }
+
+    public override bool KeepWaiting => !HasEnded;
 
     public Coroutine(IEnumerator enumerator)
     {

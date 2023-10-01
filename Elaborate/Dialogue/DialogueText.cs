@@ -27,7 +27,6 @@ public class DialogueText
         Node = node;
         ParseText(Node.Text);
         Debug.Log("Text: " + Text);
-        Debug.Log("Text length: " + TextLength);
     }
 
     private void ParseText(string str)
@@ -42,7 +41,8 @@ public class DialogueText
             // BBCode
             if (str[i] == '[')
             {
-                i += CaptureUntil(str, i, ']', out var captured);
+                CaptureUntil(str, i, ']', out var captured);
+                TextLength -= captured.Length;
                 Debug.Log("BBCode: " + captured);
             }
 
