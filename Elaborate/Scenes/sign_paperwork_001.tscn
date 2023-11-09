@@ -22,7 +22,7 @@ script = ExtResource("1_5awwu")
 [node name="Camera3D" type="Camera3D" parent="."]
 environment = SubResource("Environment_e5bgt")
 
-[node name="Canvas2" type="Control" parent="."]
+[node name="Canvas" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Rorschach" parent="Canvas2" instance=ExtResource("2_xslms")]
+[node name="Rorschach" parent="Canvas" instance=ExtResource("2_xslms")]
 visible = true
 layout_mode = 1
 anchors_preset = 15
@@ -44,22 +44,43 @@ offset_right = 0.0
 offset_bottom = 1.0
 Speed = 0.5
 
-[node name="Paper" type="TextureRect" parent="Canvas2"]
+[node name="PivotPaperIn" type="Control" parent="Canvas"]
+anchors_preset = 0
+offset_left = 287.0
+offset_top = -735.0
+offset_right = 327.0
+offset_bottom = -695.0
+
+[node name="PivotPaperOut" type="Control" parent="Canvas"]
+anchors_preset = 0
+offset_left = 287.0
+offset_top = 843.0
+offset_right = 327.0
+offset_bottom = 883.0
+
+[node name="PaperPivot" type="Control" parent="Canvas"]
+anchors_preset = 0
+offset_left = 287.0
+offset_top = 65.0
+offset_right = 327.0
+offset_bottom = 105.0
+
+[node name="PaperTemplate" type="TextureRect" parent="Canvas/PaperPivot"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -289.0
-offset_right = 256.0
-offset_bottom = 289.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 492.0
+offset_bottom = 558.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_3utdf")
 
-[node name="TextLabel" type="Label" parent="Canvas2/Paper"]
+[node name="TextLabel" type="Label" parent="Canvas/PaperPivot/PaperTemplate"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -96,7 +117,7 @@ IN WITNESS WHEREOF, the Parties hereto have executed this Air Access Agreement a
 label_settings = SubResource("LabelSettings_rjcc8")
 autowrap_mode = 3
 
-[node name="SignLabel" type="Label" parent="Canvas2/Paper"]
+[node name="SignLabel" type="Label" parent="Canvas/PaperPivot/PaperTemplate"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -110,10 +131,15 @@ label_settings = SubResource("LabelSettings_qrq3p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DrawController" parent="Canvas2/Paper/SignLabel" instance=ExtResource("4_imu77")]
+[node name="DrawController" parent="Canvas/PaperPivot/PaperTemplate/SignLabel" instance=ExtResource("4_imu77")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+DrawingEnabled = false

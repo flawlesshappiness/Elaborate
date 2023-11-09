@@ -4,7 +4,11 @@ public static class Debug
 {
     public const bool PRINT_ENABLED = true;
 
-    public static void Log(object o) => Debug.Log(o.ToString());
+    public static void Log(object o)
+    {
+        var message = o == null ? "null" : o.ToString();
+        Log(message);
+    }
 
     public static void Log(string message)
     {

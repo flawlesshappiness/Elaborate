@@ -1,8 +1,22 @@
 using Godot;
 using System.Collections.Generic;
 
-public static class NodeExtensions
+public static partial class NodeExtensions
 {
+    public static T GetNodeInChildren<T>(this Node node, string name) where T : Node
+    {
+        if (node.Name == name) return node as T;
+
+        foreach (var child in node.GetChildren())
+        {
+            var valid_child = child.GetNodeInChildren<T>(name);
+            if (valid_child != null)
+                return valid_child;
+        }
+
+        return null;
+    }
+
     public static T GetNodeInChildren<T>(this Node node) where T : Node
     {
         if (node.TryGetNode<T>(out var result)) return result;
@@ -11,9 +25,7 @@ public static class NodeExtensions
         {
             T script = child.GetNodeInChildren<T>();
             if (script != null)
-            {
                 return script;
-            }
         }
 
         return null;

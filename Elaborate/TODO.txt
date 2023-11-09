@@ -17,12 +17,13 @@ GAME START
 >Apartment: 
 Pray to THE STATE for money to pay rent (scripted fail)
 
-> Go outside (2D top down) to landlord's house
+> Outside (2D top down)
+Go to The Landlord's house
 
 > Landlord's house:
 Talk to landlord
-Landlord wants something that is locked in a safe.
-Upon inspection it appears locked.
-Landlord does not know the code, but his ex-wife does
+The Landlord allows you 24 hours to pay your rent, or The State will smite you
+The Landlord tells you to do different jobs
+Also asks you to kill the rats in his basement
 
-> Ex wife's house:
+> The Landlord's Basement (2D top down dungeon):

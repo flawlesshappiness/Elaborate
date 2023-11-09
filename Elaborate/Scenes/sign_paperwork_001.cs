@@ -1,6 +1,20 @@
+using Godot;
+using System;
+using System.Collections;
+
 public partial class sign_paperwork_001 : MinigameScene
 {
-    private DrawController _draw;
+    private int _papers_to_sign;
+    private TextureRect _current_paper;
+
+    [NodeName("PivotPaperIn")]
+    public Control PivotPaperIn;
+
+    [NodeName("PivotPaperOut")]
+    public Control PivotPaperOut;
+
+    [NodeName("PaperTemplate")]
+    public TextureRect PaperTemplate;
 
     public override void _Ready()
     {
@@ -8,13 +22,84 @@ public partial class sign_paperwork_001 : MinigameScene
 
         Player.Input.MouseVisibleLock.AddLock(nameof(sign_paperwork_001));
 
-        _draw = this.GetNodeInChildren<DrawController>();
-        _draw.OnDrawLine += _ => OnDraw();
+        _papers_to_sign = Random.Shared.Next(2, 3);
+
+        PaperTemplate.Visible = false;
+
+        AnimateNextPaper();
     }
 
-    private void OnDraw()
+    private void OnSign()
     {
-        Player.Input.MouseVisibleLock.RemoveLock(nameof(sign_paperwork_001));
-        CompleteMinigame();
+        _papers_to_sign--;
+
+        if (_papers_to_sign > 0)
+        {
+            AnimateNextPaper();
+        }
+        else
+        {
+            Player.Input.MouseVisibleLock.RemoveLock(nameof(sign_paperwork_001));
+            CompleteMinigame();
+        }
+    }
+
+    private void NextPaper()
+    {
+        if (_current_paper != null)
+        {
+            _current_paper.Visible = false;
+            _current_paper.QueueFree();
+        }
+
+        _current_paper = PaperTemplate.Duplicate() as TextureRect;
+        PaperTemplate.GetParent().AddChild(_current_paper);
+        _current_paper.Visible = false;
+
+        var draw = _current_paper.GetNodeInChildren<DrawController>();
+        draw.DrawingEnabled = true;
+        draw.OnDrawLine += _ => OnSign();
+    }
+
+    private Coroutine AnimateNextPaper()
+    {
+        return Coroutine.Start(Cr);
+        IEnumerator Cr()
+        {
+            if (_current_paper != null)
+            {
+                yield return AnimatePaperOut(_current_paper);
+            }
+
+            NextPaper();
+
+            yield return AnimatePaperIn(_current_paper);
+        }
+    }
+
+    private Coroutine AnimatePaperIn(TextureRect paper)
+    {
+        return Coroutine.Start(Cr);
+        IEnumerator Cr()
+        {
+            paper.Visible = true;
+            paper.GlobalPosition = PivotPaperIn.GlobalPosition;
+            var duration = 1.0f;
+            yield return LerpEnumerator.Position(paper, duration, Vector2.Zero)
+                .SetCurve(EasingFunctions.Ease.EaseOutQuad);
+        }
+    }
+
+    private Coroutine AnimatePaperOut(TextureRect paper)
+    {
+        return Coroutine.Start(Cr);
+        IEnumerator Cr()
+        {
+            var end = PivotPaperOut.GlobalPosition;
+            var duration = 1.0f;
+            yield return LerpEnumerator.GlobalPosition(paper, duration, end)
+                .SetCurve(EasingFunctions.Ease.EaseInQuad);
+            paper.Visible = false;
+        }
     }
 }

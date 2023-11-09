@@ -16,7 +16,7 @@ public static class TweenEnumerator
         return node;
     }
 
-    public static Coroutine TweenProperty(GodotObject go, string property, float duration, Variant end)
+    public static Coroutine TweenProperty(GodotObject go, string property, double duration, Variant end)
     {
         return Coroutine.Start(Cr);
         IEnumerator Cr()
@@ -27,7 +27,7 @@ public static class TweenEnumerator
         }
     }
 
-    public static Coroutine TweenProperty(GodotObject go, string property, float duration, Variant start, Variant end)
+    public static Coroutine TweenProperty(GodotObject go, string property, double duration, Variant start, Variant end)
     {
         go.Set(property, start);
         return TweenProperty(go, property, duration, end);

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Scene : Node
+public partial class Scene : NodeScript
 {
     private bool _initialized;
 
