@@ -13,7 +13,13 @@ public partial class WorryController : Node
 
     public void SetWorry(float value)
     {
+        // Set value
         Save.Game.Worry = Mathf.Clamp(value, 0f, 1f);
+
+        // Save
+        SaveDataController.Instance.Save<GameSaveData>();
+
+        // Event
         OnWorryChanged?.Invoke(value);
     }
 

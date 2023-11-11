@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://4gqivaxpcjpb"]
 
 [ext_resource type="Script" path="res://Scenes/test_fps_3d_empty_world.cs" id="1_xnfns"]
-[ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/player.tscn" id="2_6jufc"]
+[ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/FirstPersonPlayer.tscn" id="2_6jufc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_10har"]
 sky_top_color = Color(0.235294, 0.447059, 0.752941, 1)

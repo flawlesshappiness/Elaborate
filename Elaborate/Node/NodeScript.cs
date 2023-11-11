@@ -1,52 +1,58 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Reflection;
 
 public partial class NodeScript : Node
 {
     public override void _Ready()
     {
-        FindNodesFromAttribute();
+        FindNodesFromAttribute(this, GetType());
 
         base._Ready();
     }
 
-    protected void FindNodesFromAttribute()
+    public static void FindNodesFromAttribute(Node root, Type type)
     {
-        var fields = this.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
+        Debug.Log($"FindNodes_NodePathAttribute ({root.Name})");
+
+        var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
 
         foreach (FieldInfo field in fields)
         {
+            if (field.CustomAttributes.Count() == 0) continue;
+
             try
             {
-                FindNodeFromAttribute(field);
+                FindNodeFromAttribute(root, field);
+                Debug.Log($"  Found value for field: {field.Name}");
             }
             catch (Exception e)
             {
-                Debug.LogError("FindNodes_NodePathAttribute: Node not found: " + e.Message);
+                Debug.LogError($"  {field.Name} field value not found: " + e.Message);
             }
         }
     }
 
-    private Node FindNodeFromAttribute(FieldInfo field)
+    private static Node FindNodeFromAttribute(Node root, FieldInfo field)
     {
         if (Attribute.GetCustomAttribute(field, typeof(NodePathAttribute)) as NodePathAttribute is var nodePathAtt && nodePathAtt != null)
         {
-            var node = GetNode(nodePathAtt.Value);
+            var node = root.GetNode(nodePathAtt.Value);
             _ = node ?? throw new NullReferenceException("Node was null");
 
-            field.SetValue(this, node);
+            field.SetValue(root, node);
             return node;
         }
         else if (Attribute.GetCustomAttribute(field, typeof(NodeNameAttribute)) as NodeNameAttribute is var nodeNameAtt && nodeNameAtt != null)
         {
-            var node = this.GetNodeInChildren<Node>(nodeNameAtt.Value);
+            var node = root.GetNodeInChildren<Node>(nodeNameAtt.Value);
             _ = node ?? throw new NullReferenceException("Node was null");
 
-            field.SetValue(this, node);
+            field.SetValue(root, node);
             return node;
         }
 
-        throw new NullReferenceException("No valid attribute was found");
+        throw new NullReferenceException($"No valid attribute was found");
     }
 }

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://q11501dx8eg2"]
+
+[ext_resource type="ArrayMesh" uid="uid://wgie3jqe1j0b" path="res://Models/Quaternius/OBJ/Bathroom_Mirror1.obj" id="1_wejdp"]
+[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_light_001.tres" id="2_wqw40"]
+[ext_resource type="Material" uid="uid://2l4yfsgf3lw0" path="res://Materials/base_light_003.tres" id="3_qwm3m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rxfg2"]
+size = Vector3(0.75, 1, 0.25)
+
+[node name="Mirror" type="MeshInstance3D"]
+mesh = ExtResource("1_wejdp")
+surface_material_override/0 = ExtResource("2_wqw40")
+surface_material_override/1 = ExtResource("3_qwm3m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_rxfg2")

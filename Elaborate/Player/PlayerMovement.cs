@@ -1,5 +1,3 @@
-using Godot;
-
-public partial class PlayerMovement : Node3D
+public partial class PlayerMovement : Node3DScript
 {
 }

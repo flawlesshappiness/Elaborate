@@ -62,7 +62,17 @@ public partial class PraySelectView : View
 
         void Pressed()
         {
+            // Reset UI
             Reset();
+
+            // Save player data
+            var player = Player.Instance;
+            if (player != null)
+            {
+                player.SaveData();
+            }
+
+            // Load scene
             Scene.Goto<sign_paperwork_001>();
         }
     }

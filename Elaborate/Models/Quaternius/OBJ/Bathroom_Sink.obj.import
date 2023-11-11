@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://sie7tvmbiopb"
+path="res://.godot/imported/Bathroom_Sink.obj-2caf51fa204a0b25f451bb2ef91b6fc9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bathroom_Sink.obj-2caf51fa204a0b25f451bb2ef91b6fc9.mesh"]
+
+source_file="res://Models/Quaternius/OBJ/Bathroom_Sink.obj"
+dest_files=["res://.godot/imported/Bathroom_Sink.obj-2caf51fa204a0b25f451bb2ef91b6fc9.mesh", "res://.godot/imported/Bathroom_Sink.obj-2caf51fa204a0b25f451bb2ef91b6fc9.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

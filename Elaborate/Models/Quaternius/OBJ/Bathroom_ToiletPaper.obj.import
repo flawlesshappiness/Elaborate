@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bbm4qsgwt68pn"
+path="res://.godot/imported/Bathroom_ToiletPaper.obj-4c6b36d10d995f1c36e21e711cff9e3d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bathroom_ToiletPaper.obj-4c6b36d10d995f1c36e21e711cff9e3d.mesh"]
+
+source_file="res://Models/Quaternius/OBJ/Bathroom_ToiletPaper.obj"
+dest_files=["res://.godot/imported/Bathroom_ToiletPaper.obj-4c6b36d10d995f1c36e21e711cff9e3d.mesh", "res://.godot/imported/Bathroom_ToiletPaper.obj-4c6b36d10d995f1c36e21e711cff9e3d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

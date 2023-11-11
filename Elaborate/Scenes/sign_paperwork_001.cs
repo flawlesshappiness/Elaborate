@@ -39,8 +39,7 @@ public partial class sign_paperwork_001 : MinigameScene
         }
         else
         {
-            Player.Input.MouseVisibleLock.RemoveLock(nameof(sign_paperwork_001));
-            CompleteMinigame();
+            AnimateEnd();
         }
     }
 
@@ -100,6 +99,18 @@ public partial class sign_paperwork_001 : MinigameScene
             yield return LerpEnumerator.GlobalPosition(paper, duration, end)
                 .SetCurve(EasingFunctions.Ease.EaseInQuad);
             paper.Visible = false;
+        }
+    }
+
+    private Coroutine AnimateEnd()
+    {
+        return Coroutine.Start(Cr);
+        IEnumerator Cr()
+        {
+            yield return AnimatePaperOut(_current_paper);
+
+            Player.Input.MouseVisibleLock.RemoveLock(nameof(sign_paperwork_001));
+            CompleteMinigame();
         }
     }
 }

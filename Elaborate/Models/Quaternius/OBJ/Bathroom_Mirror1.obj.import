@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://wgie3jqe1j0b"
+path="res://.godot/imported/Bathroom_Mirror1.obj-87002219ed4e5885fe47fd2932f590bd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bathroom_Mirror1.obj-87002219ed4e5885fe47fd2932f590bd.mesh"]
+
+source_file="res://Models/Quaternius/OBJ/Bathroom_Mirror1.obj"
+dest_files=["res://.godot/imported/Bathroom_Mirror1.obj-87002219ed4e5885fe47fd2932f590bd.mesh", "res://.godot/imported/Bathroom_Mirror1.obj-87002219ed4e5885fe47fd2932f590bd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

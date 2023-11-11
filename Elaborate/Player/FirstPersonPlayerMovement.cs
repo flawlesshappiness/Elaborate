@@ -8,20 +8,17 @@ public partial class FirstPersonPlayerMovement : PlayerMovement
     // Get the gravity from the project settings to be synced with RigidBody nodes.
     public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
-    public bool IsOnFloor => body.IsOnFloor();
-    public Vector3 Velocity { get { return body.Velocity; } set { body.Velocity = value; } }
+    public bool IsOnFloor => Body.IsOnFloor();
+    public Vector3 Velocity { get { return Body.Velocity; } set { Body.Velocity = value; } }
 
-    private CharacterBody3D body;
-    private Node3D neck;
-    private Camera3D camera;
+    [NodePath("../")]
+    public CharacterBody3D Body;
 
-    public override void _Ready()
-    {
-        base._Ready();
-        body = GetNode<CharacterBody3D>("../");
-        neck = GetNode<Node3D>("Neck");
-        camera = GetNode<Camera3D>("Neck/Camera3D");
-    }
+    [NodeName("Neck")]
+    public Node3D Neck;
+
+    [NodeName("Camera3D")]
+    public Camera3D Camera;
 
     public override void _Input(InputEvent @event)
     {
@@ -35,16 +32,16 @@ public partial class FirstPersonPlayerMovement : PlayerMovement
         if (e is not InputEventMouseMotion) return;
 
         var motion = e as InputEventMouseMotion;
-        neck.RotateY(-motion.Relative.X * 0.001f);
-        camera.RotateX(-motion.Relative.Y * 0.001f);
+        Neck.RotateY(-motion.Relative.X * 0.001f);
+        Camera.RotateX(-motion.Relative.Y * 0.001f);
 
-        var x = Mathf.Clamp(camera.Rotation.X, Mathf.DegToRad(-70), Mathf.DegToRad(70));
-        camera.Rotation = Rotation with { X = x };
+        var x = Mathf.Clamp(Camera.Rotation.X, Mathf.DegToRad(-70), Mathf.DegToRad(70));
+        Camera.Rotation = Rotation with { X = x };
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        Vector3 velocity = body.Velocity;
+        Vector3 velocity = Body.Velocity;
 
         // Add the gravity.
         if (!IsOnFloor)
@@ -59,7 +56,7 @@ public partial class FirstPersonPlayerMovement : PlayerMovement
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
         Vector2 inputDir = Input.GetVector(PlayerControls.Left, PlayerControls.Right, PlayerControls.Forward, PlayerControls.Back);
-        Vector3 direction = (neck.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+        Vector3 direction = (Neck.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
         if (direction != Vector3.Zero)
         {
             velocity.X = direction.X * Speed;
@@ -72,6 +69,6 @@ public partial class FirstPersonPlayerMovement : PlayerMovement
         }
 
         Velocity = velocity;
-        body.MoveAndSlide();
+        Body.MoveAndSlide();
     }
 }

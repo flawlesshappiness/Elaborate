@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://lntp2bwefssr"]
+
+[ext_resource type="ArrayMesh" uid="uid://dhisq33an788d" path="res://Models/Quaternius/OBJ/Bathroom_Towel.obj" id="1_refvw"]
+[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_light_001.tres" id="2_rqrey"]
+
+[node name="Bathroom_Towel" type="MeshInstance3D"]
+mesh = ExtResource("1_refvw")
+surface_material_override/0 = ExtResource("2_rqrey")
+surface_material_override/1 = ExtResource("2_rqrey")
+surface_material_override/2 = ExtResource("2_rqrey")

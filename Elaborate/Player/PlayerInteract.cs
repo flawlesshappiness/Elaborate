@@ -21,6 +21,7 @@ public partial class PlayerInteract : RayCast3D
         if (Player.InteractLock.IsLocked) return;
         if (CurrentInteractable == null) return;
 
+        // Currently not using a key as interact input
         /*
         if (Input.IsActionJustPressed(PlayerControls.Interact))
         {

@@ -16,11 +16,13 @@ public partial class Boot : Node
     {
         _initialized = true;
         InitializeScene();
+        GameController.Create();
         DialogueController.Create();
         View.LoadSingleton<PauseView>();
         View.LoadSingleton<DialogueView>();
         View.LoadSingleton<PraySelectView>();
-        Scene.Goto(Save.Game.Scene);
+        LoadScene();
+        LoadPlayer();
 
         SaveDataController.Instance.SaveAll();
     }
@@ -31,5 +33,19 @@ public partial class Boot : Node
         Scene.Root = Scene.Tree.Root;
         Scene.PauseLock.OnLocked += () => Scene.Tree.Paused = true;
         Scene.PauseLock.OnFree += () => Scene.Tree.Paused = false;
+    }
+
+    private void LoadScene()
+    {
+        Scene.Goto(Save.Game.Scene);
+    }
+
+    private void LoadPlayer()
+    {
+        var player = Player.Instance;
+        if (player != null)
+        {
+            player.LoadData();
+        }
     }
 }

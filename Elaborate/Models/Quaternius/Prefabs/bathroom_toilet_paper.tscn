@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgffft15xa56f"]
+
+[ext_resource type="ArrayMesh" uid="uid://bbm4qsgwt68pn" path="res://Models/Quaternius/OBJ/Bathroom_ToiletPaper.obj" id="1_rb5g2"]
+[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_light_001.tres" id="2_fckn4"]
+
+[node name="Bathroom_ToiletPaper" type="MeshInstance3D"]
+mesh = ExtResource("1_rb5g2")
+surface_material_override/0 = ExtResource("2_fckn4")
+surface_material_override/1 = ExtResource("2_fckn4")
+surface_material_override/2 = ExtResource("2_fckn4")

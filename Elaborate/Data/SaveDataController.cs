@@ -1,6 +1,6 @@
 using Godot;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Text.Json;
 
 public partial class SaveDataController : Node
 {
@@ -23,7 +23,7 @@ public partial class SaveDataController : Node
             var path = $"user://{filename}.save";
             EnsureFileExists(path);
             var json = FileAccess.GetFileAsString(path);
-            T data = string.IsNullOrEmpty(json) ? new T() : JsonSerializer.Deserialize<T>(json);
+            T data = string.IsNullOrEmpty(json) ? new T() : JsonConvert.DeserializeObject<T>(json);
             data_objects.Add(typeof(T), data);
             Save<T>();
             Debug.Log("json: " + json);
@@ -33,8 +33,11 @@ public partial class SaveDataController : Node
 
     public void SaveAll()
     {
+        Debug.Log("SaveDataController.SaveAll");
+
         foreach (var kvp in data_objects)
         {
+            Debug.Log($"  {kvp.Key}");
             Save(kvp.Key);
         }
     }
@@ -48,7 +51,7 @@ public partial class SaveDataController : Node
     public void Save(System.Type type)
     {
         var data = data_objects[type];
-        var json = JsonSerializer.Serialize(data, type);
+        var json = JsonConvert.SerializeObject(data);
         var filename = type.Name;
         var path = $"user://{filename}.save";
         using var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
