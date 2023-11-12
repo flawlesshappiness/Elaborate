@@ -49,6 +49,10 @@ public partial class DialogueView : View
                 case "ACTION":
                     ParseAction(parts[1]);
                     break;
+
+                case "ID":
+                    SetUrlId(parts[1]);
+                    break;
             }
         }
         else
@@ -63,10 +67,16 @@ public partial class DialogueView : View
         {
             case "PRAY":
                 Player.Instance.Pray.BeginPraying();
-                _current_node = null;
-                HideDialogueBox();
+                EndDialogue(_current_node);
                 break;
         }
+    }
+
+    private void SetUrlId(string text)
+    {
+        Debug.Log($"DialogueView.SetUrlId: {text}");
+        DialogueController.Instance.SelectedUrlId = text;
+        EndDialogue(_current_node);
     }
 
     public override void _Input(InputEvent @event)
@@ -152,13 +162,7 @@ public partial class DialogueView : View
 
         if (_current_node == null)
         {
-            if (previous_node != null)
-            {
-                Debug.Log(DEBUG, $"Dialogue ended: {previous_node.Id}");
-                OnDialogueEnded?.Invoke(previous_node.Id);
-            }
-
-            HideDialogueBox();
+            EndDialogue(previous_node);
             return;
         }
 
@@ -169,6 +173,18 @@ public partial class DialogueView : View
         HideDialogueButton();
         SetDialogueText(text);
         AnimateDialogueText(text, MSEC_PER_CHAR);
+    }
+
+    private void EndDialogue(DialogueNode previous_node)
+    {
+        _current_node = null;
+        HideDialogueBox();
+
+        if (previous_node != null)
+        {
+            Debug.Log(DEBUG, $"Dialogue ended: {previous_node.Id}");
+            OnDialogueEnded?.Invoke(previous_node.Id);
+        }
     }
 
     public void SetDialogueText(DialogueText text)

@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://cb10dhpqcptpa"]
+
+[ext_resource type="Script" path="res://Scenes/corridor_001.cs" id="1_42ekv"]
+[ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/FirstPersonPlayer.tscn" id="2_wnsl3"]
+[ext_resource type="PackedScene" uid="uid://bt800rhdk3pmv" path="res://Interior/floor.tscn" id="3_janb7"]
+[ext_resource type="PackedScene" uid="uid://cpj5061q1s535" path="res://Interior/ceiling.tscn" id="4_cditg"]
+[ext_resource type="PackedScene" uid="uid://bk4u3k36pahhd" path="res://Interior/wall.tscn" id="5_nyaul"]
+[ext_resource type="Script" path="res://Interact/InteractableUrlCondition.cs" id="8_0jkqn"]
+[ext_resource type="Script" path="res://Interact/InteractableChangeScene.cs" id="9_qr3hv"]
+[ext_resource type="Script" path="res://Interact/InteractableDialogue.cs" id="9_yggr6"]
+[ext_resource type="PackedScene" uid="uid://k522cynkv3fs" path="res://Models/Quaternius/Prefabs/door_1.tscn" id="10_sn7o4"]
+
+[sub_resource type="Environment" id="Environment_6e6rg"]
+background_mode = 1
+background_color = Color(0.196078, 0.313726, 0.529412, 1)
+
+[node name="corridor_001" type="Node3D"]
+script = ExtResource("1_42ekv")
+
+[node name="FirstPersonPlayer" parent="." instance=ExtResource("2_wnsl3")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -3.18634, 0.00286412, -0.851484)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6e6rg")
+
+[node name="room" type="Node3D" parent="."]
+
+[node name="floor" parent="room" instance=ExtResource("3_janb7")]
+transform = Transform3D(15, 0, 0, 0, 3, 0, 0, 0, 3, 9, 0, -3)
+skeleton = NodePath("../..")
+
+[node name="ceiling" parent="room" instance=ExtResource("4_cditg")]
+transform = Transform3D(-15, 9.05975e-07, 0, -2.26494e-06, -6, 0, 0, 0, 3, 9, 4, -3)
+
+[node name="wall" parent="room" instance=ExtResource("5_nyaul")]
+transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 3, -6, 2, -3)
+skeleton = NodePath("../..")
+
+[node name="wall2" parent="room" instance=ExtResource("5_nyaul")]
+transform = Transform3D(-8.74228e-08, -2, 2.62268e-07, -2, 8.74228e-08, -1.14641e-14, 0, -1.74846e-07, -3, 24, 2, -3)
+skeleton = NodePath("../..")
+
+[node name="wall3" parent="room" instance=ExtResource("5_nyaul")]
+transform = Transform3D(-8.74228e-08, -8.74228e-08, -15, -2, -8.74228e-08, 6.55671e-07, -8.74228e-08, 2, -6.55671e-07, 9, 2, -6)
+skeleton = NodePath("../..")
+
+[node name="wall4" parent="room" instance=ExtResource("5_nyaul")]
+transform = Transform3D(-8.74228e-08, 1.50996e-07, 15, -2, -8.74228e-08, -6.55671e-07, 8.74228e-08, -2, 1.13247e-06, 9, 2, 0)
+skeleton = NodePath("../..")
+
+[node name="furniture" type="Node3D" parent="."]
+
+[node name="Door1" parent="furniture" instance=ExtResource("10_sn7o4")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -2.5, 0, 0)
+
+[node name="InteractDoor" type="Node3D" parent="furniture/Door1"]
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, -0.828386, 0, -5.7109)
+script = ExtResource("9_yggr6")
+dialogue_id = "DOOR_HOME_001"
+
+[node name="UrlCondition" type="Node3D" parent="furniture/Door1/InteractDoor"]
+script = ExtResource("8_0jkqn")
+Id = "HOME"
+
+[node name="ChangeScene" type="Node3D" parent="furniture/Door1/InteractDoor/UrlCondition"]
+script = ExtResource("9_qr3hv")
+SceneName = "home_001"
+
+[node name="Door2" parent="furniture" instance=ExtResource("10_sn7o4")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 5, 0, 0)
+
+[node name="Door3" parent="furniture" instance=ExtResource("10_sn7o4")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 12.5, 0, 0)
+
+[node name="Door4" parent="furniture" instance=ExtResource("10_sn7o4")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 20, 0, 0)

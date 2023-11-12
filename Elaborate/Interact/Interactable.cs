@@ -7,6 +7,7 @@ public partial class Interactable : Node
     private List<InteractableCondition> _conditions = new();
 
     public event System.Action OnInteract;
+    public event System.Action OnInteractEnd;
 
     public bool CanInteract => _CanInteract();
 
@@ -16,13 +17,15 @@ public partial class Interactable : Node
         _conditions = this.GetNodesInParents<InteractableCondition>();
     }
 
-    public bool TryInteract()
+    public bool TryInteract(System.Action onInteractEnd)
     {
         if (!CanInteract)
         {
             Debug.Log($"Failed to interact with: {GetParent().Name}, Condition not met");
             return false;
         }
+
+        OnInteractEnd = onInteractEnd;
 
         Interact();
         return true;
@@ -32,6 +35,12 @@ public partial class Interactable : Node
     {
         Debug.Log($"Interacted with: {GetParent().Name}");
         OnInteract?.Invoke();
+    }
+
+    protected virtual void EndInteraction()
+    {
+        Debug.Log($"Interaction ended");
+        OnInteractEnd?.Invoke();
     }
 
     private bool _CanInteract() =>

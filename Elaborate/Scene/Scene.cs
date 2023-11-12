@@ -33,6 +33,8 @@ public partial class Scene : NodeScript
 
     public static Scene Goto(string scenename)
     {
+        Debug.Log($"Scene.Goto: {scenename}");
+
         if (Current != null)
         {
             Current.QueueFree();

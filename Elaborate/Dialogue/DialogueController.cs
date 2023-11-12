@@ -11,6 +11,8 @@ public partial class DialogueController : Node
 
     private DialogueNodeCollection _collection;
 
+    public string SelectedUrlId { get; set; } = string.Empty;
+
     public override void _Ready()
     {
         base._Ready();

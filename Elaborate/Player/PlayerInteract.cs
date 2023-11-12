@@ -43,7 +43,7 @@ public partial class PlayerInteract : RayCast3D
         if (e == null) return;
         if (e.ButtonIndex == MouseButton.Left && e.IsReleased())
         {
-            CurrentInteractable.TryInteract();
+            CurrentInteractable.TryInteract(OnInteractEnd);
         }
     }
 
@@ -58,6 +58,26 @@ public partial class PlayerInteract : RayCast3D
         {
             SetInteractable(null);
         }
+    }
+
+    private void OnInteractEnd()
+    {
+        Debug.Log($"PlayerInteract.OnInteractEnd");
+
+        var interactable = GetValidInteractableFromNode(CurrentInteractable, true);
+
+        Debug.Log($"  Interactable: {interactable}");
+
+        if (interactable == null) return;
+
+        if (interactable == CurrentInteractable)
+        {
+            Debug.Log($"  Same as current interactable: {CurrentInteractable}");
+            return;
+        }
+
+        CurrentInteractable = interactable;
+        CurrentInteractable.TryInteract(OnInteractEnd);
     }
 
     private void SetInteractable(GodotObject go)
@@ -90,14 +110,14 @@ public partial class PlayerInteract : RayCast3D
         }
     }
 
-    private Interactable GetValidInteractableFromNode(Node node)
+    private Interactable GetValidInteractableFromNode(Node node, bool exclude_self = false)
     {
         if (node.TryGetNode<InteractableCondition>(out var condition) && !condition.CanInteract)
         {
             return null;
         }
 
-        if (node.TryGetNode<Interactable>(out var interactable))
+        if (node.TryGetNode<Interactable>(out var interactable) && !exclude_self)
         {
             return interactable;
         }

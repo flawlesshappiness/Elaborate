@@ -41,8 +41,12 @@
 		"text": "My second miracle.{pause=500}.{pause=500}.{pause=500} Free donuts."
 	},
 	{
-		"id": "HOME_DOOR_001",
-		"text": "It's the door'"
+		"id": "DOOR_CORRIDOR_001",
+		"text": "[url=ID-CORRIDOR]The corridor[/url] is always so empty."
+	},
+	{
+		"id": "DOOR_HOME_001",
+		"text": "This is [url=ID-HOME]my room[/url]."
 	},
 	{
 		"id": "WORRY_001",
