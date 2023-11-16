@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerInput="*res://Player/PlayerInput.cs"
 PlayerPray="*res://Player/PlayerPray.cs"
+PlayerEquipment="*res://Player/Equipment/PlayerEquipment.cs"
 
 [display]
 

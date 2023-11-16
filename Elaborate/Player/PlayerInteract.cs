@@ -104,7 +104,7 @@ public partial class PlayerInteract : RayCast3D
                 OnInteractableEnter?.Invoke(CurrentInteractable);
             }
         }
-        catch (Exception e)
+        catch
         {
             ClearInteractable();
         }

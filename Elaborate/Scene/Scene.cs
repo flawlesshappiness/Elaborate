@@ -70,24 +70,16 @@ public partial class Scene : NodeScript
 
     public static void StartPlayerAtNode(string start_node)
     {
+        if (string.IsNullOrEmpty(start_node))
+        {
+            return;
+        }
+
         try
         {
             Debug.Log($"Scene.StartPlayerAtNode: {start_node}");
-
-            if (Player.Is3D)
-            {
-                var p3d = Player.Instance as Player3d;
-                var n3d = Current.GetNodeInChildren<Node3D>(start_node);
-                _ = n3d ?? throw new NullReferenceException("start_node was null");
-                p3d.GlobalPosition = n3d.GlobalPosition;
-            }
-            else if (Player.Is2D)
-            {
-                var p2d = Player.Instance as Player2d;
-                var n2d = Current.GetNodeInChildren<Node2D>(start_node);
-                _ = n2d ?? throw new NullReferenceException("start_node was null");
-                p2d.GlobalPosition = n2d.GlobalPosition;
-            }
+            var node = Current.GetNodeInChildren<Node>(start_node);
+            Player.Instance.MoveToNode(node);
         }
         catch (Exception e)
         {

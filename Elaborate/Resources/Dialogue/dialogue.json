@@ -1,5 +1,37 @@
 [
 	{
+		"id": "WORRY_001",
+		"next": "WORRY_002",
+		"text": "I'm too worried to do that."
+	},
+	{
+		"id": "WORRY_002",
+		"text": "[url=ACTION-PRAY]Praying[/url] could help me feel better."
+	},
+
+	{
+		"id": "EQUIP_LEFT_OPEN",
+		"text": "My [url=EQUIP-LEFT]left hand[/url] can carry it."
+	},
+	{
+		"id": "EQUIP_LEFT_OCCUPIED",
+		"text": "I'm already carrying something in my [url=EQUIP-LEFT]left hand[/url]."
+	},
+	{
+		"id": "EQUIP_RIGHT_OPEN",
+		"text": "My [url=EQUIP-RIGHT]right hand[/url] can carry it."
+	},
+	{
+		"id": "EQUIP_RIGHT_OCCUPIED",
+		"text": "I'm already carrying something in my [url=EQUIP-RIGHT]right hand[/url]."
+	},
+
+	{
+		"id": "ITEM_BASEMENT_KEY_001",
+		"text": "It's the key to the basement."
+	},
+
+	{
 		"id": "HOME_BOOKCASE_001",
 		"next": "HOME_BOOKCASE_002",
 		"text": "Judging by how many books I own, it's easy to see how smart I am."
@@ -37,16 +69,6 @@
 	},
 
 	{
-		"id": "WORRY_001",
-		"next": "WORRY_002",
-		"text": "I'm too worried to do that."
-	},
-	{
-		"id": "WORRY_002",
-		"text": "[url=ACTION-PRAY]Praying[/url] could help me feel better."
-	},
-
-	{
 		"id": "LANDLORD_INTRO_001",
 		"next": "LANDLORD_INTRO_002",
 		"text": "You're room 101 right?"
@@ -79,12 +101,12 @@
 	{
 		"id": "LANDLORD_THESTATE_001",
 		"next": "LANDLORD_THESTATE_002",
-		"text": "Yeah, The State, the one above"
+		"text": "Yeah, The State, the one above."
 	},
 	{
 		"id": "LANDLORD_THESTATE_002",
 		"next": "LANDLORD_THESTATE_003",
-		"text": "Big brother, high lord, large man"
+		"text": "Big brother, high lord, large man."
 	},
 	{
 		"id": "LANDLORD_THESTATE_003",

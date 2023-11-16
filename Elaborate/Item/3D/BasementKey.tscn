@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://78v3f0hger4d"]
+
+[ext_resource type="Script" path="res://Item/Item_Key.cs" id="1_lu5va"]
+[ext_resource type="ArrayMesh" uid="uid://bixrmvrhjdcx0" path="res://Models/Quaternius/OBJ/Key4.obj" id="1_sw4hm"]
+[ext_resource type="Script" path="res://Interact/InteractableEquip.cs" id="2_ar8wj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gu8po"]
+size = Vector3(0.43, 0.2, 0.975)
+
+[node name="BasementKey" type="Node3D"]
+script = ExtResource("1_lu5va")
+ItemDataId = "BasementKey"
+
+[node name="Key4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.992546, -0.121869, 0, -0.121869, -0.992546, 8.74228e-08, -1.06542e-08, -8.67711e-08, -1, 0, 0, 0)
+mesh = ExtResource("1_sw4hm")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Key4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Key4/StaticBody3D"]
+transform = Transform3D(0.992546, 0.121869, -6.47512e-15, -0.121869, 0.992546, 7.95045e-16, 6.52375e-15, 4.23516e-22, 1, -4.07119e-10, -3.31573e-09, -0.0382123)
+shape = SubResource("BoxShape3D_gu8po")
+
+[node name="Grab" type="Node3D" parent="."]
+transform = Transform3D(-3.09086e-08, 0.707107, -0.707107, -1, -4.37114e-08, 0, -3.09086e-08, 0.707107, 0.707107, 0, 0, 0.325)
+
+[node name="Equip" type="Node3D" parent="."]
+script = ExtResource("2_ar8wj")

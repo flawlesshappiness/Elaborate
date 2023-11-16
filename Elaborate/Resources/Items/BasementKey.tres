@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://bryu6xxpue20c"]
+
+[ext_resource type="Script" path="res://Item/ItemData.cs" id="1_c3egq"]
+
+[resource]
+script = ExtResource("1_c3egq")
+PathItem3D = "res://Item/3D/BasementKey.tscn"
+PathItem2D = ""

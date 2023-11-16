@@ -19,7 +19,8 @@ public partial class DialogueView : View
 
     public bool IsAnimatingDialogue => !(_cr_dialogue_text?.HasEnded ?? false);
 
-    public System.Action<string> OnDialogueStarted, OnDialogueEnded;
+    public System.Action<string> OnDialogueStarted;
+    public System.Action<DialogueEndedArguments> OnDialogueEnded;
 
     public override void _Ready()
     {
@@ -39,44 +40,61 @@ public partial class DialogueView : View
     private void MetaClicked(Variant meta)
     {
         var text = (string)meta;
-        var id = text;
         var parts = text.Split('-');
 
         if (parts.Length == 2)
         {
             switch (parts[0])
             {
-                case "ACTION":
+                case Constants.DIALOGUE_URL_ACTION:
                     ParseAction(parts[1]);
                     break;
 
-                case "ID":
-                    SetUrlId(parts[1]);
+                case Constants.DIALOGUE_URL_ID:
+                    ClickUrlId(parts[1]);
+                    break;
+
+                default:
+                    EndDialogue(new DialogueEndedArguments
+                    {
+                        Node = _current_node,
+                        UrlClicked = text,
+                    });
                     break;
             }
         }
         else
         {
-            SetDialogueNode(id);
+            SetDialogueNode(text);
         }
     }
 
     private void ParseAction(string action)
     {
+        var args = new DialogueEndedArguments
+        {
+            Node = _current_node,
+            UrlClicked = $"{Constants.DIALOGUE_URL_ACTION}-{action}"
+        };
+
         switch (action)
         {
-            case "PRAY":
+            case Constants.DIALOGUE_URL_ACTION_PRAY:
                 PlayerPray.Instance.BeginPraying();
-                EndDialogue(_current_node);
+                EndDialogue(args);
                 break;
         }
     }
 
-    private void SetUrlId(string text)
+    private void ClickUrlId(string text)
     {
         Debug.Log($"DialogueView.SetUrlId: {text}");
         DialogueController.Instance.SelectedUrlId = text;
-        EndDialogue(_current_node);
+        EndDialogue(new DialogueEndedArguments
+        {
+            Node = _current_node,
+            UrlClicked = $"{Constants.DIALOGUE_URL_ID}-{text}"
+        });
     }
 
     public override void _Input(InputEvent @event)
@@ -162,7 +180,10 @@ public partial class DialogueView : View
 
         if (_current_node == null)
         {
-            EndDialogue(previous_node);
+            EndDialogue(new DialogueEndedArguments
+            {
+                Node = previous_node
+            });
             return;
         }
 
@@ -175,15 +196,15 @@ public partial class DialogueView : View
         AnimateDialogueText(text, MSEC_PER_CHAR);
     }
 
-    private void EndDialogue(DialogueNode previous_node)
+    private void EndDialogue(DialogueEndedArguments args)
     {
         _current_node = null;
         HideDialogueBox();
 
-        if (previous_node != null)
+        if (args != null)
         {
-            Debug.Log(DEBUG, $"Dialogue ended: {previous_node.Id}");
-            OnDialogueEnded?.Invoke(previous_node.Id);
+            Debug.Log(DEBUG, $"Dialogue ended: {args.Node.Id}");
+            OnDialogueEnded?.Invoke(args);
         }
     }
 
@@ -254,4 +275,11 @@ public partial class DialogueView : View
         Coroutine.Stop(_cr_dialogue_text);
         OnAnimateDialogueTextEnd();
     }
+}
+
+public class DialogueEndedArguments
+{
+    public DialogueNode Node { get; set; }
+
+    public string UrlClicked { get; set; } = string.Empty;
 }

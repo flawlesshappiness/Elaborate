@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://kda8f2jvgwgq"]
+[gd_scene load_steps=13 format=3 uid="uid://kda8f2jvgwgq"]
 
 [ext_resource type="Script" path="res://Scenes/corridor_001.cs" id="1_ahvjn"]
 [ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/FirstPersonPlayer.tscn" id="2_vuyhh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Interact/InteractableUrlCondition.cs" id="9_jw4wc"]
 [ext_resource type="Script" path="res://Interact/InteractableChangeScene.cs" id="10_511ug"]
 [ext_resource type="PackedScene" uid="uid://qacgk3ap4i6o" path="res://Models/Quaternius/Characters/ghost.tscn" id="10_rc3xm"]
+[ext_resource type="PackedScene" uid="uid://78v3f0hger4d" path="res://Item/3D/BasementKey.tscn" id="11_v770a"]
 
 [sub_resource type="Environment" id="Environment_6e6rg"]
 background_mode = 1
@@ -88,6 +89,7 @@ Id = "CORRIDOR"
 [node name="ChangeScene" type="Node3D" parent="furniture/Door1/InteractDoor/UrlCondition"]
 script = ExtResource("10_511ug")
 SceneName = "corridor_001"
+StartNode = "start_landlord"
 
 [node name="characters" type="Node3D" parent="."]
 
@@ -97,3 +99,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.25)
 [node name="Interact" type="Node3D" parent="characters/Ghost"]
 script = ExtResource("8_cddam")
 dialogue_id = "LANDLORD_INTRO_001"
+
+[node name="items" type="Node3D" parent="."]
+
+[node name="Key4" parent="items" instance=ExtResource("11_v770a")]
+transform = Transform3D(2.98023e-08, 1, 0, -1, 2.98023e-08, 0, 0, 0, 1, -2.75, 1.75, -8)

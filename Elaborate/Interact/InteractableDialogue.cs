@@ -29,7 +29,7 @@ public partial class InteractableDialogue : Interactable
         view.SetDialogueNode(dialogue_id);
     }
 
-    private void OnDialogueEnded(string node_id)
+    private void OnDialogueEnded(DialogueEndedArguments args)
     {
         if (!_active) return;
         _active = false;
