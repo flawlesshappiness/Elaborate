@@ -3,23 +3,25 @@ using System.Collections;
 
 public partial class PlayerPray : Node
 {
-    private PraySelectView _view;
+    public static PlayerPray Instance { get; private set; }
 
     public override void _Ready()
     {
         base._Ready();
-        _view = View.Get<PraySelectView>();
+
+        Instance = this;
     }
 
     public void BeginPraying()
     {
+        var view = View.Get<PraySelectView>();
         Coroutine.Start(Cr);
         IEnumerator Cr()
         {
-            Scene.PauseLock.AddLock(nameof(PlayerPray));
-            _view.Show();
-            yield return _view.AnimateShow();
-            Scene.PauseLock.RemoveLock(nameof(PlayerPray));
+            Scene.PauseLock.AddLock("pray");
+            view.Show();
+            yield return view.AnimateShow();
+            Scene.PauseLock.RemoveLock("pray");
         }
     }
 }

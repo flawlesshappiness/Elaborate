@@ -24,7 +24,7 @@
 
 [sub_resource type="Environment" id="Environment_6e6rg"]
 background_mode = 1
-background_color = Color(0.698039, 0.839216, 0.662745, 1)
+background_color = Color(0.129412, 0.2, 0.2, 1)
 
 [node name="room_001" type="Node3D"]
 script = ExtResource("1_6gvod")
@@ -34,6 +34,28 @@ transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -3.18634, 0.00286412
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6e6rg")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-4.2222e-08, -0.258819, 0.965926, -1.13133e-08, 0.965926, 0.258819, -1, 4.61853e-14, -4.37114e-08, -0.25, 2.1, -4)
+visible = false
+light_color = Color(1, 0.976471, 0.909804, 1)
+shadow_enabled = true
+shadow_opacity = 0.9
+distance_fade_begin = 0.0
+spot_range = 20.195
+spot_angle = 66.4
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 2, -4)
+light_color = Color(0.580392, 0.568627, 0.529412, 1)
+shadow_enabled = true
+omni_range = 34.088
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, -1.5)
+light_color = Color(0.686275, 0.67451, 0.639216, 1)
+light_energy = 0.1
+omni_range = 15.0
 
 [node name="room" type="Node3D" parent="."]
 
@@ -108,7 +130,7 @@ SceneName = "corridor_001"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92601, 0, -3.76839)
 
 [node name="BookCaseBooks" parent="furniture" instance=ExtResource("11_oo7yw")]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -0.50985, 0, -1.50817)
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -0.50985, 0, -1.25817)
 
 [node name="Interact" type="Node3D" parent="furniture/BookCaseBooks"]
 script = ExtResource("8_4gv47")

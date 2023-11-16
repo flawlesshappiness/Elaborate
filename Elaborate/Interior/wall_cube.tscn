@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://br0r17cerchmw"]
 
-[ext_resource type="Material" uid="uid://cjflevrn682wk" path="res://Materials/base_light_002.tres" id="1_uq6f8"]
+[ext_resource type="Material" uid="uid://sncj6moy3hf2" path="res://Materials/base_001.tres" id="1_12ngy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0y1mg"]
 
@@ -9,7 +9,7 @@
 [node name="wall_cube1" type="MeshInstance3D"]
 transform = Transform3D(0.5, 0, 0, 0, 4, 0, 0, 0, 0.5, 0, 2, 0)
 mesh = SubResource("BoxMesh_0y1mg")
-surface_material_override/0 = ExtResource("1_uq6f8")
+surface_material_override/0 = ExtResource("1_12ngy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

@@ -1,4 +1,4 @@
-public partial class FirstPersonPlayer : Player
+public partial class FirstPersonPlayer : Player3d
 {
     public static FirstPersonPlayer Instance { get; private set; }
 

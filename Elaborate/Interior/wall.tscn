@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bk4u3k36pahhd"]
 
-[ext_resource type="Material" uid="uid://cjflevrn682wk" path="res://Materials/base_light_002.tres" id="1_tdc4g"]
+[ext_resource type="Material" uid="uid://sncj6moy3hf2" path="res://Materials/base_001.tres" id="1_msrmt"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nrl78"]
 
@@ -8,9 +8,9 @@
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [node name="wall" type="MeshInstance3D"]
-transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, 2, 0)
+transform = Transform3D(-8.74228e-08, 1, 0, -2, -4.37114e-08, 0, 0, 0, 2, 0, 2, 0)
 mesh = SubResource("PlaneMesh_nrl78")
-surface_material_override/0 = ExtResource("1_tdc4g")
+surface_material_override/0 = ExtResource("1_msrmt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

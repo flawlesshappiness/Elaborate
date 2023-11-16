@@ -85,8 +85,8 @@ public partial class PlayerInteract : RayCast3D
         try
         {
             var node = go as Node3D;
-            var parent = node.GetNodeInParents<MeshInstance3D>();
-            var interactable = GetValidInteractableFromNode(parent);
+            var owner = node.SceneFilePath == string.Empty ? node.Owner : node;
+            var interactable = GetValidInteractableFromNode(owner);
 
             if (interactable == CurrentInteractable) return;
 
@@ -100,7 +100,7 @@ public partial class PlayerInteract : RayCast3D
 
             if (CurrentInteractable != null)
             {
-                Debug.Log(DEBUG, $"Interactable Enter: {CurrentInteractable.Name} ({parent.Name})");
+                Debug.Log(DEBUG, $"Interactable Enter: {CurrentInteractable.Name} ({owner.Name})");
                 OnInteractableEnter?.Invoke(CurrentInteractable);
             }
         }

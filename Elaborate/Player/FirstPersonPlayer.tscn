@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://doq3o5nc1388a"]
+[gd_scene load_steps=6 format=3 uid="uid://doq3o5nc1388a"]
 
 [ext_resource type="Script" path="res://Player/FirstPersonPlayer.cs" id="1_boy3u"]
 [ext_resource type="Script" path="res://Player/FirstPersonPlayerMovement.cs" id="2_2hvsy"]
 [ext_resource type="Script" path="res://Player/PlayerInteract.cs" id="3_r1kgp"]
-[ext_resource type="Script" path="res://Player/PlayerPray.cs" id="4_0v47r"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gg5rj"]
 
@@ -34,6 +33,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47242, 0)
 [node name="RayCast3D" type="RayCast3D" parent="PlayerMovement/Neck/Camera3D"]
 target_position = Vector3(0, 0, -2)
 script = ExtResource("3_r1kgp")
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("4_0v47r")

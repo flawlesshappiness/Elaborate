@@ -20,8 +20,6 @@ public partial class sign_paperwork_001 : MinigameScene
     {
         base._Ready();
 
-        Player.Input.MouseVisibleLock.AddLock(nameof(sign_paperwork_001));
-
         _papers_to_sign = Random.Shared.Next(2, 3);
 
         PaperTemplate.Visible = false;
@@ -109,7 +107,6 @@ public partial class sign_paperwork_001 : MinigameScene
         {
             yield return AnimatePaperOut(_current_paper);
 
-            Player.Input.MouseVisibleLock.RemoveLock(nameof(sign_paperwork_001));
             CompleteMinigame();
         }
     }

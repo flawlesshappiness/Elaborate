@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://qacgk3ap4i6o"]
+
+[ext_resource type="PackedScene" uid="uid://bi4gmdd6dpxpv" path="res://Models/Quaternius/GLTF/Ghost.gltf" id="1_h5nw1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_18euh"]
+
+[node name="Ghost" instance=ExtResource("1_h5nw1")]
+disable_mode = 1
+input_ray_pickable = false
+
+[node name="Skeleton3D" parent="CharacterArmature" index="0"]
+bones/1/rotation = Quaternion(0.143495, -0.00038738, 0.00285823, 0.989647)
+bones/3/rotation = Quaternion(0.688439, -0.000200163, -0.000188993, 0.725295)
+bones/5/rotation = Quaternion(-0.361545, -0.477421, -0.520683, 0.608477)
+bones/6/rotation = Quaternion(0.0440549, -0.115107, -0.662598, 0.738765)
+bones/20/rotation = Quaternion(-0.361545, 0.477421, 0.520683, 0.608477)
+bones/21/rotation = Quaternion(0.0440549, 0.115107, 0.662598, 0.738765)
+bones/34/rotation = Quaternion(0.997995, -0.0121773, -0.00776351, -0.0616306)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Flying_Idle"
+reset_on_save = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_18euh")

@@ -66,7 +66,7 @@ public partial class DialogueView : View
         switch (action)
         {
             case "PRAY":
-                Player.Instance.Pray.BeginPraying();
+                PlayerPray.Instance.BeginPraying();
                 EndDialogue(_current_node);
                 break;
         }
@@ -119,7 +119,7 @@ public partial class DialogueView : View
 
     private void ShowDialogueBox()
     {
-        Player.Input.MouseVisibleLock.AddLock(nameof(PraySelectView));
+        PlayerInput.Instance.MouseVisibleLock.AddLock(nameof(PraySelectView));
         Scene.PauseLock.AddLock(nameof(DialogueView));
         Player.InteractLock.AddLock(nameof(DialogueView));
         Visible = true;
@@ -127,7 +127,7 @@ public partial class DialogueView : View
 
     private void HideDialogueBox()
     {
-        Player.Input.MouseVisibleLock.RemoveLock(nameof(PraySelectView));
+        PlayerInput.Instance.MouseVisibleLock.RemoveLock(nameof(PraySelectView));
         Scene.PauseLock.RemoveLock(nameof(DialogueView));
         Player.InteractLock.RemoveLock(nameof(DialogueView));
         Visible = false;

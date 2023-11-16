@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://s850tyddk22e"]
 
 [ext_resource type="ArrayMesh" uid="uid://dl6yu12t8u28k" path="res://Models/Quaternius/OBJ/Couch_Medium1.obj" id="1_cfacl"]
-[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_light_001.tres" id="2_s335n"]
+[ext_resource type="Material" uid="uid://cg087yaipj50m" path="res://Materials/base_outline_001.tres" id="2_s335n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wo1sl"]
 size = Vector3(4.5211, 1.74618, 2.16209)

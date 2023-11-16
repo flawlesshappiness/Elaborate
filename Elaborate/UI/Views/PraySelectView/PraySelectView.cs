@@ -25,7 +25,7 @@ public partial class PraySelectView : View
         _buttons.Visible = false;
         _btn_prefab.Visible = false;
 
-        Player.Input.MouseVisibleLock.RemoveLock(nameof(PraySelectView));
+        PlayerInput.Instance.MouseVisibleLock.RemoveLock(nameof(PraySelectView));
         Player.InteractLock.RemoveLock(nameof(PraySelectView));
     }
 
@@ -38,7 +38,7 @@ public partial class PraySelectView : View
         {
             yield return AnimateShowBackground();
             _buttons.Visible = true;
-            Player.Input.MouseVisibleLock.AddLock(nameof(PraySelectView));
+            PlayerInput.Instance.MouseVisibleLock.AddLock(nameof(PraySelectView));
         }
     }
 

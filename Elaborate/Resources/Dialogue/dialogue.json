@@ -1,23 +1,5 @@
 [
 	{
-		"id": "DEBUG_001",
-		"next": "DEBUG_002",
-		"text": "This is the first debug dialogue text."
-	},
-	{
-		"id": "DEBUG_002",
-		"next": "DEBUG_003",
-		"text": "The second debug text looks like this. If you wanted to, you can click [url=DEBUG_004]here[/url]."
-	},
-	{
-		"id": "DEBUG_003",
-		"text": "And this is the third debug text."
-	},
-	{
-		"id": "DEBUG_004",
-		"text": "You got to the fourth debug text by clicking the text."
-	},
-	{
 		"id": "HOME_BOOKCASE_001",
 		"next": "HOME_BOOKCASE_002",
 		"text": "Judging by how many books I own, it's easy to see how smart I am."
@@ -40,14 +22,20 @@
 		"id": "HOME_BED_003",
 		"text": "My second miracle.{pause=500}.{pause=500}.{pause=500} Free donuts."
 	},
+
 	{
 		"id": "DOOR_CORRIDOR_001",
-		"text": "[url=ID-CORRIDOR]The corridor[/url] is always so empty."
+		"text": "The [url=ID-CORRIDOR]apartment corridor[/url]."
 	},
 	{
 		"id": "DOOR_HOME_001",
 		"text": "This is [url=ID-HOME]my room[/url]."
 	},
+	{
+		"id": "DOOR_LANDLORD_001",
+		"text": "My [url=ID-ENTER]landlord[/url] lives here."
+	},
+
 	{
 		"id": "WORRY_001",
 		"next": "WORRY_002",
@@ -56,5 +44,70 @@
 	{
 		"id": "WORRY_002",
 		"text": "[url=ACTION-PRAY]Praying[/url] could help me feel better."
+	},
+
+	{
+		"id": "LANDLORD_INTRO_001",
+		"next": "LANDLORD_INTRO_002",
+		"text": "You're room 101 right?"
+	},
+	{
+		"id": "LANDLORD_INTRO_002",
+		"text": "Listen, I've got a lot of shit going on right now. [url=LANDLORD_RENT_001]Rent[/url] is due so please hand it in."
+	},
+
+	{
+		"id": "LANDLORD_RENT_001",
+		"next": "LANDLORD_RENT_002",
+		"text": "What, you don't have it?"
+	},
+	{
+		"id": "LANDLORD_RENT_002",
+		"next": "LANDLORD_RENT_003",
+		"text": "Ugh, [url=LANDLORD_THESTATE_001]The State[/url] is gonna rip me a new one."
+	},
+	{
+		"id": "LANDLORD_RENT_003",
+		"next": "LANDLORD_RENT_004",
+		"text": "Suppose you could solve [url=LANDLORD_ISSUE_001]this issue[/url] for me, and I'll figure something out with your rent."
+	},
+	{
+		"id": "LANDLORD_RENT_004",
+		"text": "Otherwise we're both dead meat..."
+	},
+
+	{
+		"id": "LANDLORD_THESTATE_001",
+		"next": "LANDLORD_THESTATE_002",
+		"text": "Yeah, The State, the one above"
+	},
+	{
+		"id": "LANDLORD_THESTATE_002",
+		"next": "LANDLORD_THESTATE_003",
+		"text": "Big brother, high lord, large man"
+	},
+	{
+		"id": "LANDLORD_THESTATE_003",
+		"next": "LANDLORD_RENT_003",
+		"text": "You know..."
+	},
+
+	{
+		"id": "LANDLORD_ISSUE_001",
+		"next": "LANDLORD_ISSUE_002",
+		"text": "Look, don't tell anyone in the building about this..."
+	},
+	{
+		"id": "LANDLORD_ISSUE_002",
+		"next": "LANDLORD_ISSUE_003",
+		"text": "We've got a problem. A big one. The size of a rat. A big rat."
+	},
+	{
+		"id": "LANDLORD_ISSUE_003",
+		"text": "You get the idea. The key to the basement is in a drawer somewhere."
+	},
+	{
+		"id": "LANDLORD_RATS_001",
+		"text": "Are we clear of [url=LANDLORD_ISSUE_002]the rats[/url] yet?"
 	}
 ]

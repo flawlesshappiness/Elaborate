@@ -1,0 +1,33 @@
+Opening sequence where you lose all your money
+
+Wake up in your room
+Go to the landlord's room
+
+"You're room 101 right?"
+"Listen, I've got a lot of shit going on right now. [Rent] is due so please hand it in."
+
+> Rent
+"What, you don't have it?"
+"Ugh, [The State] is gonna rip me a new one..."
+"Suppose you could solve [this issue] for me, and I'll figure something out with your rent"
+"Otherwise we're both dead meat"
+
+> The State
+"Yeah, The State, the one above"
+"Big brother, high lord, large man"
+"You know..."
+(Suppose you could...)
+
+> this issue
+"Look, don't tell anyone in the building about this..."
+"We've got a problem. A big one. The size of a rat. A big rat."
+"You get the idea. The key to the basement is in the drawer next to my bed."
+
+"Are we clear of [the rats] yet?"
+
+> the rats
+(We've got a problem...)
+
+Pick up Basement Key
+Exit Landlord's room
+Go to Basement
