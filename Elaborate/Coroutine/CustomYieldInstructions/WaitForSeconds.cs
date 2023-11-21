@@ -2,13 +2,19 @@ using Godot;
 
 public class WaitForSeconds : CustomYieldInstruction
 {
-    private double _time_end;
-
-    private double CurrentTime => Time.GetTicksMsec();
-    public override bool KeepWaiting => CurrentTime < _time_end;
+    public double StartTime { get; private set; }
+    public double EndTime { get; private set; }
+    public double CurrentTime => Time.GetTicksMsec();
+    public override bool KeepWaiting => CurrentTime < EndTime;
 
     public WaitForSeconds(double seconds)
     {
-        _time_end = CurrentTime + seconds * 1000;
+        StartTime = CurrentTime;
+        EndTime = StartTime + seconds * 1000;
+    }
+
+    public override string ToString()
+    {
+        return base.ToString() + $"({CurrentTime - StartTime} / {EndTime - StartTime})";
     }
 }

@@ -6,6 +6,10 @@ public partial class Player3D : CharacterBody3D, IPlayer
 
     public PlayerInteract Interact { get; private set; }
 
+    public Item3D EquippedItemLeft { get; protected set; }
+
+    public Item3D EquippedItemRight { get; protected set; }
+
     public override void _Ready()
     {
         base._Ready();
@@ -57,13 +61,37 @@ public partial class Player3D : CharacterBody3D, IPlayer
         GlobalPosition = n3.GlobalPosition;
     }
 
-    public virtual void EquipItem(string id, EquipmentSlot slot)
+    public virtual void EquipItem(EquipItemArguments args)
     {
-        Debug.Log($"Player3D.EquipItem({id}, {slot})");
+        Debug.Log($"Player3D.EquipItem({args.ItemId}, {args.Slot})");
     }
 
-    public virtual void UnequipItem(EquipmentSlot slot)
+    public virtual void UnequipItem(UnequipItemArguments args)
     {
-        Debug.Log($"Player3D.UnequipItem({slot})");
+        Debug.Log($"Player3D.UnequipItem({args.Slot})");
+    }
+
+    protected void SetEquippedItem(Item3D item, EquipmentSlot slot)
+    {
+        switch (slot)
+        {
+            case EquipmentSlot.LEFT:
+                EquippedItemLeft = item;
+                break;
+
+            case EquipmentSlot.RIGHT:
+                EquippedItemRight = item;
+                break;
+        }
+    }
+
+    public Item3D GetEquippedItem(EquipmentSlot slot)
+    {
+        switch (slot)
+        {
+            case EquipmentSlot.LEFT: return EquippedItemLeft;
+            case EquipmentSlot.RIGHT: return EquippedItemRight;
+            default: return null;
+        }
     }
 }

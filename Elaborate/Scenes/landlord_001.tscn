@@ -104,3 +104,6 @@ dialogue_id = "LANDLORD_INTRO_001"
 
 [node name="Key4" parent="items" instance=ExtResource("11_v770a")]
 transform = Transform3D(2.98023e-08, 1, 0, -1, 2.98023e-08, 0, 0, 0, 1, -2.75, 1.75, -8)
+
+[node name="Key5" parent="items" instance=ExtResource("11_v770a")]
+transform = Transform3D(2.98023e-08, 1, 0, -1, 2.98023e-08, 0, 0, 0, 1, -2.75, 1.75, -9.25)

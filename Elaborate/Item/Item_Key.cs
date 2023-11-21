@@ -1,3 +1,4 @@
-public partial class Item_Key : Item, IEquippable
+public partial class Item_Key : Item3D, IEquippable
 {
+
 }

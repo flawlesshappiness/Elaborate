@@ -3,6 +3,18 @@ using System.Collections.Generic;
 
 public static partial class NodeExtensions
 {
+    public static void SetParent(this Node node, Node parent, bool keepGlobalTransform = true)
+    {
+        if (node.GetParent() == null)
+        {
+            parent.AddChild(node);
+        }
+        else
+        {
+            node.Reparent(parent, keepGlobalTransform);
+        }
+    }
+
     public static T GetNodeInChildren<T>(this Node node, string name) where T : Node
     {
         if (node.Name == name) return node as T;

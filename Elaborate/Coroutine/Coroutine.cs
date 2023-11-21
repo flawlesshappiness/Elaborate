@@ -38,25 +38,25 @@ public class Coroutine : CustomYieldInstruction
 
     public void UpdateFrame()
     {
-        while (true)
+        if (!TryMoveEnumerator(Enumerator))
         {
-            var yield_instruction = Enumerator.Current as CustomYieldInstruction;
-            if (yield_instruction != null && yield_instruction.KeepWaiting)
-            {
-                break;
-            }
-
-            if (!Enumerator.MoveNext())
-            {
-                HasEnded = true;
-                HasCompleted = true;
-                break;
-            }
-
-            if (Enumerator.Current == null)
-            {
-                break;
-            }
+            HasEnded = true;
+            HasCompleted = true;
         }
     }
+
+    private bool TryMoveEnumerator(IEnumerator enumerator)
+    {
+        var new_enumerator = enumerator.Current != null ? enumerator.Current as IEnumerator : null;
+        if (new_enumerator != null)
+        {
+            if (TryMoveEnumerator(new_enumerator))
+            {
+                return true;
+            }
+        }
+
+        return enumerator.MoveNext();
+    }
+
 }

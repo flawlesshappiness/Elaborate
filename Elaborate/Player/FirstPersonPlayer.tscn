@@ -32,12 +32,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47242, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="PlayerMovement/Neck/Camera3D"]
 target_position = Vector3(0, 0, -2)
+collision_mask = 2
 script = ExtResource("3_r1kgp")
 
 [node name="Equipment" type="Node3D" parent="PlayerMovement/Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="EquipLeft" type="Node3D" parent="PlayerMovement/Neck/Camera3D/Equipment"]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.625, 0.0344751, -1.25)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.625, 0, -1.25)
 
 [node name="EquipRight" type="Node3D" parent="PlayerMovement/Neck/Camera3D/Equipment"]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.625, 0.0344751, -1.25)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.625, 0, -1.25)

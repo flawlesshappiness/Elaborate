@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Player2D : CharacterBody2D, IPlayer
 {
-    public void EquipItem(string id, EquipmentSlot slot)
+    public void EquipItem(EquipItemArguments args)
     {
         throw new System.NotImplementedException();
     }
@@ -22,7 +22,7 @@ public partial class Player2D : CharacterBody2D, IPlayer
         throw new System.NotImplementedException();
     }
 
-    public void UnequipItem(EquipmentSlot slot)
+    public void UnequipItem(UnequipItemArguments args)
     {
         throw new System.NotImplementedException();
     }

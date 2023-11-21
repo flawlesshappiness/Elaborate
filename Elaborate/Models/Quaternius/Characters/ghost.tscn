@@ -6,6 +6,7 @@
 
 [node name="Ghost" instance=ExtResource("1_h5nw1")]
 disable_mode = 1
+collision_layer = 3
 input_ray_pickable = false
 
 [node name="Skeleton3D" parent="CharacterArmature" index="0"]

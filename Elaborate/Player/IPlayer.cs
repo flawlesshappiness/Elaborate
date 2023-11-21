@@ -8,7 +8,25 @@ public interface IPlayer
 
     public void MoveToNode(Node node);
 
-    public void EquipItem(string id, EquipmentSlot slot);
+    public void EquipItem(EquipItemArguments args);
 
-    public void UnequipItem(EquipmentSlot slot);
+    public void UnequipItem(UnequipItemArguments args);
+}
+
+public class EquipItemArguments
+{
+    public string ItemId { get; set; }
+
+    public EquipmentSlot Slot { get; set; }
+
+    public IItem WorldItem { get; set; }
+
+    public bool Animate { get; set; }
+}
+
+public class UnequipItemArguments
+{
+    public EquipmentSlot Slot { get; set; }
+
+    public bool Animate { get; set; }
 }

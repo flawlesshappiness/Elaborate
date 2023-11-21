@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections;
 
 public partial class FirstPersonPlayer : Player3D
 {
@@ -73,18 +74,147 @@ public partial class FirstPersonPlayer : Player3D
         FirstPersonMovement.Neck.Rotation = new Vector3(0, r.Y, 0);
     }
 
-    public override void EquipItem(string id, EquipmentSlot slot)
+    private Item3D CreateItem(string id)
     {
-        base.EquipItem(id, slot);
-
-        Debug.Log($"  FirstPersonPlayer.EquipItem({id}, {slot})");
-
         var item_data = ItemData.Load(id);
-        var parent = slot == EquipmentSlot.LEFT ? EquipLeftParent : EquipRightParent;
-        var instance = GD.Load<PackedScene>(item_data.PathItem3D).Instantiate();
-        parent.AddChild(instance);
+        var item = GD.Load<PackedScene>(item_data.PathItem3D).Instantiate() as Item3D;
+        return item;
+    }
 
-        var item = instance as Item;
+    public override void EquipItem(EquipItemArguments args)
+    {
+        base.EquipItem(args);
+
+        Debug.Log($"FirstPersonPlayer.EquipItem({args.ItemId}, {args.Slot})");
+
+        var item = CreateItem(args.ItemId);
+        var parent = args.Slot == EquipmentSlot.LEFT ? EquipLeftParent : EquipRightParent;
+
+        item.SetParent(Scene.Current);
         item.CollisionEnabled = false;
+
+        SetEquippedItem(item, args.Slot);
+
+        if (args.Animate)
+        {
+            AnimateEquipItem(item, parent, args.WorldItem.ItemOwner);
+        }
+        else
+        {
+            var position = item.GlobalPosition;
+            item.SetParent(parent);
+            item.Position = item.GrabNode.Position.Set(x: position.X, z: position.Z);
+            item.Rotation = item.GrabNode.Rotation;
+        }
+    }
+
+    public override void UnequipItem(UnequipItemArguments args)
+    {
+        base.UnequipItem(new UnequipItemArguments
+        {
+            Slot = args.Slot,
+            Animate = true
+        });
+
+        Debug.Log($"FirstPersonPlayer.UnequipItem({args.Slot})");
+
+        var current_item = GetEquippedItem(args.Slot);
+        if (current_item == null) return;
+
+        var id = current_item.ItemDataId;
+        var item = CreateItem(id);
+        item.SetParent(Scene.Current);
+
+        SetEquippedItem(null, args.Slot);
+
+        if (args.Animate)
+        {
+            AnimateUnequipItem(item, current_item);
+        }
+        else
+        {
+            item.GlobalPosition = GlobalPosition;
+            item.GlobalRotation = FirstPersonMovement.Neck.Rotation;
+        }
+    }
+
+    private Coroutine AnimateEquipItem(Item3D item, Node3D parent, Node previous_item)
+    {
+        Debug.Log("FirstPersonPlayer.AnimateEquipItem");
+        return Coroutine.Start(Cr);
+        IEnumerator Cr()
+        {
+            // Create temporary nodes
+            var n3 = previous_item as Node3D;
+            var start_node = new Node3D();
+            var end_node = new Node3D();
+
+            // Initialize temporary nodes
+            start_node.SetParent(Scene.Current);
+            end_node.SetParent(parent);
+
+            start_node.GlobalPosition = n3.GlobalPosition;
+            start_node.GlobalRotation = n3.GlobalRotation;
+
+            end_node.Position = item.GrabNode.Position;
+            end_node.Rotation = item.GrabNode.Rotation;
+
+            n3.Visible = false;
+
+            // Perform lerp
+            item.Transform = start_node.Transform;
+            yield return LerpEnumerator.Lerp01(0.25f, f =>
+            {
+                item.Transform = start_node.GlobalTransform.InterpolateWith(end_node.GlobalTransform, f);
+            });
+
+            // Finalize lerp
+            item.SetParent(parent);
+            item.Transform = end_node.Transform;
+
+            // Remove temporary nodes
+            start_node.QueueFree();
+            end_node.QueueFree();
+            previous_item.QueueFree();
+        }
+    }
+
+    private Coroutine AnimateUnequipItem(Item3D item, Node previous_item)
+    {
+        Debug.Log("FirstPersonPlayer.AnimateEquipItem");
+        return Coroutine.Start(Cr);
+        IEnumerator Cr()
+        {
+            // Create temporary nodes
+            var n3 = previous_item as Node3D;
+            var start_node = new Node3D();
+            var end_node = new Node3D();
+            var parent = previous_item.GetParent();
+
+            // Initialize temporary nodes
+            start_node.SetParent(parent);
+            end_node.SetParent(Scene.Current);
+
+            start_node.Position = item.GrabNode.Position;
+            start_node.Rotation = item.GrabNode.Rotation;
+
+            end_node.GlobalPosition = GlobalPosition.Set(x: start_node.GlobalPosition.X, z: start_node.GlobalPosition.Z);
+            end_node.GlobalRotation = FirstPersonMovement.Neck.Rotation;
+
+            n3.Visible = false;
+
+            yield return LerpEnumerator.Lerp01(0.25f, f =>
+            {
+                item.Transform = start_node.GlobalTransform.InterpolateWith(end_node.GlobalTransform, f);
+            });
+
+            item.SetParent(Scene.Current);
+            item.Position = end_node.Position;
+            item.Rotation = end_node.Rotation;
+
+            start_node.QueueFree();
+            end_node.QueueFree();
+            previous_item.QueueFree();
+        }
     }
 }

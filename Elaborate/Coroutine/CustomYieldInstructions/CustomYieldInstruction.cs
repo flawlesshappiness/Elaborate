@@ -2,9 +2,9 @@ using System.Collections;
 
 public class CustomYieldInstruction : IEnumerator
 {
-    public object Current => this;
+    public object Current => null;
 
-    public bool MoveNext() => !KeepWaiting;
+    public bool MoveNext() => KeepWaiting;
 
     public void Reset()
     {
