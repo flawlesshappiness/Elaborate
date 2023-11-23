@@ -125,6 +125,10 @@ Id = "CORRIDOR"
 [node name="ChangeScene" type="Node3D" parent="furniture/Door1/Interact/UrlCondition"]
 script = ExtResource("12_yvh02")
 SceneName = "corridor_001"
+StartNode = "start_home"
+
+[node name="start_corridor" type="Node3D" parent="furniture/Door1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07143, 0, -1.07143)
 
 [node name="Table" parent="furniture" instance=ExtResource("9_6p22o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92601, 0, -3.76839)

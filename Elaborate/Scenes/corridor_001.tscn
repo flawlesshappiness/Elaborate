@@ -92,6 +92,10 @@ Id = "HOME"
 [node name="ChangeScene" type="Node3D" parent="furniture/Door1/InteractDoor/UrlCondition"]
 script = ExtResource("9_qr3hv")
 SceneName = "home_001"
+StartNode = "start_corridor"
+
+[node name="start_home" type="Node3D" parent="furniture/Door1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07143, 0, -1.42857)
 
 [node name="Door2" parent="furniture" instance=ExtResource("10_sn7o4")]
 transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, -3.5, 0, -18)
@@ -108,6 +112,7 @@ Id = "ENTER"
 [node name="ChangeScene" type="Node3D" parent="furniture/Door2/InteractDoor/UrlCondition"]
 script = ExtResource("9_qr3hv")
 SceneName = "landlord_001"
+StartNode = "start_corridor"
 
 [node name="start_landlord" type="Node3D" parent="furniture/Door2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.714286, 0, -1)

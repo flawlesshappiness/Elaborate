@@ -13,7 +13,6 @@ public partial class InteractableDialogue : Interactable
         base._Ready();
 
         _view = View.Get<DialogueView>();
-        _view.OnDialogueEnded += OnDialogueEnded;
 
         if (string.IsNullOrEmpty(dialogue_id))
         {
@@ -25,8 +24,9 @@ public partial class InteractableDialogue : Interactable
     {
         base.Interact();
         _active = true;
-        var view = View.Get<DialogueView>();
-        view.SetDialogueNode(dialogue_id);
+
+        _view.OnDialogueEnded = OnDialogueEnded;
+        _view.SetDialogueNode(dialogue_id);
     }
 
     private void OnDialogueEnded(DialogueEndedArguments args)

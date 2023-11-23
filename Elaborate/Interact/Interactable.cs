@@ -1,8 +1,7 @@
-using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class Interactable : Node
+public partial class Interactable : NodeScript
 {
     private List<InteractableCondition> _conditions = new();
 
@@ -44,5 +43,5 @@ public partial class Interactable : Node
     }
 
     private bool _CanInteract() =>
-        _conditions.All(condition => condition.CanInteract);
+        IsVisibleInTree() && _conditions.All(condition => condition.CanInteract);
 }

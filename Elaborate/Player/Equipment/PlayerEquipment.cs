@@ -45,7 +45,11 @@ public partial class PlayerEquipment : Node
         }
         else
         {
-            Unequip(EquipmentSlot.LEFT);
+            Unequip(new UnequipItemArguments
+            {
+                Slot = EquipmentSlot.LEFT,
+                Animate = false
+            });
         }
 
         if (!string.IsNullOrEmpty(data.RightItemId))
@@ -61,7 +65,11 @@ public partial class PlayerEquipment : Node
         }
         else
         {
-            Unequip(EquipmentSlot.RIGHT);
+            Unequip(new UnequipItemArguments
+            {
+                Slot = EquipmentSlot.RIGHT,
+                Animate = false,
+            });
         }
     }
 
@@ -69,7 +77,11 @@ public partial class PlayerEquipment : Node
     {
         if (HasItem(args.Slot))
         {
-            Unequip(args.Slot);
+            Unequip(new UnequipItemArguments
+            {
+                Slot = args.Slot,
+                Animate = args.Animate
+            });
         }
 
         LeftItemId = args.Slot == EquipmentSlot.LEFT ? args.ItemId : LeftItemId;
@@ -79,17 +91,13 @@ public partial class PlayerEquipment : Node
         Player.Instance.EquipItem(args);
     }
 
-    public void Unequip(EquipmentSlot slot)
+    public void Unequip(UnequipItemArguments args)
     {
-        LeftItemId = slot == EquipmentSlot.LEFT ? null : LeftItemId;
-        RightItemId = slot == EquipmentSlot.RIGHT ? null : RightItemId;
+        LeftItemId = args.Slot == EquipmentSlot.LEFT ? null : LeftItemId;
+        RightItemId = args.Slot == EquipmentSlot.RIGHT ? null : RightItemId;
         SaveData();
 
-        Player.Instance.UnequipItem(new UnequipItemArguments
-        {
-            Slot = slot,
-            Animate = true,
-        });
+        Player.Instance.UnequipItem(args);
     }
 
     public bool HasItem(EquipmentSlot slot)

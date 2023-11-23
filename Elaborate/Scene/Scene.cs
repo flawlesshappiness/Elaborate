@@ -45,15 +45,8 @@ public partial class Scene : NodeScript
         {
             try
             {
-                Debug.Log($"  path: {data.Path}");
-                var node = GetNode(data.Path);
-                Debug.Log($"    node: {node}");
-                foreach (var kvp in data.Properties)
-                {
-                    var value = kvp.Value;
-                    Debug.Log($"      {kvp.Key}: {value}");
-                    //node.Set(kvp.Key, kvp.Value);
-                }
+                LoadNode(data);
+
             }
             catch (Exception e)
             {
@@ -62,37 +55,53 @@ public partial class Scene : NodeScript
         }
     }
 
-    public void SaveNode(string path, params string[] property_names) =>
-        SaveNode(GetNode(path), property_names);
+    private void LoadNode(NodeData data)
+    {
+        Debug.Log("Scene.LoadNode");
+        Debug.Log($"  path: {data.Path}");
 
-    public void SaveNode(Node node, params string[] property_names)
+        var node = GetNode(data.Path);
+        Debug.Log($"  node: {node}");
+
+        if (node is Node3D n3)
+        {
+            data.LoadNode3D(n3);
+        }
+        else if (node is Node2D n2)
+        {
+            data.LoadNode2D(n2);
+        }
+    }
+
+    public void SaveNode(string path) =>
+        SaveNode(GetNode(path));
+
+    public void SaveNode(Node node)
     {
         Debug.Log("Scene.SaveNode");
 
-        var nodepath = node.GetPath();
-        var path = nodepath.ToString().Replace(Current.Name, Data.SceneName);
-        Debug.Log($"  path: {path}");
+        if (node == null)
+        {
+            Debug.LogError("  Node was null");
+            return;
+        }
 
+        var path = node.GetPath();
         var data = Data.GetOrCreateNode(path);
 
-        // Initialize properties
-        foreach (var property in property_names)
+        if (node is Node3D n3)
         {
-            if (!data.Properties.ContainsKey(property))
-            {
-                data.Properties.Add(property, "");
-            }
+            data.SaveNode3D(n3);
+            return;
         }
 
-        Debug.Log($"  {data.Path}");
-
-        // Save property values
-        foreach (var kvp in data.Properties)
+        if (node is Node2D n2)
         {
-            var value = node.Get(kvp.Key);
-            data.Properties[kvp.Key] = value;
-            Debug.Log($"    {kvp.Key}: {value}");
+            data.SaveNode2D(n2);
+            return;
         }
+
+        Debug.LogError($"  Unhandled node type: {node}");
     }
 
     public static T CreateInstance<T>(string path) where T : Scene =>

@@ -78,7 +78,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.75, 0, 0)
 
 [node name="InteractDoor" type="Node3D" parent="furniture/Door1"]
-transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, -0.828386, 0, -5.7109)
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 0, 0, 0)
 script = ExtResource("8_cddam")
 dialogue_id = "DOOR_CORRIDOR_001"
 
@@ -90,6 +90,9 @@ Id = "CORRIDOR"
 script = ExtResource("10_511ug")
 SceneName = "corridor_001"
 StartNode = "start_landlord"
+
+[node name="start_corridor" type="Node3D" parent="furniture/Door1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.42857, 0, -1.78571)
 
 [node name="characters" type="Node3D" parent="."]
 
