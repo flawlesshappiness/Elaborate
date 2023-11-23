@@ -14,8 +14,6 @@ public static class Player
         {
             Instance.SaveData();
         }
-
-        PlayerEquipment.Instance.SaveData();
     }
 
     public static void LoadData()

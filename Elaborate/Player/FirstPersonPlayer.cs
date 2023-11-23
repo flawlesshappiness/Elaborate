@@ -84,6 +84,7 @@ public partial class FirstPersonPlayer : Player3D
 
         item.SetParent(Scene.Current);
         item.CollisionEnabled = false;
+        item.ShadowsEnabled = false;
 
         SetEquippedItem(item, args.Slot);
 
@@ -115,6 +116,7 @@ public partial class FirstPersonPlayer : Player3D
         var id = current_item.ItemDataId;
         var item = CreateItem(id);
         item.SetParent(Scene.Current);
+        item.ShadowsEnabled = true;
 
         SetEquippedItem(null, args.Slot);
 

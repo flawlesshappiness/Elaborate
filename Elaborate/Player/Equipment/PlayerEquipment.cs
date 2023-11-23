@@ -15,22 +15,13 @@ public partial class PlayerEquipment : Node
         Instance = this;
     }
 
-    public void SaveData()
-    {
-        Debug.Log("PlayerEquipment.SaveData");
-
-        Save.Game.Player.LeftItemId = LeftItemId;
-        Save.Game.Player.RightItemId = RightItemId;
-
-        Debug.Log($"  LeftItemId: {LeftItemId}");
-        Debug.Log($"  RightItemId: {RightItemId}");
-    }
-
     public void LoadData()
     {
         Debug.Log($"PlayerEquipment.LoadData");
 
         var data = Save.Game.Player;
+        Debug.Log($"  Left: {data.LeftItemId}");
+        Debug.Log($"  Right: {data.RightItemId}");
 
         if (!string.IsNullOrEmpty(data.LeftItemId))
         {
@@ -86,7 +77,9 @@ public partial class PlayerEquipment : Node
 
         LeftItemId = args.Slot == EquipmentSlot.LEFT ? args.ItemId : LeftItemId;
         RightItemId = args.Slot == EquipmentSlot.RIGHT ? args.ItemId : RightItemId;
-        SaveData();
+
+        Save.Game.Player.LeftItemId = args.Slot == EquipmentSlot.LEFT ? LeftItemId : Save.Game.Player.LeftItemId;
+        Save.Game.Player.RightItemId = args.Slot == EquipmentSlot.RIGHT ? RightItemId : Save.Game.Player.RightItemId;
 
         Player.Instance.EquipItem(args);
     }
@@ -95,7 +88,6 @@ public partial class PlayerEquipment : Node
     {
         LeftItemId = args.Slot == EquipmentSlot.LEFT ? null : LeftItemId;
         RightItemId = args.Slot == EquipmentSlot.RIGHT ? null : RightItemId;
-        SaveData();
 
         Player.Instance.UnequipItem(args);
     }
