@@ -7,6 +7,8 @@ public partial class GameController : Node
     public static GameController Create() =>
         Singleton.CreateSingleton<GameController>($"Game/{nameof(GameController)}");
 
+    public static bool AutoSave { get; set; } = true;
+
     public System.Action OnQuit;
 
     public override void _Notification(int what)
@@ -19,19 +21,27 @@ public partial class GameController : Node
         }
     }
 
+    private void SaveAll()
+    {
+        // Scene
+        Scene.Current.SaveData();
+
+        // Player
+        Player.SaveData();
+
+        // Serialize data
+        SaveDataController.Instance.SaveAll();
+    }
+
     private void OnWindowClose()
     {
         Debug.Log("GameController.OnWindowClose");
 
-        // Save player data
-        var player = Player.Instance;
-        if (player != null)
-        {
-            player.SaveData();
-        }
-
         // Serialize save data
-        SaveDataController.Instance.SaveAll();
+        if (AutoSave)
+        {
+            SaveAll();
+        }
 
         // Event
         OnQuit?.Invoke();

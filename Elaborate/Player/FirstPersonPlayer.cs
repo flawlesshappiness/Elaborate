@@ -26,7 +26,7 @@ public partial class FirstPersonPlayer : Player3D
         Debug.Log("FirstPersonPlayer.SaveData");
 
         var data = Save.Game.Player;
-        data.Position = Position;
+
         data.CameraRotation = FirstPersonMovement.Camera.Rotation;
         data.NeckRotation = FirstPersonMovement.Neck.Rotation;
 
@@ -43,17 +43,9 @@ public partial class FirstPersonPlayer : Player3D
 
         var data = Save.Game.Player;
 
-        if (data == null)
-        {
-            Debug.Log("  PlayerData is null");
-            return;
-        }
+        FirstPersonMovement.Camera.Rotation = data.CameraRotation ?? FirstPersonMovement.Camera.Rotation;
+        FirstPersonMovement.Neck.Rotation = data.NeckRotation ?? FirstPersonMovement.Neck.Rotation;
 
-        Position = data.Position;
-        FirstPersonMovement.Camera.Rotation = data.CameraRotation;
-        FirstPersonMovement.Neck.Rotation = data.NeckRotation;
-
-        Debug.Log($"  PlayerPosition: {data.Position}");
         Debug.Log($"  CameraRotation: {data.CameraRotation}");
         Debug.Log($"  NeckRotation: {data.NeckRotation}");
     }
@@ -97,13 +89,12 @@ public partial class FirstPersonPlayer : Player3D
 
         if (args.Animate)
         {
-            AnimateEquipItem(item, parent, args.WorldItem.ItemOwner);
+            AnimateEquipItem(item, parent, args.WorldItem.ItemOwner as Node3D);
         }
         else
         {
-            var position = item.GlobalPosition;
             item.SetParent(parent);
-            item.Position = item.GrabNode.Position.Set(x: position.X, z: position.Z);
+            item.Position = item.GrabNode.Position;
             item.Rotation = item.GrabNode.Rotation;
         }
     }
@@ -133,12 +124,13 @@ public partial class FirstPersonPlayer : Player3D
         }
         else
         {
-            item.GlobalPosition = GlobalPosition;
+            var position = item.GlobalPosition;
+            item.GlobalPosition = GlobalPosition.Set(x: position.X, z: position.Z);
             item.GlobalRotation = FirstPersonMovement.Neck.Rotation;
         }
     }
 
-    private Coroutine AnimateEquipItem(Item3D item, Node3D parent, Node previous_item)
+    private Coroutine AnimateEquipItem(Item3D item, Node3D parent, Node3D previous_item)
     {
         Debug.Log("FirstPersonPlayer.AnimateEquipItem");
         return Coroutine.Start(Cr);
@@ -175,11 +167,11 @@ public partial class FirstPersonPlayer : Player3D
             // Remove temporary nodes
             start_node.QueueFree();
             end_node.QueueFree();
-            previous_item.QueueFree();
+            previous_item.Visible = false;
         }
     }
 
-    private Coroutine AnimateUnequipItem(Item3D item, Node previous_item)
+    private Coroutine AnimateUnequipItem(Item3D item, Node3D previous_item)
     {
         Debug.Log("FirstPersonPlayer.AnimateEquipItem");
         return Coroutine.Start(Cr);

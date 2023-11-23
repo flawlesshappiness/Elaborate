@@ -13,6 +13,15 @@ public partial class PlayerInput : Node
         MouseVisibleLock.OnLocked += OnMouseVisibleLocked;
         MouseVisibleLock.OnFree += OnMouseVisibleFree;
 
+        if (MouseVisibleLock.IsLocked)
+        {
+            OnMouseVisibleLocked();
+        }
+        else
+        {
+            OnMouseVisibleFree();
+        }
+
         Instance = this;
     }
 

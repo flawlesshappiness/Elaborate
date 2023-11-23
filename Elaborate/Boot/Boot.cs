@@ -21,8 +21,8 @@ public partial class Boot : Node
         View.LoadSingleton<PauseView>();
         View.LoadSingleton<DialogueView>();
         View.LoadSingleton<PraySelectView>();
+        View.LoadSingleton<DebugView>();
         LoadScene();
-        LoadPlayer();
 
         SaveDataController.Instance.SaveAll();
     }
@@ -38,14 +38,5 @@ public partial class Boot : Node
     private void LoadScene()
     {
         Scene.Goto(Save.Game.Scene);
-    }
-
-    private void LoadPlayer()
-    {
-        var player = Player.Instance;
-        if (player != null)
-        {
-            player.LoadData();
-        }
     }
 }

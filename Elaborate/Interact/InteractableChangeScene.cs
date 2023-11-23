@@ -14,9 +14,13 @@ public partial class InteractableChangeScene : Interactable
 
         // Save
         Save.Game.Scene = SceneName;
+        Save.Game.Player.Position = null;
+        Save.Game.Player.CameraRotation = null;
+        Save.Game.Player.NeckRotation = null;
+        Save.Game.Player.StartNode = StartNode;
         SaveDataController.Instance.Save<GameSaveData>();
 
-        Scene.Goto(SceneName, StartNode);
+        Scene.Goto(SceneName);
         EndInteraction();
     }
 

@@ -1,6 +1,4 @@
-using Godot;
-
-public partial class View : Control
+public partial class View : ControlScript
 {
     public override void _Ready()
     {

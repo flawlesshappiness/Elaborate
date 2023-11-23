@@ -19,33 +19,46 @@ public partial class Player3D : CharacterBody3D, IPlayer
         Interact = this.GetNodeInChildren<PlayerInteract>();
     }
 
-    protected void VerifySaveData()
-    {
-        Debug.Log("Player.VerifySaveData");
-
-        if (Save.Game.Player == null)
-        {
-            Save.Game.Player = new PlayerData();
-            Debug.Log($"  Created new {nameof(PlayerData)}");
-        }
-    }
-
     public virtual void SaveData()
     {
         Debug.Log("Player.SaveData");
 
-        VerifySaveData();
+        var data = Save.Game.Player;
+        data.Position = GlobalPosition;
     }
 
     public virtual void LoadData()
     {
         Debug.Log("Player.LoadData");
 
-        if (Save.Game.Player == null)
+        LoadStartPosition();
+    }
+
+    private void LoadStartPosition()
+    {
+        Debug.Log("Player3D.LoadStartPosition");
+
+        var data = Save.Game.Player;
+        var position = data.Position;
+
+        if (data.Position != null)
         {
-            Debug.Log("  PlayerData is null");
+            GlobalPosition = position.Value;
             return;
         }
+
+        if (data.StartNode != null)
+        {
+            Debug.Log($"  Finding node: {data.StartNode}");
+            var node = Scene.Current.GetNodeInChildren<Node>(data.StartNode);
+            if (node != null)
+            {
+                MoveToNode(node);
+                return;
+            }
+        }
+
+        Debug.LogError("  Failed to load position");
     }
 
     public virtual void MoveToNode(Node node)
@@ -54,7 +67,7 @@ public partial class Player3D : CharacterBody3D, IPlayer
 
         if (n3 == null)
         {
-            Debug.Log($"Player3d.MoveToNode: Failed to start at node: {node.Name}");
+            Debug.Log($"Player3d.MoveToNode: Failed to start at node: {node?.Name}");
             return;
         }
 
@@ -69,6 +82,15 @@ public partial class Player3D : CharacterBody3D, IPlayer
     public virtual void UnequipItem(UnequipItemArguments args)
     {
         Debug.Log($"Player3D.UnequipItem({args.Slot})");
+
+        if (args.Slot == EquipmentSlot.LEFT)
+        {
+            Save.Game.Player.LeftItemId = null;
+        }
+        else if (args.Slot == EquipmentSlot.RIGHT)
+        {
+            Save.Game.Player.RightItemId = null;
+        }
     }
 
     protected void SetEquippedItem(Item3D item, EquipmentSlot slot)

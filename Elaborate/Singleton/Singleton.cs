@@ -21,7 +21,6 @@ public static class Singleton
         if (node.TryGetNode<T>(out var instance))
         {
             Debug.Log($"Created instance: {typeof(T).Name}");
-            instance._Ready();
             return instance;
         }
 
