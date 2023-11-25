@@ -28,6 +28,7 @@ public partial class InteractableEquip : Interactable
     private void DialogueEquipLeft()
     {
         Debug.Log("InteractableEquip.DialogueEquipLeft");
+        Debug.Indent++;
 
         var slot = EquipmentSlot.LEFT;
         var id = PlayerEquipment.Instance.HasItem(slot) ? "EQUIP_LEFT_OCCUPIED" : "EQUIP_LEFT_OPEN";
@@ -36,7 +37,7 @@ public partial class InteractableEquip : Interactable
         {
             if (args.UrlClicked == Constants.DIALOGUE_URL_EQUIP_LEFT)
             {
-                Debug.Log($"  Clicked {Constants.DIALOGUE_URL_EQUIP_LEFT}");
+                Debug.Log($"Clicked {Constants.DIALOGUE_URL_EQUIP_LEFT}");
                 PlayerEquipment.Instance.Equip(new EquipItemArguments
                 {
                     ItemId = Item.ItemDataId,
@@ -51,11 +52,14 @@ public partial class InteractableEquip : Interactable
                 DialogueEquipRight();
             }
         };
+
+        Debug.Indent--;
     }
 
     private void DialogueEquipRight()
     {
         Debug.Log("InteractableEquip.DialogueEquipRight");
+        Debug.Indent++;
 
         var slot = EquipmentSlot.RIGHT;
         var id = PlayerEquipment.Instance.HasItem(slot) ? "EQUIP_RIGHT_OCCUPIED" : "EQUIP_RIGHT_OPEN";
@@ -64,7 +68,7 @@ public partial class InteractableEquip : Interactable
         {
             if (args.UrlClicked == Constants.DIALOGUE_URL_EQUIP_RIGHT)
             {
-                Debug.Log($"  Clicked {Constants.DIALOGUE_URL_EQUIP_RIGHT}");
+                Debug.Log($"Clicked {Constants.DIALOGUE_URL_EQUIP_RIGHT}");
                 PlayerEquipment.Instance.Equip(new EquipItemArguments
                 {
                     ItemId = Item.ItemDataId,
@@ -79,5 +83,7 @@ public partial class InteractableEquip : Interactable
                 EndInteraction();
             }
         };
+
+        Debug.Indent--;
     }
 }

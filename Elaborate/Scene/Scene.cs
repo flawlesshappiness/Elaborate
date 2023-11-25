@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class Scene : NodeScript
 {
@@ -35,11 +36,14 @@ public partial class Scene : NodeScript
     public virtual void SaveData()
     {
         Debug.Log("Scene.SaveData");
+        Debug.Indent++;
+        Debug.Indent--;
     }
 
     public virtual void LoadData()
     {
         Debug.Log("Scene.LoadData");
+        Debug.Indent++;
 
         foreach (var data in Data.Nodes)
         {
@@ -53,15 +57,18 @@ public partial class Scene : NodeScript
                 Debug.LogError(e.Message);
             }
         }
+
+        Debug.Indent--;
     }
 
     private void LoadNode(NodeData data)
     {
         Debug.Log("Scene.LoadNode");
-        Debug.Log($"  path: {data.Path}");
+        Debug.Indent++;
+        Debug.Log($"path: {data.Path}");
 
         var node = GetNode(data.Path);
-        Debug.Log($"  node: {node}");
+        Debug.Log($"node: {node}");
 
         if (node is Node3D n3)
         {
@@ -71,6 +78,8 @@ public partial class Scene : NodeScript
         {
             data.LoadNode2D(n2);
         }
+
+        Debug.Indent--;
     }
 
     public void SaveNode(string path) =>
@@ -79,10 +88,12 @@ public partial class Scene : NodeScript
     public void SaveNode(Node node)
     {
         Debug.Log("Scene.SaveNode");
+        Debug.Indent++;
 
         if (node == null)
         {
-            Debug.LogError("  Node was null");
+            Debug.LogError("Node was null");
+            Debug.Indent--;
             return;
         }
 
@@ -92,16 +103,19 @@ public partial class Scene : NodeScript
         if (node is Node3D n3)
         {
             data.SaveNode3D(n3);
+            Debug.Indent--;
             return;
         }
 
         if (node is Node2D n2)
         {
             data.SaveNode2D(n2);
+            Debug.Indent--;
             return;
         }
 
-        Debug.LogError($"  Unhandled node type: {node}");
+        Debug.LogError($"Unhandled node type: {node}");
+        Debug.Indent--;
     }
 
     public static T CreateInstance<T>(string path) where T : Scene =>
@@ -110,6 +124,7 @@ public partial class Scene : NodeScript
     public static Scene Goto(string scene_name)
     {
         Debug.Log($"Scene.Goto: {scene_name}");
+        Debug.Indent++;
 
         if (Current != null)
         {
@@ -122,9 +137,11 @@ public partial class Scene : NodeScript
         }
 
         Current = CreateInstance<Scene>($"Scenes/{scene_name}");
-        Current.Data = Save.Game.GetOrCreateSceneData(scene_name);
+        Current.Data = GetOrCreateSceneData(scene_name);
         Current.LoadData();
         Player.LoadData();
+
+        Debug.Indent--;
         return Current;
     }
 
@@ -139,22 +156,20 @@ public partial class Scene : NodeScript
         scene.QueueFree();
     }
 
-    public static void StartPlayerAtNode(string start_node)
+    private static SceneData GetOrCreateSceneData(string scene_name)
     {
-        if (string.IsNullOrEmpty(start_node))
+        var data = Save.Game.Scenes.FirstOrDefault(d => d.SceneName == scene_name);
+
+        if (data == null)
         {
-            return;
+            Debug.Log("New scene data created!");
+            data = new SceneData
+            {
+                SceneName = scene_name,
+            };
+            Save.Game.Scenes.Add(data);
         }
 
-        try
-        {
-            Debug.Log($"Scene.StartPlayerAtNode: {start_node}");
-            var node = Current.GetNodeInChildren<Node>(start_node);
-            Player.Instance.MoveToNode(node);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"  Failed to start player at node: {e.Message}");
-        }
+        return data;
     }
 }

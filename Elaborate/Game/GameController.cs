@@ -36,6 +36,7 @@ public partial class GameController : Node
     private void OnWindowClose()
     {
         Debug.Log("GameController.OnWindowClose");
+        Debug.Indent++;
 
         // Serialize save data
         if (AutoSave)
@@ -48,6 +49,7 @@ public partial class GameController : Node
 
         // Quit
         Debug.Log("Quit");
+        Debug.Indent--;
     }
 
     private void CloseWindow()

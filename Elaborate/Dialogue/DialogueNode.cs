@@ -10,4 +10,10 @@ public class DialogueNode
 
     [JsonPropertyName("next")]
     public string Next { get; set; }
+
+    [JsonPropertyName("character")]
+    public string Character { get; set; }
+
+    [JsonPropertyName("start")]
+    public string Start { get; set; }
 }

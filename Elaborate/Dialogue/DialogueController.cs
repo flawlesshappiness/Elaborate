@@ -39,4 +39,30 @@ public partial class DialogueController : Node
                 .Replace("[/url]", "[/url][/color]");
         }
     }
+
+    public DialogueCharacterData GetOrCreateDialogueCharacterData(string id)
+    {
+        Debug.Log($"DialogueView.GetOrCreateDialogueCharacterdata: {id}");
+        Debug.Indent++;
+
+        if (string.IsNullOrEmpty(id))
+        {
+            Debug.LogError("id was null or empty");
+            Debug.Indent--;
+            return null;
+        }
+
+        if (!Save.Game.DialogueCharacters.TryGetValue(id, out var data))
+        {
+            data = new DialogueCharacterData
+            {
+                Id = id
+            };
+
+            Save.Game.DialogueCharacters.Add(id, data);
+        }
+
+        Debug.Indent--;
+        return data;
+    }
 }

@@ -55,12 +55,15 @@ public partial class SaveDataController : Node
     public void SaveAll()
     {
         Debug.Log("SaveDataController.SaveAll");
+        Debug.Indent++;
 
         foreach (var kvp in data_objects)
         {
-            Debug.Log($"  {kvp.Key}");
+            Debug.Log($"{kvp.Key}");
             Save(kvp.Key);
         }
+
+        Debug.Indent--;
     }
 
     public void Save<T>() where T : SaveData, new()

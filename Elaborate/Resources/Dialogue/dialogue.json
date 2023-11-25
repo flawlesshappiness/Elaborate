@@ -75,6 +75,8 @@
 	},
 	{
 		"id": "LANDLORD_INTRO_002",
+		"character": "landlord",
+		"start":  "LANDLORD_INTRO_002",
 		"text": "Listen, I've got a lot of shit going on right now. [url=LANDLORD_RENT_001]Rent[/url] is due so please hand it in."
 	},
 
@@ -91,6 +93,8 @@
 	{
 		"id": "LANDLORD_RENT_003",
 		"next": "LANDLORD_RENT_004",
+		"character": "landlord",
+		"start": "LANDLORD_RENT_003",
 		"text": "Suppose you could solve [url=LANDLORD_ISSUE_001]this issue[/url] for me, and I'll figure something out with your rent."
 	},
 	{
@@ -126,6 +130,8 @@
 	},
 	{
 		"id": "LANDLORD_ISSUE_003",
+		"character": "landlord",
+		"start": "LANDLORD_RATS_001",
 		"text": "You get the idea. The key to the basement is in a drawer somewhere."
 	},
 	{

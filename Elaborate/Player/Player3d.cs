@@ -22,21 +22,28 @@ public partial class Player3D : CharacterBody3D, IPlayer
     public virtual void SaveData()
     {
         Debug.Log("Player.SaveData");
+        Debug.Indent++;
 
         var data = Save.Game.Player;
         data.Position = GlobalPosition;
+
+        Debug.Indent--;
     }
 
     public virtual void LoadData()
     {
         Debug.Log("Player.LoadData");
+        Debug.Indent++;
 
         LoadStartPosition();
+
+        Debug.Indent--;
     }
 
     private void LoadStartPosition()
     {
         Debug.Log("Player3D.LoadStartPosition");
+        Debug.Indent++;
 
         var data = Save.Game.Player;
         var position = data.Position;
@@ -44,21 +51,26 @@ public partial class Player3D : CharacterBody3D, IPlayer
         if (data.Position != null)
         {
             GlobalPosition = position.Value;
+
+            Debug.Indent--;
             return;
         }
 
         if (data.StartNode != null)
         {
-            Debug.Log($"  Finding node: {data.StartNode}");
+            Debug.Log($"Finding node: {data.StartNode}");
             var node = Scene.Current.GetNodeInChildren<Node>(data.StartNode);
             if (node != null)
             {
                 MoveToNode(node);
+
+                Debug.Indent--;
                 return;
             }
         }
 
-        Debug.LogError("  Failed to load position");
+        Debug.LogError("Failed to load position");
+        Debug.Indent--;
     }
 
     public virtual void MoveToNode(Node node)
@@ -82,6 +94,7 @@ public partial class Player3D : CharacterBody3D, IPlayer
     public virtual void UnequipItem(UnequipItemArguments args)
     {
         Debug.Log($"Player3D.UnequipItem({args.Slot})");
+        Debug.Indent++;
 
         if (args.Slot == EquipmentSlot.LEFT)
         {
@@ -91,6 +104,8 @@ public partial class Player3D : CharacterBody3D, IPlayer
         {
             Save.Game.Player.RightItemId = null;
         }
+
+        Debug.Indent--;
     }
 
     protected void SetEquippedItem(Item3D item, EquipmentSlot slot)

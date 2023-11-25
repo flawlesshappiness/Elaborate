@@ -24,15 +24,17 @@ public partial class FirstPersonPlayer : Player3D
         base.SaveData();
 
         Debug.Log("FirstPersonPlayer.SaveData");
+        Debug.Indent++;
 
         var data = Save.Game.Player;
 
         data.CameraRotation = FirstPersonMovement.Camera.Rotation;
         data.NeckRotation = FirstPersonMovement.Neck.Rotation;
 
-        Debug.Log($"  PlayerPosition: {data.Position}");
-        Debug.Log($"  CameraRotation: {data.CameraRotation}");
-        Debug.Log($"  NeckRotation: {data.NeckRotation}");
+        Debug.Log($"PlayerPosition: {data.Position}");
+        Debug.Log($"CameraRotation: {data.CameraRotation}");
+        Debug.Log($"NeckRotation: {data.NeckRotation}");
+        Debug.Indent--;
     }
 
     public override void LoadData()
@@ -40,14 +42,16 @@ public partial class FirstPersonPlayer : Player3D
         base.LoadData();
 
         Debug.Log("FirstPersonPlayer.LoadData");
+        Debug.Indent++;
 
         var data = Save.Game.Player;
 
         FirstPersonMovement.Camera.Rotation = data.CameraRotation ?? FirstPersonMovement.Camera.Rotation;
         FirstPersonMovement.Neck.Rotation = data.NeckRotation ?? FirstPersonMovement.Neck.Rotation;
 
-        Debug.Log($"  CameraRotation: {data.CameraRotation}");
-        Debug.Log($"  NeckRotation: {data.NeckRotation}");
+        Debug.Log($"CameraRotation: {data.CameraRotation}");
+        Debug.Log($"NeckRotation: {data.NeckRotation}");
+        Debug.Indent--;
     }
 
     public override void MoveToNode(Node node)
@@ -78,6 +82,7 @@ public partial class FirstPersonPlayer : Player3D
         base.EquipItem(args);
 
         Debug.Log($"FirstPersonPlayer.EquipItem({args.ItemId}, {args.Slot})");
+        Debug.Indent++;
 
         var item = CreateItem(args.ItemId);
         var parent = args.Slot == EquipmentSlot.LEFT ? EquipLeftParent : EquipRightParent;
@@ -98,6 +103,8 @@ public partial class FirstPersonPlayer : Player3D
             item.Position = item.GrabNode.Position;
             item.Rotation = item.GrabNode.Rotation;
         }
+
+        Debug.Indent--;
     }
 
     public override void UnequipItem(UnequipItemArguments args)
@@ -109,9 +116,15 @@ public partial class FirstPersonPlayer : Player3D
         });
 
         Debug.Log($"FirstPersonPlayer.UnequipItem({args.Slot})");
+        Debug.Indent++;
 
         var current_item = GetEquippedItem(args.Slot);
-        if (current_item == null) return;
+        if (current_item == null)
+        {
+            Debug.Log("Equipped item was null");
+            Debug.Indent--;
+            return;
+        }
 
         var id = current_item.ItemDataId;
         var item = CreateItem(id);
@@ -130,11 +143,14 @@ public partial class FirstPersonPlayer : Player3D
             item.GlobalPosition = GlobalPosition.Set(x: position.X, z: position.Z);
             item.GlobalRotation = FirstPersonMovement.Neck.Rotation;
         }
+
+        Debug.Indent--;
     }
 
     private Coroutine AnimateEquipItem(Item3D item, Node3D parent, Node3D previous_item)
     {
         Debug.Log("FirstPersonPlayer.AnimateEquipItem");
+
         return Coroutine.Start(Cr);
         IEnumerator Cr()
         {
@@ -176,6 +192,7 @@ public partial class FirstPersonPlayer : Player3D
     private Coroutine AnimateUnequipItem(Item3D item, Node3D previous_item)
     {
         Debug.Log("FirstPersonPlayer.AnimateEquipItem");
+
         return Coroutine.Start(Cr);
         IEnumerator Cr()
         {

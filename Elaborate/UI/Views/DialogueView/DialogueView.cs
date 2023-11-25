@@ -104,13 +104,17 @@ public partial class DialogueView : View
 
     private void ClickUrlId(string text)
     {
-        Debug.Log($"DialogueView.SetUrlId: {text}");
+        Debug.Log($"DialogueView.ClickUrlId: {text}");
+        Debug.Indent++;
+
         DialogueController.Instance.SelectedUrlId = text;
         EndDialogue(new DialogueEndedArguments
         {
             Node = _current_node,
             UrlClicked = $"{Constants.DIALOGUE_URL_ID}-{text}"
         });
+
+        Debug.Indent--;
     }
 
     public override void _Input(InputEvent @event)
@@ -183,12 +187,11 @@ public partial class DialogueView : View
     public void SetDialogueNode(DialogueNode node)
     {
         Debug.Log(DEBUG, $"DialogueView.SetDialogueNode({node})");
+        Debug.Indent++;
 
         if (_current_node == null && node != null)
         {
-            Debug.Log(DEBUG, $"Dialogue started: {node.Id}");
-            OnDialogueStarted?.Invoke(node.Id);
-            ShowDialogueBox();
+            StartDialogue(node);
         }
 
         var previous_node = _current_node;
@@ -200,6 +203,8 @@ public partial class DialogueView : View
             {
                 Node = previous_node
             });
+
+            Debug.Indent--;
             return;
         }
 
@@ -207,9 +212,50 @@ public partial class DialogueView : View
 
         var text = new DialogueText(node);
 
+        ParseDialogueNode(node);
         HideDialogueButton();
         SetDialogueText(text);
         AnimateDialogueText(text, MSEC_PER_CHAR);
+
+        Debug.Indent--;
+    }
+
+    private void ParseDialogueNode(DialogueNode node)
+    {
+        Debug.Log("DialogueView.ParseDialogueNode");
+        Debug.Indent++;
+
+        if (node == null)
+        {
+            Debug.LogError("  Node was null");
+            Debug.Indent--;
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(node.Start))
+        {
+            Debug.Log($"node.Start: {node.Start}");
+            var character = DialogueController.Instance.GetOrCreateDialogueCharacterData(node.Character);
+            if (character == null)
+            {
+                Debug.LogError("Character was not found");
+            }
+            else
+            {
+                character.StartNode = node.Start;
+            }
+        }
+    }
+
+    private void StartDialogue(DialogueNode node)
+    {
+        Debug.Log(DEBUG, $"Dialogue started: {node.Id}");
+        Debug.Indent++;
+
+        OnDialogueStarted?.Invoke(node.Id);
+        ShowDialogueBox();
+
+        Debug.Indent--;
     }
 
     private void EndDialogue(DialogueEndedArguments args)
@@ -220,7 +266,11 @@ public partial class DialogueView : View
         if (args != null)
         {
             Debug.Log(DEBUG, $"Dialogue ended: {args.Node.Id}");
+            Debug.Indent++;
+
             OnDialogueEnded?.Invoke(args);
+
+            Debug.Indent--;
         }
     }
 
@@ -266,7 +316,6 @@ public partial class DialogueView : View
                     var pause = animation as DialogueText.PauseIndexAnimation;
                     if (pause != null)
                     {
-                        Debug.Log($"Waiting for {pause.DurationInMs}ms");
                         time_current += (ulong)pause.DurationInMs;
                         yield return new WaitForSeconds((float)pause.DurationInMs / 1000);
                     }

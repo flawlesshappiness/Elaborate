@@ -33,17 +33,22 @@ public partial class InteractableChangeScene : Interactable
 
     private void StartDialogue()
     {
+        Debug.Log("InteractableChangeScene.StartDialogue");
+        Debug.Indent++;
+
         DialogueView.SetDialogueNode(DialogueNode);
         DialogueView.OnDialogueEnded = args =>
         {
             if (args.UrlClicked == Constants.DIALOGUE_URL_ENTER)
             {
-                Debug.Log($"  Clicked {Constants.DIALOGUE_URL_ENTER}");
+                Debug.Log($"Clicked {Constants.DIALOGUE_URL_ENTER}");
                 SaveData();
                 ChangeScene();
                 EndInteraction();
             }
         };
+
+        Debug.Indent--;
     }
 
     private void SaveData()

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cpj5061q1s535" path="res://Interior/ceiling.tscn" id="4_e8c5g"]
 [ext_resource type="PackedScene" uid="uid://bk4u3k36pahhd" path="res://Interior/wall.tscn" id="5_vfo1o"]
 [ext_resource type="PackedScene" uid="uid://k522cynkv3fs" path="res://Models/Quaternius/Prefabs/door_1.tscn" id="7_7gm2c"]
-[ext_resource type="Script" path="res://Interact/InteractableDialogue.cs" id="8_cddam"]
+[ext_resource type="Script" path="res://Interact/InteractableDialogueCharacter.cs" id="9_jywqw"]
 [ext_resource type="Script" path="res://Interact/InteractableChangeScene.cs" id="10_511ug"]
 [ext_resource type="PackedScene" uid="uid://qacgk3ap4i6o" path="res://Models/Quaternius/Characters/ghost.tscn" id="10_rc3xm"]
 [ext_resource type="PackedScene" uid="uid://78v3f0hger4d" path="res://Item/3D/BasementKey.tscn" id="11_v770a"]
@@ -92,8 +92,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.42857, 0, -1.78571)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.25)
 
 [node name="Interact" type="Node3D" parent="characters/Ghost"]
-script = ExtResource("8_cddam")
-dialogue_id = "LANDLORD_INTRO_001"
+script = ExtResource("9_jywqw")
+Id = "landlord"
+DefaultNode = "LANDLORD_INTRO_001"
 
 [node name="items" type="Node3D" parent="."]
 

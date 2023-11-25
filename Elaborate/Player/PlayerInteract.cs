@@ -63,18 +63,22 @@ public partial class PlayerInteract : RayCast3D
     private void OnInteractEnd()
     {
         Debug.Log($"PlayerInteract.OnInteractEnd");
+        Debug.Indent++;
 
         var interactable = GetValidInteractableFromNode(CurrentInteractable, true);
 
-        Debug.Log($"  Interactable: {interactable}");
+        Debug.Log($"Interactable: {interactable}");
 
         if (interactable == null) return;
 
         if (interactable == CurrentInteractable)
         {
-            Debug.Log($"  Same as current interactable: {CurrentInteractable}");
+            Debug.Log($"Same as current interactable: {CurrentInteractable}");
+            Debug.Indent--;
             return;
         }
+
+        Debug.Indent--;
 
         CurrentInteractable = interactable;
         CurrentInteractable.TryInteract(OnInteractEnd);

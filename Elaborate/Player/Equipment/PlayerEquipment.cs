@@ -18,14 +18,15 @@ public partial class PlayerEquipment : Node
     public void LoadData()
     {
         Debug.Log($"PlayerEquipment.LoadData");
+        Debug.Indent++;
 
         var data = Save.Game.Player;
-        Debug.Log($"  Left: {data.LeftItemId}");
-        Debug.Log($"  Right: {data.RightItemId}");
+        Debug.Log($"Left: {data.LeftItemId}");
+        Debug.Log($"Right: {data.RightItemId}");
 
         if (!string.IsNullOrEmpty(data.LeftItemId))
         {
-            Debug.Log($"  LeftItemId: {data.LeftItemId}");
+            Debug.Log($"LeftItemId: {data.LeftItemId}");
 
             Equip(new EquipItemArguments
             {
@@ -45,7 +46,7 @@ public partial class PlayerEquipment : Node
 
         if (!string.IsNullOrEmpty(data.RightItemId))
         {
-            Debug.Log($"  RightItemId: {data.RightItemId}");
+            Debug.Log($"RightItemId: {data.RightItemId}");
 
             Equip(new EquipItemArguments
             {
@@ -62,6 +63,8 @@ public partial class PlayerEquipment : Node
                 Animate = false,
             });
         }
+
+        Debug.Indent--;
     }
 
     public void Equip(EquipItemArguments args)

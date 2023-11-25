@@ -20,13 +20,16 @@ public partial class ItemData : Resource
         try
         {
             Debug.Log($"ItemData.Load({name})");
+            Debug.Indent++;
             var data = GD.Load<ItemData>($"res://Resources/Items/{name}.tres");
+            Debug.Indent--;
             return data;
         }
         catch (Exception e)
         {
-            Debug.LogError($"  ItemData.Load: Failed to load ItemData");
-            Debug.LogError($"  {e.Message}");
+            Debug.LogError($"ItemData.Load: Failed to load ItemData");
+            Debug.LogError($"{e.Message}");
+            Debug.Indent--;
             return null;
         }
     }

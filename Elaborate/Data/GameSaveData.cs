@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 public class GameSaveData : SaveData
 {
@@ -11,20 +10,7 @@ public class GameSaveData : SaveData
 
     public List<SceneData> Scenes { get; set; } = new();
 
-    public SceneData GetOrCreateSceneData(string scene_name)
-    {
-        var data = Scenes.FirstOrDefault(d => d.SceneName == scene_name);
+    public Dictionary<string, bool> DialogueFlags { get; set; } = new();
 
-        if (data == null)
-        {
-            Debug.Log("New scene data created!");
-            data = new SceneData
-            {
-                SceneName = scene_name,
-            };
-            Scenes.Add(data);
-        }
-
-        return data;
-    }
+    public Dictionary<string, DialogueCharacterData> DialogueCharacters { get; set; } = new();
 }

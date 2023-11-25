@@ -15,6 +15,7 @@ public partial class NodeScript : Node
     public static void FindNodesFromAttribute(Node root, Type type)
     {
         Debug.Log($"FindNodes_NodePathAttribute ({root.Name})");
+        Debug.Indent++;
 
         var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
 
@@ -25,13 +26,15 @@ public partial class NodeScript : Node
             try
             {
                 FindNodeFromAttribute(root, field);
-                Debug.Log($"  Found value for field: {field.Name}");
+                Debug.Log($"Found value for field: {field.Name}");
             }
             catch (Exception e)
             {
-                Debug.LogError($"  {field.Name} field value not found: " + e.Message);
+                Debug.LogError($"{field.Name} field value not found: " + e.Message);
             }
         }
+
+        Debug.Indent--;
     }
 
     private static Node FindNodeFromAttribute(Node root, FieldInfo field)

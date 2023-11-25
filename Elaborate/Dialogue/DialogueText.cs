@@ -35,6 +35,7 @@ public class DialogueText
         TextLength = 0;
 
         Debug.Log($"Parsing text: {str}");
+        Debug.Indent++;
 
         for (int i = 0; i < str.Length; i++)
         {
@@ -56,6 +57,8 @@ public class DialogueText
             Text += str[i];
             TextLength++;
         }
+
+        Debug.Indent--;
     }
 
     private int CaptureUntil(string str, int i, char c, out string captured_string)
@@ -79,6 +82,7 @@ public class DialogueText
         _ = captured_string ?? throw new ArgumentNullException(nameof(captured_string));
 
         Debug.Log($"Index Animation ({index}): {captured_string}");
+        Debug.Indent++;
 
         try
         {
@@ -99,6 +103,8 @@ public class DialogueText
             GD.PrintErr($"{e.GetType().Name}: {e.Message}");
             GD.Print(e.StackTrace);
         }
+
+        Debug.Indent--;
     }
 
     private void ParsePauseIndexAnimation(int index, string value)
