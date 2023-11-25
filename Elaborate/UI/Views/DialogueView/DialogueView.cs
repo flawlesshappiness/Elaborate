@@ -17,6 +17,11 @@ public partial class DialogueView : View
 
     private const ulong MSEC_PER_CHAR = 15;
 
+    private double time_dialogue_sfx_play;
+
+    [NodeName("sfx_dialogue")]
+    public AudioStreamPlayer2D sfx_dialogue;
+
     public bool IsAnimatingDialogue => !(_cr_dialogue_text?.HasEnded ?? false);
 
     public System.Action<string> OnDialogueStarted;
@@ -186,7 +191,7 @@ public partial class DialogueView : View
 
     public void SetDialogueNode(DialogueNode node)
     {
-        Debug.Log(DEBUG, $"DialogueView.SetDialogueNode({node})");
+        Debug.Log(DEBUG, $"DialogueView.SetDialogueNode: {node?.Id}");
         Debug.Indent++;
 
         if (_current_node == null && node != null)
@@ -199,12 +204,13 @@ public partial class DialogueView : View
 
         if (_current_node == null)
         {
+            Debug.Indent--;
+
             EndDialogue(new DialogueEndedArguments
             {
                 Node = previous_node
             });
 
-            Debug.Indent--;
             return;
         }
 
@@ -245,6 +251,8 @@ public partial class DialogueView : View
                 character.StartNode = node.Start;
             }
         }
+
+        Debug.Indent--;
     }
 
     private void StartDialogue(DialogueNode node)
@@ -303,11 +311,18 @@ public partial class DialogueView : View
         {
             yield return null;
 
+            var previous_visible_characters = 0;
             while (i < max && time_current < Time.GetTicksMsec())
             {
                 i++;
                 dialogue_label.VisibleCharacters = i;
                 time_current += msec_per_char;
+
+                if (i > previous_visible_characters)
+                {
+                    PlayDialogueSFX();
+                    previous_visible_characters = i;
+                }
 
                 // Animation
                 var animation = text.Animations.FirstOrDefault(a => a.Index == i);
@@ -339,6 +354,16 @@ public partial class DialogueView : View
         if (_first_frame) return;
         Coroutine.Stop(_cr_dialogue_text);
         OnAnimateDialogueTextEnd();
+    }
+
+    private void PlayDialogueSFX()
+    {
+        var time = Time.GetUnixTimeFromSystem();
+        if (time > time_dialogue_sfx_play)
+        {
+            time_dialogue_sfx_play = time + 0.05f;
+            sfx_dialogue.Play();
+        }
     }
 }
 

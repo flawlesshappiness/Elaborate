@@ -35,7 +35,7 @@ public static class Debug
     {
         if (PRINT_ENABLED)
         {
-            GD.PrintErr(message);
+            GD.PrintErr(IndentString + message);
         }
     }
 

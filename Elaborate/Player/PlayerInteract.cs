@@ -69,7 +69,11 @@ public partial class PlayerInteract : RayCast3D
 
         Debug.Log($"Interactable: {interactable}");
 
-        if (interactable == null) return;
+        if (interactable == null)
+        {
+            Debug.Indent--;
+            return;
+        }
 
         if (interactable == CurrentInteractable)
         {
@@ -92,7 +96,10 @@ public partial class PlayerInteract : RayCast3D
             var owner = node.SceneFilePath == string.Empty ? node.Owner : node;
             var interactable = GetValidInteractableFromNode(owner);
 
-            if (interactable == CurrentInteractable) return;
+            if (interactable == CurrentInteractable)
+            {
+                return;
+            }
 
             if (CurrentInteractable != null)
             {

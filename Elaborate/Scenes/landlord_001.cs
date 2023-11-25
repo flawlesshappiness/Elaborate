@@ -4,7 +4,6 @@ public partial class landlord_001 : Scene
     {
         base.SaveData();
 
-        SaveNode("items/Key4");
-        SaveNode("items/Key5");
+        SaveNode("items/BasementKey");
     }
 }
