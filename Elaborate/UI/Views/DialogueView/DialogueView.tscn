@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwjljblblxfxs"]
+[gd_scene load_steps=6 format=3 uid="uid://cwjljblblxfxs"]
 
 [ext_resource type="Script" path="res://UI/Views/DialogueView/DialogueView.cs" id="1_dnkai"]
 [ext_resource type="Texture2D" uid="uid://b7wtql8prmpfm" path="res://Dialogue/Sprites/dialogue-arrow-down.png" id="2_lkga2"]
-[ext_resource type="AudioStream" uid="uid://dgi21trm21mcq" path="res://Audio/UI/ui_dialogue_bertil_001.ogg" id="3_wf4vc"]
 
 [sub_resource type="Animation" id="Animation_dj7x8"]
 length = 0.001
@@ -139,5 +138,4 @@ libraries = {
 }
 
 [node name="sfx_dialogue" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_wf4vc")
 bus = &"UI"

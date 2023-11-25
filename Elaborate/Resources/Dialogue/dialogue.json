@@ -70,72 +70,82 @@
 
 	{
 		"id": "LANDLORD_INTRO_001",
+		"character": "LANDLORD",
 		"next": "LANDLORD_INTRO_002",
 		"text": "You're room 101 right?"
 	},
 	{
 		"id": "LANDLORD_INTRO_002",
-		"character": "landlord",
-		"start":  "LANDLORD_INTRO_002",
+		"character": "LANDLORD",
+		"start": "LANDLORD_INTRO_002",
 		"text": "Listen, I've got a lot of shit going on right now. [url=LANDLORD_RENT_001]Rent[/url] is due so please hand it in."
 	},
 
 	{
 		"id": "LANDLORD_RENT_001",
+		"character": "LANDLORD",
 		"next": "LANDLORD_RENT_002",
 		"text": "What, you don't have it?"
 	},
 	{
 		"id": "LANDLORD_RENT_002",
+		"character": "LANDLORD",
 		"next": "LANDLORD_RENT_003",
 		"text": "Ugh, [url=LANDLORD_THESTATE_001]The State[/url] is gonna rip me a new one."
 	},
 	{
 		"id": "LANDLORD_RENT_003",
+		"character": "LANDLORD",
 		"next": "LANDLORD_RENT_004",
-		"character": "landlord",
 		"start": "LANDLORD_RENT_003",
 		"text": "Suppose you could solve [url=LANDLORD_ISSUE_001]this issue[/url] for me, and I'll figure something out with your rent."
 	},
 	{
 		"id": "LANDLORD_RENT_004",
+		"character": "LANDLORD",
 		"text": "Otherwise we're both dead meat..."
 	},
 
 	{
 		"id": "LANDLORD_THESTATE_001",
+		"character": "LANDLORD",
 		"next": "LANDLORD_THESTATE_002",
 		"text": "Yeah, The State, the one above."
 	},
 	{
 		"id": "LANDLORD_THESTATE_002",
+		"character": "LANDLORD",
 		"next": "LANDLORD_THESTATE_003",
 		"text": "Big brother, high lord, large man."
 	},
 	{
 		"id": "LANDLORD_THESTATE_003",
+		"character": "LANDLORD",
 		"next": "LANDLORD_RENT_003",
 		"text": "You know..."
 	},
 
 	{
 		"id": "LANDLORD_ISSUE_001",
+		"character": "LANDLORD",
 		"next": "LANDLORD_ISSUE_002",
 		"text": "Look, don't tell anyone in the building about this..."
 	},
 	{
 		"id": "LANDLORD_ISSUE_002",
+		"character": "LANDLORD",
 		"next": "LANDLORD_ISSUE_003",
 		"text": "We've got a problem. A big one. The size of a rat. A big rat."
 	},
 	{
 		"id": "LANDLORD_ISSUE_003",
-		"character": "landlord",
+		"character": "LANDLORD",
 		"start": "LANDLORD_RATS_001",
 		"text": "You get the idea. The key to the basement is in a drawer somewhere."
 	},
 	{
 		"id": "LANDLORD_RATS_001",
+		"character": "LANDLORD",
 		"text": "Are we clear of [url=LANDLORD_ISSUE_002]the rats[/url] yet?"
 	}
 ]

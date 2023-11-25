@@ -47,7 +47,7 @@ public partial class DialogueController : Node
 
         if (string.IsNullOrEmpty(id))
         {
-            Debug.LogError("id was null or empty");
+            Debug.Log("id was null or empty");
             Debug.Indent--;
             return null;
         }

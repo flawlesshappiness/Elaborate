@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://8me60tkbygff"]
+
+[ext_resource type="AudioStream" uid="uid://dgi21trm21mcq" path="res://Audio/UI/ui_dialogue_bertil_001.ogg" id="1_oam06"]
+[ext_resource type="Script" path="res://Character/CharacterData.cs" id="2_agrdv"]
+
+[resource]
+script = ExtResource("2_agrdv")
+SfxDialogue = ExtResource("1_oam06")
+SfxDialoguePlayDuration = 0.05

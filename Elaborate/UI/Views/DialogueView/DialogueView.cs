@@ -4,6 +4,9 @@ using System.Linq;
 
 public partial class DialogueView : View
 {
+    [NodeName("sfx_dialogue")]
+    public AudioStreamPlayer2D sfx_dialogue;
+
     private const bool DEBUG = true;
 
     private bool _first_frame;
@@ -18,9 +21,7 @@ public partial class DialogueView : View
     private const ulong MSEC_PER_CHAR = 15;
 
     private double time_dialogue_sfx_play;
-
-    [NodeName("sfx_dialogue")]
-    public AudioStreamPlayer2D sfx_dialogue;
+    private double duration_dialogue_sfx;
 
     public bool IsAnimatingDialogue => !(_cr_dialogue_text?.HasEnded ?? false);
 
@@ -233,15 +234,25 @@ public partial class DialogueView : View
 
         if (node == null)
         {
-            Debug.LogError("  Node was null");
+            Debug.LogError("Node was null");
             Debug.Indent--;
             return;
+        }
+
+        var id_character = string.IsNullOrEmpty(node.Character) ? "DEFAULT" : node.Character;
+        var character = DialogueController.Instance.GetOrCreateDialogueCharacterData(id_character);
+
+        if (character != null)
+        {
+            Debug.Log($"node.Character: {node.Character}");
+            var data = CharacterData.Load(character.Id);
+            sfx_dialogue.Stream = data == null ? null : data.SfxDialogue;
+            duration_dialogue_sfx = data == null ? 0.05 : data.SfxDialoguePlayDuration;
         }
 
         if (!string.IsNullOrEmpty(node.Start))
         {
             Debug.Log($"node.Start: {node.Start}");
-            var character = DialogueController.Instance.GetOrCreateDialogueCharacterData(node.Character);
             if (character == null)
             {
                 Debug.LogError("Character was not found");
@@ -361,7 +372,7 @@ public partial class DialogueView : View
         var time = Time.GetUnixTimeFromSystem();
         if (time > time_dialogue_sfx_play)
         {
-            time_dialogue_sfx_play = time + 0.05f;
+            time_dialogue_sfx_play = time + duration_dialogue_sfx;
             sfx_dialogue.Play();
         }
     }
