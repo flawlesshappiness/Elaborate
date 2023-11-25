@@ -65,7 +65,19 @@ public partial class DialogueView : View
         }
         else
         {
-            SetDialogueNode(text);
+            var node = DialogueController.Instance.GetNode(text);
+            if (node != null)
+            {
+                SetDialogueNode(node);
+            }
+            else
+            {
+                EndDialogue(new DialogueEndedArguments
+                {
+                    Node = _current_node,
+                    UrlClicked = text
+                });
+            }
         }
     }
 
@@ -81,6 +93,10 @@ public partial class DialogueView : View
         {
             case Constants.DIALOGUE_URL_ACTION_PRAY:
                 PlayerPray.Instance.BeginPraying();
+                EndDialogue(args);
+                break;
+
+            default:
                 EndDialogue(args);
                 break;
         }

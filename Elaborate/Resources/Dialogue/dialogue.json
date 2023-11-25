@@ -57,15 +57,15 @@
 
 	{
 		"id": "DOOR_CORRIDOR_001",
-		"text": "The [url=ID-CORRIDOR]apartment corridor[/url]."
+		"text": "The [url=ENTER]apartment corridor[/url]."
 	},
 	{
 		"id": "DOOR_HOME_001",
-		"text": "This is [url=ID-HOME]my room[/url]."
+		"text": "This is [url=ENTER]my room[/url]."
 	},
 	{
 		"id": "DOOR_LANDLORD_001",
-		"text": "My [url=ID-ENTER]landlord[/url] lives here."
+		"text": "My [url=ENTER]landlord[/url] lives here."
 	},
 
 	{
