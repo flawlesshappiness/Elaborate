@@ -10,6 +10,9 @@ public partial class ItemData : Resource
     [Export]
     public string PathItem2D { get; set; }
 
+    [Export]
+    public string ItemName { get; set; }
+
     public static ItemData Load(string name)
     {
         try

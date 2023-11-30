@@ -11,6 +11,8 @@ public interface IPlayer
     public void EquipItem(EquipItemArguments args);
 
     public void UnequipItem(UnequipItemArguments args);
+
+    public void RemoveItem(RemoveItemArguments args);
 }
 
 public class EquipItemArguments
@@ -25,6 +27,13 @@ public class EquipItemArguments
 }
 
 public class UnequipItemArguments
+{
+    public EquipmentSlot Slot { get; set; }
+
+    public bool Animate { get; set; }
+}
+
+public class RemoveItemArguments
 {
     public EquipmentSlot Slot { get; set; }
 

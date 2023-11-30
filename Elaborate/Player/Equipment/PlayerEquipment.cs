@@ -67,9 +67,24 @@ public partial class PlayerEquipment : Node
         Debug.Indent--;
     }
 
+    public void SaveData(EquipmentSlot slot)
+    {
+        Save.Game.Player.LeftItemId = slot == EquipmentSlot.LEFT ? LeftItemId : Save.Game.Player.LeftItemId;
+        Save.Game.Player.RightItemId = slot == EquipmentSlot.RIGHT ? RightItemId : Save.Game.Player.RightItemId;
+    }
+
+    private void SetItemId(EquipmentSlot slot, string item_id)
+    {
+        LeftItemId = slot == EquipmentSlot.LEFT ? item_id : LeftItemId;
+        RightItemId = slot == EquipmentSlot.RIGHT ? item_id : RightItemId;
+    }
+
     public void Equip(EquipItemArguments args)
     {
-        if (HasItem(args.Slot))
+        Debug.Log($"PlayerEquipment.Equip: {args.Slot}");
+        Debug.Indent++;
+
+        if (HasItemInSlot(args.Slot))
         {
             Unequip(new UnequipItemArguments
             {
@@ -78,26 +93,52 @@ public partial class PlayerEquipment : Node
             });
         }
 
-        LeftItemId = args.Slot == EquipmentSlot.LEFT ? args.ItemId : LeftItemId;
-        RightItemId = args.Slot == EquipmentSlot.RIGHT ? args.ItemId : RightItemId;
-
-        Save.Game.Player.LeftItemId = args.Slot == EquipmentSlot.LEFT ? LeftItemId : Save.Game.Player.LeftItemId;
-        Save.Game.Player.RightItemId = args.Slot == EquipmentSlot.RIGHT ? RightItemId : Save.Game.Player.RightItemId;
-
+        SetItemId(args.Slot, args.ItemId);
+        SaveData(args.Slot);
         Player.Instance.EquipItem(args);
+
+        Debug.Indent--;
     }
 
     public void Unequip(UnequipItemArguments args)
     {
-        LeftItemId = args.Slot == EquipmentSlot.LEFT ? null : LeftItemId;
-        RightItemId = args.Slot == EquipmentSlot.RIGHT ? null : RightItemId;
+        Debug.Log($"PlayerEquipment.Unequip: {args.Slot}");
+        Debug.Indent++;
 
+        SetItemId(args.Slot, null);
+        SaveData(args.Slot);
         Player.Instance.UnequipItem(args);
+
+        Debug.Indent--;
     }
 
-    public bool HasItem(EquipmentSlot slot)
+    public void RemoveItem(RemoveItemArguments args)
+    {
+        Debug.Log($"PlayerEquipment.RemoveItem: {args.Slot}");
+        Debug.Indent++;
+
+        SetItemId(args.Slot, null);
+        SaveData(args.Slot);
+        Player.Instance.RemoveItem(args);
+
+        Debug.Indent--;
+    }
+
+    public bool HasItemInSlot(EquipmentSlot slot)
     {
         return GetItemId(slot) != null;
+    }
+
+    public bool HasItem(string item_id)
+    {
+        return !string.IsNullOrEmpty(item_id) && LeftItemId == item_id || RightItemId == item_id;
+    }
+
+    public EquipmentSlot? GetItemSlot(string item_id)
+    {
+        if (LeftItemId == item_id) return EquipmentSlot.LEFT;
+        if (RightItemId == item_id) return EquipmentSlot.RIGHT;
+        return null;
     }
 
     public string GetItemId(EquipmentSlot slot)

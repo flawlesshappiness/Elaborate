@@ -31,7 +31,7 @@ public partial class InteractableEquip : Interactable
         Debug.Indent++;
 
         var slot = EquipmentSlot.LEFT;
-        var id = PlayerEquipment.Instance.HasItem(slot) ? "EQUIP_LEFT_OCCUPIED" : "EQUIP_LEFT_OPEN";
+        var id = PlayerEquipment.Instance.HasItemInSlot(slot) ? "EQUIP_LEFT_OCCUPIED" : "EQUIP_LEFT_OPEN";
         DialogueView.SetDialogueNode(id);
         DialogueView.OnDialogueEnded = args =>
         {
@@ -62,7 +62,7 @@ public partial class InteractableEquip : Interactable
         Debug.Indent++;
 
         var slot = EquipmentSlot.RIGHT;
-        var id = PlayerEquipment.Instance.HasItem(slot) ? "EQUIP_RIGHT_OCCUPIED" : "EQUIP_RIGHT_OPEN";
+        var id = PlayerEquipment.Instance.HasItemInSlot(slot) ? "EQUIP_RIGHT_OCCUPIED" : "EQUIP_RIGHT_OPEN";
         DialogueView.SetDialogueNode(id);
         DialogueView.OnDialogueEnded = args =>
         {

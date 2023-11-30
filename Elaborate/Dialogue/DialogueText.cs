@@ -26,7 +26,18 @@ public class DialogueText
     {
         Node = node;
         ParseText(Node.Text);
+        OverwriteText();
         Debug.Log("Text: " + Text);
+    }
+
+    private void OverwriteText()
+    {
+        if (!Node.Text.Contains(Constants.DIALOGUE_OVERWRITE_CHAR))
+        {
+            return;
+        }
+
+        Text = DialogueController.Instance.ReplaceOverwrites(Text);
     }
 
     private void ParseText(string str)

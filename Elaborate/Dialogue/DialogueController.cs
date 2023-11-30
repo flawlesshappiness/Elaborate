@@ -11,6 +11,8 @@ public partial class DialogueController : Node
 
     private DialogueNodeCollection _collection;
 
+    private Dictionary<string, string> _overwrites = new();
+
     public string SelectedUrlId { get; set; } = string.Empty;
 
     public override void _Ready()
@@ -64,5 +66,32 @@ public partial class DialogueController : Node
 
         Debug.Indent--;
         return data;
+    }
+
+    public void SetOverwrite(string key, string overwrite)
+    {
+        if (_overwrites.ContainsKey(key))
+        {
+            _overwrites[key] = overwrite;
+            Debug.Log($"Set dialogue overwrite {key} to {overwrite}");
+        }
+        else
+        {
+            _overwrites.Add(key, overwrite);
+            Debug.Log($"Added dialogue overwrite {key} to {overwrite}");
+        }
+    }
+
+    public string ReplaceOverwrites(string text)
+    {
+        string s = text;
+
+        foreach (var kvp in _overwrites)
+        {
+            var key = $"{Constants.DIALOGUE_OVERWRITE_CHAR}{kvp.Key}";
+            s = s.Replace(key, kvp.Value);
+        }
+
+        return s;
     }
 }

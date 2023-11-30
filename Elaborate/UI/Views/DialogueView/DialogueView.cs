@@ -48,6 +48,8 @@ public partial class DialogueView : View
         var text = (string)meta;
         var parts = text.Split('-');
 
+        Debug.Log($"DialogueView.MetaClicked: {text}");
+
         if (parts.Length == 2)
         {
             switch (parts[0])

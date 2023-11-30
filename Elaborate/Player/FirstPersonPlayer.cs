@@ -77,6 +77,7 @@ public partial class FirstPersonPlayer : Player3D
         return item;
     }
 
+    #region EQUIP
     public override void EquipItem(EquipItemArguments args)
     {
         base.EquipItem(args);
@@ -85,6 +86,7 @@ public partial class FirstPersonPlayer : Player3D
         Debug.Indent++;
 
         var item = CreateItem(args.ItemId);
+        var previous_item = args.WorldItem?.ItemOwner as Node3D;
         var parent = args.Slot == EquipmentSlot.LEFT ? EquipLeftParent : EquipRightParent;
 
         item.SetParent(Scene.Current);
@@ -95,25 +97,72 @@ public partial class FirstPersonPlayer : Player3D
 
         if (args.Animate)
         {
-            AnimateEquipItem(item, parent, args.WorldItem.ItemOwner as Node3D);
+            AnimateEquipItem(item, parent, previous_item);
         }
         else
         {
-            item.SetParent(parent);
-            item.Position = item.GrabNode.Position;
-            item.Rotation = item.GrabNode.Rotation;
+            FinalizeEquipItem(item, parent, previous_item);
         }
 
         Debug.Indent--;
     }
 
+    private void FinalizeEquipItem(Item3D item, Node3D parent, Node3D previous_item)
+    {
+        item.SetParent(parent);
+        item.Position = item.GrabNode.Position;
+        item.Rotation = item.GrabNode.Rotation;
+
+        if (previous_item != null)
+        {
+            previous_item.Visible = false;
+        }
+    }
+
+    private Coroutine AnimateEquipItem(Item3D item, Node3D parent, Node3D previous_item)
+    {
+        Debug.Log("FirstPersonPlayer.AnimateEquipItem");
+
+        return Coroutine.Start(Cr);
+        IEnumerator Cr()
+        {
+            // Create temporary nodes
+            var start_node = new Node3D();
+            var end_node = new Node3D();
+
+            // Initialize temporary nodes
+            start_node.SetParent(Scene.Current);
+            end_node.SetParent(parent);
+
+            start_node.GlobalPosition = previous_item.GlobalPosition;
+            start_node.GlobalRotation = previous_item.GlobalRotation;
+
+            end_node.Position = item.GrabNode.Position;
+            end_node.Rotation = item.GrabNode.Rotation;
+
+            previous_item.Visible = false;
+
+            // Perform lerp
+            item.Transform = start_node.Transform;
+            yield return LerpEnumerator.Lerp01(0.25f, f =>
+            {
+                item.Transform = start_node.GlobalTransform.InterpolateWith(end_node.GlobalTransform, f);
+            });
+
+            // Finalize
+            FinalizeEquipItem(item, parent, previous_item);
+
+            // Remove temp nodes
+            start_node.QueueFree();
+            end_node.QueueFree();
+        }
+    }
+    #endregion
+
+    #region UNEQUIP
     public override void UnequipItem(UnequipItemArguments args)
     {
-        base.UnequipItem(new UnequipItemArguments
-        {
-            Slot = args.Slot,
-            Animate = true
-        });
+        base.UnequipItem(args);
 
         Debug.Log($"FirstPersonPlayer.UnequipItem({args.Slot})");
         Debug.Indent++;
@@ -139,54 +188,21 @@ public partial class FirstPersonPlayer : Player3D
         }
         else
         {
-            var position = item.GlobalPosition;
-            item.GlobalPosition = GlobalPosition.Set(x: position.X, z: position.Z);
-            item.GlobalRotation = FirstPersonMovement.Neck.Rotation;
+            FinalizeUnequipItem(item, current_item);
         }
 
         Debug.Indent--;
     }
 
-    private Coroutine AnimateEquipItem(Item3D item, Node3D parent, Node3D previous_item)
+    private void FinalizeUnequipItem(Item3D item, Node3D previous_item)
     {
-        Debug.Log("FirstPersonPlayer.AnimateEquipItem");
+        item.SetParent(Scene.Current);
 
-        return Coroutine.Start(Cr);
-        IEnumerator Cr()
-        {
-            // Create temporary nodes
-            var n3 = previous_item as Node3D;
-            var start_node = new Node3D();
-            var end_node = new Node3D();
+        var position = item.GlobalPosition;
+        item.GlobalPosition = GlobalPosition.Set(x: position.X, z: position.Z);
+        item.GlobalRotation = FirstPersonMovement.Neck.Rotation;
 
-            // Initialize temporary nodes
-            start_node.SetParent(Scene.Current);
-            end_node.SetParent(parent);
-
-            start_node.GlobalPosition = n3.GlobalPosition;
-            start_node.GlobalRotation = n3.GlobalRotation;
-
-            end_node.Position = item.GrabNode.Position;
-            end_node.Rotation = item.GrabNode.Rotation;
-
-            n3.Visible = false;
-
-            // Perform lerp
-            item.Transform = start_node.Transform;
-            yield return LerpEnumerator.Lerp01(0.25f, f =>
-            {
-                item.Transform = start_node.GlobalTransform.InterpolateWith(end_node.GlobalTransform, f);
-            });
-
-            // Finalize lerp
-            item.SetParent(parent);
-            item.Transform = end_node.Transform;
-
-            // Remove temporary nodes
-            start_node.QueueFree();
-            end_node.QueueFree();
-            previous_item.Visible = false;
-        }
+        previous_item.QueueFree();
     }
 
     private Coroutine AnimateUnequipItem(Item3D item, Node3D previous_item)
@@ -197,7 +213,6 @@ public partial class FirstPersonPlayer : Player3D
         IEnumerator Cr()
         {
             // Create temporary nodes
-            var n3 = previous_item as Node3D;
             var start_node = new Node3D();
             var end_node = new Node3D();
             var parent = previous_item.GetParent();
@@ -212,20 +227,68 @@ public partial class FirstPersonPlayer : Player3D
             end_node.GlobalPosition = GlobalPosition.Set(x: start_node.GlobalPosition.X, z: start_node.GlobalPosition.Z);
             end_node.GlobalRotation = FirstPersonMovement.Neck.Rotation;
 
-            n3.Visible = false;
+            previous_item.Visible = false;
 
             yield return LerpEnumerator.Lerp01(0.25f, f =>
             {
                 item.Transform = start_node.GlobalTransform.InterpolateWith(end_node.GlobalTransform, f);
             });
 
-            item.SetParent(Scene.Current);
-            item.Position = end_node.Position;
-            item.Rotation = end_node.Rotation;
+            // Finalize
+            FinalizeUnequipItem(item, previous_item);
 
+            // Remove temp nodes
             start_node.QueueFree();
             end_node.QueueFree();
-            previous_item.QueueFree();
         }
     }
+    #endregion
+
+    #region REMOVE
+    public override void RemoveItem(RemoveItemArguments args)
+    {
+        base.RemoveItem(args);
+
+        Debug.Log($"FirstPersonPlayer.RemoveItem({args.Slot})");
+        Debug.Indent++;
+
+        var current_item = GetEquippedItem(args.Slot);
+        if (current_item == null)
+        {
+            Debug.Log("Equipped item was null");
+            Debug.Indent--;
+            return;
+        }
+
+        SetEquippedItem(null, args.Slot);
+
+        if (args.Animate)
+        {
+            AnimateRemoveItem(current_item);
+        }
+        else
+        {
+            FinalizeRemoveItem(current_item);
+        }
+
+        Debug.Indent--;
+    }
+
+    private void FinalizeRemoveItem(Item3D item)
+    {
+        item.QueueFree();
+    }
+
+    private Coroutine AnimateRemoveItem(Item3D item)
+    {
+        Debug.Log("FirstPersonPlayer.AnimateRemoveItem");
+
+        return Coroutine.Start(Cr);
+        IEnumerator Cr()
+        {
+            FinalizeRemoveItem(item);
+            yield return null;
+        }
+    }
+    #endregion
 }

@@ -17,6 +17,11 @@ public partial class Player2D : CharacterBody2D, IPlayer
         throw new System.NotImplementedException();
     }
 
+    public void RemoveItem(RemoveItemArguments args)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void SaveData()
     {
         throw new System.NotImplementedException();

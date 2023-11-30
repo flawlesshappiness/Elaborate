@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cb10dhpqcptpa"]
+[gd_scene load_steps=12 format=3 uid="uid://cb10dhpqcptpa"]
 
 [ext_resource type="Script" path="res://Scenes/corridor_001.cs" id="1_42ekv"]
 [ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/FirstPersonPlayer.tscn" id="2_wnsl3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cpj5061q1s535" path="res://Interior/ceiling.tscn" id="4_cditg"]
 [ext_resource type="PackedScene" uid="uid://bk4u3k36pahhd" path="res://Interior/wall.tscn" id="5_nyaul"]
 [ext_resource type="PackedScene" uid="uid://br0r17cerchmw" path="res://Interior/wall_cube.tscn" id="6_agi3d"]
+[ext_resource type="Script" path="res://Interact/InteractableLock.cs" id="9_ax7go"]
 [ext_resource type="Script" path="res://Interact/InteractableChangeScene.cs" id="9_qr3hv"]
 [ext_resource type="PackedScene" uid="uid://k522cynkv3fs" path="res://Models/Quaternius/Prefabs/door_1.tscn" id="10_sn7o4"]
 [ext_resource type="PackedScene" uid="uid://c02o14xe35xvy" path="res://Models/Quaternius/Prefabs/window_small_2.tscn" id="11_v4qpv"]
@@ -79,7 +80,7 @@ transform = Transform3D(6, 0, 0, 0, 4, 0, 0, 0, 6, -3, 2, -9)
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -2.5, 0, 0)
 
 [node name="ChangeScene" type="Node3D" parent="furniture/Door1"]
-transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, -0.828386, 0, -5.7109)
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 0, 0, 0)
 script = ExtResource("9_qr3hv")
 DialogueNode = "DOOR_HOME_001"
 SceneName = "home_001"
@@ -92,7 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07143, 0, -1.42857)
 transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, -3.5, 0, -18)
 
 [node name="ChangeScene" type="Node3D" parent="furniture/Door2"]
-transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, -0.828386, 0, -5.7109)
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 0, 0, 0)
 script = ExtResource("9_qr3hv")
 DialogueNode = "DOOR_LANDLORD_001"
 SceneName = "landlord_001"
@@ -103,6 +104,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.714286, 0, -1)
 
 [node name="Door3" parent="furniture" instance=ExtResource("10_sn7o4")]
 transform = Transform3D(9.17939e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, 9.17939e-08, 0, 0, -8.25)
+
+[node name="Locked" type="Node3D" parent="furniture/Door3"]
+script = ExtResource("9_ax7go")
+ItemId = "BasementKey"
+LockedDialogueNode = "GENERIC_LOCKED_001"
+UnlockDialogueNode = "USE_ITEM_UNLOCK_001"
+
+[node name="ChangeScene" type="Node3D" parent="furniture/Door3/Locked"]
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 0, 0, 0)
+script = ExtResource("9_qr3hv")
+DialogueNode = "DOOR_LANDLORD_001"
+SceneName = "landlord_001"
+StartNode = "start_corridor"
+
+[node name="start_basement" type="Node3D" parent="furniture/Door3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.714286, 0, -1)
 
 [node name="Door4" parent="furniture" instance=ExtResource("10_sn7o4")]
 transform = Transform3D(9.17939e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, 9.17939e-08, -6, 0, -13.5)

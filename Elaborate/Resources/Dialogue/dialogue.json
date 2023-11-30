@@ -27,6 +27,16 @@
 	},
 
 	{
+		"id": "USE_ITEM_UNLOCK_001",
+		"text": "[url=USE]Unlock[/url] with $USE_ITEM?"
+	},
+
+	{
+		"id": "GENERIC_LOCKED_001",
+		"text": "It's locked."
+	},
+
+	{
 		"id": "ITEM_BASEMENT_KEY_001",
 		"text": "It's the key to the basement."
 	},

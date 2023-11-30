@@ -6,3 +6,4 @@
 script = ExtResource("1_c3egq")
 PathItem3D = "res://Item/3D/BasementKey.tscn"
 PathItem2D = ""
+ItemName = "Basement Key"

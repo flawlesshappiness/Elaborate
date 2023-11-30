@@ -94,18 +94,11 @@ public partial class Player3D : CharacterBody3D, IPlayer
     public virtual void UnequipItem(UnequipItemArguments args)
     {
         Debug.Log($"Player3D.UnequipItem({args.Slot})");
-        Debug.Indent++;
+    }
 
-        if (args.Slot == EquipmentSlot.LEFT)
-        {
-            Save.Game.Player.LeftItemId = null;
-        }
-        else if (args.Slot == EquipmentSlot.RIGHT)
-        {
-            Save.Game.Player.RightItemId = null;
-        }
-
-        Debug.Indent--;
+    public virtual void RemoveItem(RemoveItemArguments args)
+    {
+        Debug.Log($"Player3D.RemoveItem({args.Slot}");
     }
 
     protected void SetEquippedItem(Item3D item, EquipmentSlot slot)
