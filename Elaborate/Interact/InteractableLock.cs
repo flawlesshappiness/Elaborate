@@ -100,10 +100,12 @@ public partial class InteractableLock : Interactable
     public void Unlock()
     {
         Locked = false;
+        Scene.Current.SaveLock(this);
     }
 
     public void Lock()
     {
         Locked = true;
+        Scene.Current.SaveLock(this);
     }
 }

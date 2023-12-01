@@ -33,6 +33,10 @@ public partial class Scene : NodeScript
         OnInitialize();
     }
 
+    public static T CreateInstance<T>(string path) where T : Scene =>
+        Singleton.LoadInstance<T>(path);
+
+    #region DATA
     public virtual void SaveData()
     {
         Debug.Log("Scene.SaveData");
@@ -45,6 +49,14 @@ public partial class Scene : NodeScript
         Debug.Log("Scene.LoadData");
         Debug.Indent++;
 
+        LoadNodes();
+        LoadLocks();
+
+        Debug.Indent--;
+    }
+
+    private void LoadNodes()
+    {
         foreach (var data in Data.Nodes)
         {
             try
@@ -57,8 +69,21 @@ public partial class Scene : NodeScript
                 Debug.LogError(e.Message);
             }
         }
+    }
 
-        Debug.Indent--;
+    private void LoadLocks()
+    {
+        foreach (var data in Data.Locks)
+        {
+            try
+            {
+                LoadLock(data);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+            }
+        }
     }
 
     private void LoadNode(NodeData data)
@@ -118,9 +143,49 @@ public partial class Scene : NodeScript
         Debug.Indent--;
     }
 
-    public static T CreateInstance<T>(string path) where T : Scene =>
-        Singleton.LoadInstance<T>(path);
+    public void SaveLock(InteractableLock node)
+    {
+        Debug.Log($"Scene.SaveLock");
+        Debug.Indent++;
 
+        if (node == null)
+        {
+            Debug.LogError("Lock was null");
+            return;
+        }
+
+        var path = node.GetPath();
+        var data = Data.GetOrCreateLock(path);
+        data.Locked = node.Locked;
+        Save.Game.Serialize();
+
+        Debug.Log($"Path: {path}");
+        Debug.Log($"Locked: {data.Locked}");
+
+        Debug.Indent--;
+    }
+
+    public void LoadLock(LockData data)
+    {
+        Debug.Log($"Scene.LoadLock");
+        Debug.Indent++;
+
+        Debug.Log($"Path: {data.Path}");
+
+        var node = GetNode(data.Path) as InteractableLock;
+        Debug.Log($"Node: {node}");
+
+        if (node != null)
+        {
+            node.Locked = data.Locked;
+            Debug.Log($"Locked: {node.Locked}");
+        }
+
+        Debug.Indent--;
+    }
+    #endregion
+
+    #region SCENE
     public static Scene Goto(string scene_name)
     {
         Debug.Log($"Scene.Goto: {scene_name}");
@@ -172,4 +237,5 @@ public partial class Scene : NodeScript
 
         return data;
     }
+    #endregion
 }
