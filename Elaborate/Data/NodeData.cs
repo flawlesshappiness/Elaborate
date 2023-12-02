@@ -1,8 +1,10 @@
 using Godot;
 
-public class NodeData
+public class NodeData : IDataListItem<Node>
 {
-    public string Path { get; set; }
+    public string Id { get; set; }
+
+    public string Path { get => Id; set => Id = value; }
 
     public bool Visible { get; set; }
 
@@ -10,6 +12,29 @@ public class NodeData
     {
         Debug.Log($"Path: {Path}");
         Debug.Log($"Visible: {Visible}");
+    }
+
+    public void Save(Node reference)
+    {
+        Debug.Log("NodeData.Save");
+        Debug.Indent++;
+
+        if (reference is Node3D n3)
+        {
+            SaveNode3D(n3);
+            Debug.Indent--;
+            return;
+        }
+
+        if (reference is Node2D n2)
+        {
+            SaveNode2D(n2);
+            Debug.Indent--;
+            return;
+        }
+
+        Debug.LogError($"Unhandled node of type: {reference.GetType()}");
+        Debug.Indent--;
     }
 
     public void SaveNode3D(Node3D node)
@@ -46,6 +71,27 @@ public class NodeData
         Path = path;
 
         Log();
+
+        Debug.Indent--;
+    }
+
+    public void Load()
+    {
+        Debug.Log("NodeData.Load");
+        Debug.Indent++;
+        Debug.Log($"path: {Path}");
+
+        var node = Scene.Current.GetNode(Path);
+        Debug.Log($"node: {node}");
+
+        if (node is Node3D n3)
+        {
+            LoadNode3D(n3);
+        }
+        else if (node is Node2D n2)
+        {
+            LoadNode2D(n2);
+        }
 
         Debug.Indent--;
     }

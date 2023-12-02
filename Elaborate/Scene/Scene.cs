@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Linq;
 
 public partial class Scene : NodeScript
@@ -49,139 +48,23 @@ public partial class Scene : NodeScript
         Debug.Log("Scene.LoadData");
         Debug.Indent++;
 
-        LoadNodes();
-        LoadLocks();
+        Data.Nodes.Load();
+        Data.Locks.Load();
+        Data.WorldItems.Load();
 
         Debug.Indent--;
     }
 
-    private void LoadNodes()
+    protected void SaveNode(string path)
     {
-        foreach (var data in Data.Nodes)
-        {
-            try
-            {
-                LoadNode(data);
-
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e.Message);
-            }
-        }
-    }
-
-    private void LoadLocks()
-    {
-        foreach (var data in Data.Locks)
-        {
-            try
-            {
-                LoadLock(data);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e.Message);
-            }
-        }
-    }
-
-    private void LoadNode(NodeData data)
-    {
-        Debug.Log("Scene.LoadNode");
-        Debug.Indent++;
-        Debug.Log($"path: {data.Path}");
-
-        var node = GetNode(data.Path);
-        Debug.Log($"node: {node}");
-
-        if (node is Node3D n3)
-        {
-            data.LoadNode3D(n3);
-        }
-        else if (node is Node2D n2)
-        {
-            data.LoadNode2D(n2);
-        }
-
-        Debug.Indent--;
-    }
-
-    public void SaveNode(string path) =>
-        SaveNode(GetNode(path));
-
-    public void SaveNode(Node node)
-    {
-        Debug.Log("Scene.SaveNode");
-        Debug.Indent++;
-
-        if (node == null)
-        {
-            Debug.LogError("Node was null");
-            Debug.Indent--;
-            return;
-        }
-
-        var path = node.GetPath();
-        var data = Data.GetOrCreateNode(path);
-
-        if (node is Node3D n3)
-        {
-            data.SaveNode3D(n3);
-            Debug.Indent--;
-            return;
-        }
-
-        if (node is Node2D n2)
-        {
-            data.SaveNode2D(n2);
-            Debug.Indent--;
-            return;
-        }
-
-        Debug.LogError($"Unhandled node type: {node}");
-        Debug.Indent--;
-    }
-
-    public void SaveLock(InteractableLock node)
-    {
-        Debug.Log($"Scene.SaveLock");
-        Debug.Indent++;
-
-        if (node == null)
-        {
-            Debug.LogError("Lock was null");
-            return;
-        }
-
-        var path = node.GetPath();
-        var data = Data.GetOrCreateLock(path);
-        data.Locked = node.Locked;
+        Data.Nodes.Save(GetNode(path), n => n.GetPath());
         Save.Game.Serialize();
-
-        Debug.Log($"Path: {path}");
-        Debug.Log($"Locked: {data.Locked}");
-
-        Debug.Indent--;
     }
 
-    public void LoadLock(LockData data)
+    public void SaveLock(InteractableLock reference)
     {
-        Debug.Log($"Scene.LoadLock");
-        Debug.Indent++;
-
-        Debug.Log($"Path: {data.Path}");
-
-        var node = GetNode(data.Path) as InteractableLock;
-        Debug.Log($"Node: {node}");
-
-        if (node != null)
-        {
-            node.Locked = data.Locked;
-            Debug.Log($"Locked: {node.Locked}");
-        }
-
-        Debug.Indent--;
+        Data.Locks.Save(reference, n => n.GetPath());
+        Save.Game.Serialize();
     }
     #endregion
 

@@ -1,10 +1,15 @@
 using Godot;
+using System.Collections.Generic;
 
 public static class Debug
 {
     public const bool PRINT_ENABLED = true;
 
     public static int Indent = 0;
+
+    public static List<DebugAction> RegisteredActions = new();
+
+    public static event System.Action<DebugAction> OnActionAdded;
 
     private static string IndentString => GetIndentString();
 
@@ -54,4 +59,19 @@ public static class Debug
 
         return s;
     }
+
+    public static void RegisterAction(DebugAction action)
+    {
+        RegisteredActions.Add(action);
+        OnActionAdded?.Invoke(action);
+    }
+}
+
+public class DebugAction
+{
+    public string Text { get; set; }
+
+    public string Category { get; set; }
+
+    public System.Action<DebugView> Action { get; set; }
 }

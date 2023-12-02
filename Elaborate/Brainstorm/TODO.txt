@@ -1,6 +1,4 @@
 TODO:
-save locked door state
-add equipment debug commands (equip, unequip, remove)
 dungeon generator
 
 Initial motivator: 

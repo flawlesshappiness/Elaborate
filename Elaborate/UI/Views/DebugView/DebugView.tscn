@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://vqmou3q71vox"]
+[gd_scene load_steps=6 format=3 uid="uid://vqmou3q71vox"]
 
 [ext_resource type="Script" path="res://UI/Views/DebugView/DebugView.cs" id="1_7hao7"]
+[ext_resource type="Script" path="res://UI/Views/DebugView/DebugContentSearch.cs" id="2_fggti"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8v5jt"]
 bg_color = Color(0, 0.345098, 0.8, 1)
@@ -93,6 +94,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
+[node name="CategoryPrefab" type="Label" parent="Main/HSplitContainer/Left/Buttons/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "CATEGORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ButtonPrefab" type="Button" parent="Main/HSplitContainer/Left/Buttons/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_8v5jt")
@@ -136,3 +143,48 @@ theme_override_constants/margin_bottom = 20
 
 [node name="ContentContainer" type="Control" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer"]
 layout_mode = 2
+
+[node name="ContentSearch" type="Control" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer/ContentContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_fggti")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer/ContentContainer/ContentSearch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 75
+dragger_visibility = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer/ContentContainer/ContentSearch/VSplitContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer/ContentContainer/ContentSearch/VSplitContainer/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SearchField" type="LineEdit" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer/ContentContainer/ContentSearch/VSplitContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+placeholder_text = "Search..."
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer/ContentContainer/ContentSearch/VSplitContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer/ContentContainer/ContentSearch/VSplitContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ResultButtonPrefab" type="Button" parent="Main/HSplitContainer/Right/Content/MarginContainer/MarginContainer/ContentContainer/ContentSearch/VSplitContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "PREFAB"

@@ -20,11 +20,35 @@ public partial class SaveDataController : Node
 
     private void RegisterDebugActions()
     {
-        var view = View.Get<DebugView>();
-        view.RegisterAction("Clear ALL save data", v => ClearAllSaveData());
-        view.RegisterAction("Clear current scene data", v => ClearCurrentSceneData());
-        view.RegisterAction("Clear player data", v => ClearPlayerData());
-        view.RegisterAction("Clear player equipment data", v => ClearPlayerEquipmentData());
+        var category = "SAVE DATA";
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Clear ALL save data",
+            Category = category,
+            Action = v => ClearAllSaveData()
+        });
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Clear current scene data",
+            Category = category,
+            Action = v => ClearCurrentSceneData()
+        });
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Clear player data",
+            Category = category,
+            Action = v => ClearPlayerData()
+        });
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Clear player equipment data",
+            Category = category,
+            Action = v => ClearPlayerEquipmentData()
+        });
     }
 
     public T Get<T>() where T : SaveData, new()

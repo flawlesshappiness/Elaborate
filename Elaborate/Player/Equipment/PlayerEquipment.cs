@@ -1,4 +1,5 @@
 using Godot;
+using System.Linq;
 
 public partial class PlayerEquipment : Node
 {
@@ -13,6 +14,63 @@ public partial class PlayerEquipment : Node
         base._Ready();
 
         Instance = this;
+
+        RegisterDebugActions();
+    }
+
+    private void RegisterDebugActions()
+    {
+        var category = "EQUIPMENT";
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Equip item",
+            Category = category,
+            Action = v =>
+            {
+                v.Content.Visible = true;
+                v.ContentSearch.Visible = true;
+                v.ContentSearch.Title = "Equip item";
+
+                var ext = ".tres";
+                var files = DirAccess.GetFilesAt("res://Resources/Items")
+                    .Where(file => file.EndsWith(ext));
+
+                foreach (var file in files)
+                {
+                    var name = System.IO.Path.GetFileName(file).Replace(ext, "");
+                    v.ContentSearch.AddItem(name, () => Equip(new EquipItemArguments { ItemId = name, Animate = false, Slot = EquipmentSlot.LEFT }));
+                }
+            }
+        });
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Remove left",
+            Category = category,
+            Action = v => RemoveItem(new RemoveItemArguments { Slot = EquipmentSlot.LEFT, Animate = false })
+        });
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Remove right",
+            Category = category,
+            Action = v => RemoveItem(new RemoveItemArguments { Slot = EquipmentSlot.RIGHT, Animate = false })
+        });
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Unequip left",
+            Category = category,
+            Action = v => Unequip(new UnequipItemArguments { Slot = EquipmentSlot.LEFT, Animate = false })
+        });
+
+        Debug.RegisterAction(new DebugAction
+        {
+            Text = "Unequip right",
+            Category = category,
+            Action = v => Unequip(new UnequipItemArguments { Slot = EquipmentSlot.RIGHT, Animate = false })
+        });
     }
 
     public void LoadData()

@@ -86,7 +86,7 @@ public partial class FirstPersonPlayer : Player3D
         Debug.Indent++;
 
         var item = CreateItem(args.ItemId);
-        var previous_item = args.WorldItem?.ItemOwner as Node3D;
+        var previous_item = args.WorldItem?.ItemOwner as Item3D;
         var parent = args.Slot == EquipmentSlot.LEFT ? EquipLeftParent : EquipRightParent;
 
         item.SetParent(Scene.Current);
@@ -107,7 +107,7 @@ public partial class FirstPersonPlayer : Player3D
         Debug.Indent--;
     }
 
-    private void FinalizeEquipItem(Item3D item, Node3D parent, Node3D previous_item)
+    private void FinalizeEquipItem(Item3D item, Node3D parent, Item3D previous_item)
     {
         item.SetParent(parent);
         item.Position = item.GrabNode.Position;
@@ -115,11 +115,12 @@ public partial class FirstPersonPlayer : Player3D
 
         if (previous_item != null)
         {
+            previous_item.UnsavePositionInScene();
             previous_item.Visible = false;
         }
     }
 
-    private Coroutine AnimateEquipItem(Item3D item, Node3D parent, Node3D previous_item)
+    private Coroutine AnimateEquipItem(Item3D item, Node3D parent, Item3D previous_item)
     {
         Debug.Log("FirstPersonPlayer.AnimateEquipItem");
 
@@ -198,9 +199,13 @@ public partial class FirstPersonPlayer : Player3D
     {
         item.SetParent(Scene.Current);
 
-        var position = item.GlobalPosition;
+        Debug.Log(item.GlobalPosition);
+
+        var position = previous_item.GlobalPosition;
         item.GlobalPosition = GlobalPosition.Set(x: position.X, z: position.Z);
         item.GlobalRotation = FirstPersonMovement.Neck.Rotation;
+
+        item.SavePositionInScene();
 
         previous_item.QueueFree();
     }
