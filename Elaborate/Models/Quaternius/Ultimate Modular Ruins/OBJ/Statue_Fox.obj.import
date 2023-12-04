@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c00vr3ms03iyl"
+path="res://.godot/imported/Statue_Fox.obj-3c0a242425b410d8bd4b7ae570f0648f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Statue_Fox.obj-3c0a242425b410d8bd4b7ae570f0648f.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Statue_Fox.obj"
+dest_files=["res://.godot/imported/Statue_Fox.obj-3c0a242425b410d8bd4b7ae570f0648f.mesh", "res://.godot/imported/Statue_Fox.obj-3c0a242425b410d8bd4b7ae570f0648f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

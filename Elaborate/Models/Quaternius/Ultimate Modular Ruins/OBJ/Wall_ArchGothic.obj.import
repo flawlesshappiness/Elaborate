@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://giyvut2jjerl"
+path="res://.godot/imported/Wall_ArchGothic.obj-d1c0e582800d1ec6a14c8d25b56163e0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wall_ArchGothic.obj-d1c0e582800d1ec6a14c8d25b56163e0.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Wall_ArchGothic.obj"
+dest_files=["res://.godot/imported/Wall_ArchGothic.obj-d1c0e582800d1ec6a14c8d25b56163e0.mesh", "res://.godot/imported/Wall_ArchGothic.obj-d1c0e582800d1ec6a14c8d25b56163e0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

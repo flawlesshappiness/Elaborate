@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://sy0867tfkkyo"
+path="res://.godot/imported/Stairs.obj-448cee3d319863230bcb7c4a9f7d70b6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Stairs.obj-448cee3d319863230bcb7c4a9f7d70b6.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Stairs.obj"
+dest_files=["res://.godot/imported/Stairs.obj-448cee3d319863230bcb7c4a9f7d70b6.mesh", "res://.godot/imported/Stairs.obj-448cee3d319863230bcb7c4a9f7d70b6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

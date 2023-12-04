@@ -66,9 +66,8 @@ public class NodeData : IDataListItem<Node>
         Debug.Log("NodeData.SaveNode");
         Debug.Indent++;
 
-        var nodepath = node.GetPath();
-        var path = nodepath.ToString().Replace(Scene.Current.Name, Scene.Current.Data.SceneName);
-        Path = path;
+        var path = node.GetPath();
+        Path = path.ToString().Replace(Scene.Current.Name, Scene.Current.Data.SceneName);
 
         Log();
 

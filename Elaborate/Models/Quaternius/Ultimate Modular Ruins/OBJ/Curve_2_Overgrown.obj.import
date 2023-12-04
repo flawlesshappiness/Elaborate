@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c3ktr60dd1tln"
+path="res://.godot/imported/Curve_2_Overgrown.obj-219aa44c976e693ccf1f8924d53b8c79.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Curve_2_Overgrown.obj-219aa44c976e693ccf1f8924d53b8c79.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Curve_2_Overgrown.obj"
+dest_files=["res://.godot/imported/Curve_2_Overgrown.obj-219aa44c976e693ccf1f8924d53b8c79.mesh", "res://.godot/imported/Curve_2_Overgrown.obj-219aa44c976e693ccf1f8924d53b8c79.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

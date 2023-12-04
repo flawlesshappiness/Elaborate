@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyfkwl0oxwmoq"]
+
+[ext_resource type="ArrayMesh" uid="uid://bgx7ppxo0rkx3" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Floor_Squares.obj" id="1_47m6d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2531"]
+size = Vector3(2, 0.4, 2.2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jfdcg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3otgn"]
+albedo_color = Color(0.141176, 0.141176, 0.129412, 1)
+
+[node name="floor_squares" type="Node3D"]
+
+[node name="FloorSquares" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_47m6d")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+shape = SubResource("BoxShape3D_e2531")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0)
+mesh = SubResource("PlaneMesh_jfdcg")
+surface_material_override/0 = SubResource("StandardMaterial3D_3otgn")

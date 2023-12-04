@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://kda8f2jvgwgq"]
 
 [ext_resource type="Script" path="res://Scenes/landlord_001.cs" id="1_yj7p5"]
-[ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/FirstPersonPlayer.tscn" id="2_vuyhh"]
+[ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/FirstPerson/FirstPersonPlayer.tscn" id="2_vuyhh"]
 [ext_resource type="PackedScene" uid="uid://bt800rhdk3pmv" path="res://Interior/floor.tscn" id="3_1kfiq"]
 [ext_resource type="PackedScene" uid="uid://cpj5061q1s535" path="res://Interior/ceiling.tscn" id="4_e8c5g"]
 [ext_resource type="PackedScene" uid="uid://bk4u3k36pahhd" path="res://Interior/wall.tscn" id="5_vfo1o"]

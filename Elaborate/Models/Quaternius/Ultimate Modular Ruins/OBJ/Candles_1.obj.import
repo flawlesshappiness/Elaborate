@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bp87cty80o4eh"
+path="res://.godot/imported/Candles_1.obj-c2e17155a419768586f6b1e225c10c21.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Candles_1.obj-c2e17155a419768586f6b1e225c10c21.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Candles_1.obj"
+dest_files=["res://.godot/imported/Candles_1.obj-c2e17155a419768586f6b1e225c10c21.mesh", "res://.godot/imported/Candles_1.obj-c2e17155a419768586f6b1e225c10c21.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cdeb5d1a3w8bn"
+path="res://.godot/imported/Character_Animated.obj-2a7ba4d649163c45d200ac5b189232b5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Character_Animated.obj-2a7ba4d649163c45d200ac5b189232b5.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Character_Animated.obj"
+dest_files=["res://.godot/imported/Character_Animated.obj-2a7ba4d649163c45d200ac5b189232b5.mesh", "res://.godot/imported/Character_Animated.obj-2a7ba4d649163c45d200ac5b189232b5.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

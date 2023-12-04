@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cw7ypeotf42d"
+path="res://.godot/imported/Bush_2x1.obj-ee28232b7e1c482ce87f68f3d831b6fd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bush_2x1.obj-ee28232b7e1c482ce87f68f3d831b6fd.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Bush_2x1.obj"
+dest_files=["res://.godot/imported/Bush_2x1.obj-ee28232b7e1c482ce87f68f3d831b6fd.mesh", "res://.godot/imported/Bush_2x1.obj-ee28232b7e1c482ce87f68f3d831b6fd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

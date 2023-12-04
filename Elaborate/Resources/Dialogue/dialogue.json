@@ -77,6 +77,10 @@
 		"id": "DOOR_LANDLORD_001",
 		"text": "My [url=ENTER]landlord[/url] lives here."
 	},
+	{
+		"id": "DOOR_BASEMENT_001",
+		"text": "[url=ENTER]The basement[/url]."
+	},
 
 	{
 		"id": "LANDLORD_INTRO_001",

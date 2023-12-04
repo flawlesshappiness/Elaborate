@@ -24,11 +24,18 @@ public partial class DebugContentSearch : ControlScript
     {
         base._Ready();
 
+        VisibilityChanged += OnVisibilityChanged;
         SearchField.TextChanged += OnTextChanged;
 
         ResultButtonPrefab.Visible = false;
+    }
 
-        OnTextChanged(string.Empty);
+    private void OnVisibilityChanged()
+    {
+        if (Visible)
+        {
+            OnTextChanged(string.Empty);
+        }
     }
 
     private void OnTextChanged(string text)

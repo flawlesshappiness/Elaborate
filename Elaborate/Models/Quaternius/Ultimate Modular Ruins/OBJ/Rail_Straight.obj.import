@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dbber2kwkhnio"
+path="res://.godot/imported/Rail_Straight.obj-30ca2b4107dd4843c89c0078f4e0b7dc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Rail_Straight.obj-30ca2b4107dd4843c89c0078f4e0b7dc.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Rail_Straight.obj"
+dest_files=["res://.godot/imported/Rail_Straight.obj-30ca2b4107dd4843c89c0078f4e0b7dc.mesh", "res://.godot/imported/Rail_Straight.obj-30ca2b4107dd4843c89c0078f4e0b7dc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

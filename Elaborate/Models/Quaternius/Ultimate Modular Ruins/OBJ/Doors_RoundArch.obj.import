@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dvweu5ajflbcc"
+path="res://.godot/imported/Doors_RoundArch.obj-2b7a2c86fc09bfd75d7d7252959157d3.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Doors_RoundArch.obj-2b7a2c86fc09bfd75d7d7252959157d3.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Doors_RoundArch.obj"
+dest_files=["res://.godot/imported/Doors_RoundArch.obj-2b7a2c86fc09bfd75d7d7252959157d3.mesh", "res://.godot/imported/Doors_RoundArch.obj-2b7a2c86fc09bfd75d7d7252959157d3.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

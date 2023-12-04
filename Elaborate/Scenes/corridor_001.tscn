@@ -1,15 +1,15 @@
 [gd_scene load_steps=12 format=3 uid="uid://cb10dhpqcptpa"]
 
 [ext_resource type="Script" path="res://Scenes/corridor_001.cs" id="1_42ekv"]
-[ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/FirstPersonPlayer.tscn" id="2_wnsl3"]
+[ext_resource type="PackedScene" uid="uid://doq3o5nc1388a" path="res://Player/FirstPerson/FirstPersonPlayer.tscn" id="2_wnsl3"]
 [ext_resource type="PackedScene" uid="uid://bt800rhdk3pmv" path="res://Interior/floor.tscn" id="3_janb7"]
 [ext_resource type="PackedScene" uid="uid://cpj5061q1s535" path="res://Interior/ceiling.tscn" id="4_cditg"]
 [ext_resource type="PackedScene" uid="uid://bk4u3k36pahhd" path="res://Interior/wall.tscn" id="5_nyaul"]
 [ext_resource type="PackedScene" uid="uid://br0r17cerchmw" path="res://Interior/wall_cube.tscn" id="6_agi3d"]
 [ext_resource type="Script" path="res://Interact/InteractableLock.cs" id="9_ax7go"]
 [ext_resource type="Script" path="res://Interact/InteractableChangeScene.cs" id="9_qr3hv"]
-[ext_resource type="PackedScene" uid="uid://k522cynkv3fs" path="res://Models/Quaternius/Prefabs/door_1.tscn" id="10_sn7o4"]
-[ext_resource type="PackedScene" uid="uid://c02o14xe35xvy" path="res://Models/Quaternius/Prefabs/window_small_2.tscn" id="11_v4qpv"]
+[ext_resource type="PackedScene" uid="uid://k522cynkv3fs" path="res://Models/Quaternius/Prefabs/apartment/door_1.tscn" id="10_sn7o4"]
+[ext_resource type="PackedScene" uid="uid://c02o14xe35xvy" path="res://Models/Quaternius/Prefabs/apartment/window_small_2.tscn" id="11_v4qpv"]
 
 [sub_resource type="Environment" id="Environment_6e6rg"]
 background_mode = 1
@@ -114,9 +114,9 @@ UnlockDialogueNode = "USE_ITEM_UNLOCK_001"
 [node name="ChangeScene" type="Node3D" parent="furniture/Door3/Locked"]
 transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 0, 0, 0)
 script = ExtResource("9_qr3hv")
-DialogueNode = "DOOR_LANDLORD_001"
-SceneName = "landlord_001"
-StartNode = "start_corridor"
+DialogueNode = "DOOR_BASEMENT_001"
+SceneName = "basement_001"
+StartNode = "start"
 
 [node name="start_basement" type="Node3D" parent="furniture/Door3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.714286, 0, -1)

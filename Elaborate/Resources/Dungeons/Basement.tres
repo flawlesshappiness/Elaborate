@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DungeonResource" load_steps=2 format=3 uid="uid://di3iqt0omwlpn"]
+
+[ext_resource type="Script" path="res://Dungeon/DungeonResource.cs" id="1_gw846"]
+
+[resource]
+script = ExtResource("1_gw846")
+RoomPrefabs = PackedStringArray()

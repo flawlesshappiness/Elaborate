@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cgrn6kpsaeu5x"
+path="res://.godot/imported/Statue_Stag.obj-e128b6b1394cc94db0f32cb009981302.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Statue_Stag.obj-e128b6b1394cc94db0f32cb009981302.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Statue_Stag.obj"
+dest_files=["res://.godot/imported/Statue_Stag.obj-e128b6b1394cc94db0f32cb009981302.mesh", "res://.godot/imported/Statue_Stag.obj-e128b6b1394cc94db0f32cb009981302.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

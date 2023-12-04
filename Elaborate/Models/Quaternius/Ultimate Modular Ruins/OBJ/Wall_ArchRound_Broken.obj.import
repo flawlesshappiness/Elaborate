@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bganrnxyul48m"
+path="res://.godot/imported/Wall_ArchRound_Broken.obj-5d24537c665700ad4c6fd69d2df4fa0d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wall_ArchRound_Broken.obj-5d24537c665700ad4c6fd69d2df4fa0d.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Wall_ArchRound_Broken.obj"
+dest_files=["res://.godot/imported/Wall_ArchRound_Broken.obj-5d24537c665700ad4c6fd69d2df4fa0d.mesh", "res://.godot/imported/Wall_ArchRound_Broken.obj-5d24537c665700ad4c6fd69d2df4fa0d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

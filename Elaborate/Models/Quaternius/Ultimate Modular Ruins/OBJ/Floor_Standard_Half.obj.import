@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://8mltkjhsdhj3"
+path="res://.godot/imported/Floor_Standard_Half.obj-76538f7ab8d325195b57daf4e7ba70d7.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Floor_Standard_Half.obj-76538f7ab8d325195b57daf4e7ba70d7.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Floor_Standard_Half.obj"
+dest_files=["res://.godot/imported/Floor_Standard_Half.obj-76538f7ab8d325195b57daf4e7ba70d7.mesh", "res://.godot/imported/Floor_Standard_Half.obj-76538f7ab8d325195b57daf4e7ba70d7.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

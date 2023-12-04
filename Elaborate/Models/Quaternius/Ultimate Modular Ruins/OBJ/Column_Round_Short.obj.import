@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dsnsf4s3p0spw"
+path="res://.godot/imported/Column_Round_Short.obj-ffcbcbf394ef3ac65ea7d8a6a43110a4.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Column_Round_Short.obj-ffcbcbf394ef3ac65ea7d8a6a43110a4.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Column_Round_Short.obj"
+dest_files=["res://.godot/imported/Column_Round_Short.obj-ffcbcbf394ef3ac65ea7d8a6a43110a4.mesh", "res://.godot/imported/Column_Round_Short.obj-ffcbcbf394ef3ac65ea7d8a6a43110a4.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

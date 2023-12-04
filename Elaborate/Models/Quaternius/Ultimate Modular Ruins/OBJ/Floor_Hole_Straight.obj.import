@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d12seh5u1tvgt"
+path="res://.godot/imported/Floor_Hole_Straight.obj-206faa1de46b84a508a74d13b9e8c13e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Floor_Hole_Straight.obj-206faa1de46b84a508a74d13b9e8c13e.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Floor_Hole_Straight.obj"
+dest_files=["res://.godot/imported/Floor_Hole_Straight.obj-206faa1de46b84a508a74d13b9e8c13e.mesh", "res://.godot/imported/Floor_Hole_Straight.obj-206faa1de46b84a508a74d13b9e8c13e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

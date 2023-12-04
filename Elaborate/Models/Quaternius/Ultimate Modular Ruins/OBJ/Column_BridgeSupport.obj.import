@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dsm7jx16euqc8"
+path="res://.godot/imported/Column_BridgeSupport.obj-14898e67da6553f0c58dde19db5ffcc7.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Column_BridgeSupport.obj-14898e67da6553f0c58dde19db5ffcc7.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Column_BridgeSupport.obj"
+dest_files=["res://.godot/imported/Column_BridgeSupport.obj-14898e67da6553f0c58dde19db5ffcc7.mesh", "res://.godot/imported/Column_BridgeSupport.obj-14898e67da6553f0c58dde19db5ffcc7.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -28,8 +28,6 @@ public partial class PlayerEquipment : Node
             Category = category,
             Action = v =>
             {
-                v.Content.Visible = true;
-                v.ContentSearch.Visible = true;
                 v.ContentSearch.Title = "Equip item";
 
                 var ext = ".tres";
@@ -41,6 +39,9 @@ public partial class PlayerEquipment : Node
                     var name = System.IO.Path.GetFileName(file).Replace(ext, "");
                     v.ContentSearch.AddItem(name, () => Equip(new EquipItemArguments { ItemId = name, Animate = false, Slot = EquipmentSlot.LEFT }));
                 }
+
+                v.Content.Visible = true;
+                v.ContentSearch.Visible = true;
             }
         });
 

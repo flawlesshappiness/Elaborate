@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cvkwor63i6ru8"
+path="res://.godot/imported/Pot3.obj-f9f464d2066558dac77355de68fa930a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Pot3.obj-f9f464d2066558dac77355de68fa930a.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Pot3.obj"
+dest_files=["res://.godot/imported/Pot3.obj-f9f464d2066558dac77355de68fa930a.mesh", "res://.godot/imported/Pot3.obj-f9f464d2066558dac77355de68fa930a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

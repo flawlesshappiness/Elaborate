@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://jvamsmug28kw"]
+
+[ext_resource type="ArrayMesh" uid="uid://fpubmearrhdx" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Wall.obj" id="1_y4c4o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_65e0y"]
+size = Vector3(2, 2, 0.2)
+
+[node name="wall" type="Node3D"]
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = ExtResource("1_y4c4o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_65e0y")

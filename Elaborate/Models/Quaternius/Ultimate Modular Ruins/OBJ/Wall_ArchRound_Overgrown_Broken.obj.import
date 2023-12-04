@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://vgtvdfohoj0e"
+path="res://.godot/imported/Wall_ArchRound_Overgrown_Broken.obj-44ffc9a3a1f57be32d228a809f0eb349.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wall_ArchRound_Overgrown_Broken.obj-44ffc9a3a1f57be32d228a809f0eb349.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Wall_ArchRound_Overgrown_Broken.obj"
+dest_files=["res://.godot/imported/Wall_ArchRound_Overgrown_Broken.obj-44ffc9a3a1f57be32d228a809f0eb349.mesh", "res://.godot/imported/Wall_ArchRound_Overgrown_Broken.obj-44ffc9a3a1f57be32d228a809f0eb349.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

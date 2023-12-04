@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bliu43jt3lg1v"]
+
+[ext_resource type="Script" path="res://Player/TopDown/TopDownPlayer.cs" id="1_43hj4"]
+[ext_resource type="Script" path="res://Player/TopDown/TopDownPlayerMovement.cs" id="2_8nrnd"]
+[ext_resource type="PackedScene" uid="uid://c6xadx7gtmdq6" path="res://Models/Quaternius/Characters/suit.tscn" id="3_35nct"]
+[ext_resource type="Script" path="res://Player/PlayerInteract.cs" id="4_jo8jv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ly453"]
+radius = 0.2
+
+[node name="TopDownPlayer" type="CharacterBody3D"]
+script = ExtResource("1_43hj4")
+
+[node name="PlayerMovement" type="Node3D" parent="."]
+script = ExtResource("2_8nrnd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ly453")
+
+[node name="Model" parent="." instance=ExtResource("3_35nct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.06)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.4, 0)
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+script = ExtResource("4_jo8jv")
+
+[node name="Equipment" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+
+[node name="EquipLeft" type="Node3D" parent="Equipment"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.625, 0, 0)
+
+[node name="EquipRight" type="Node3D" parent="Equipment"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.625, 0, 0)

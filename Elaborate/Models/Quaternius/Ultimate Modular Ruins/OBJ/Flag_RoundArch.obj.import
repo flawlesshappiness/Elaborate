@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bi2yixcvbfcr6"
+path="res://.godot/imported/Flag_RoundArch.obj-2cd87aa9a5ac77162d1e9e8f8a94e45c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Flag_RoundArch.obj-2cd87aa9a5ac77162d1e9e8f8a94e45c.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Flag_RoundArch.obj"
+dest_files=["res://.godot/imported/Flag_RoundArch.obj-2cd87aa9a5ac77162d1e9e8f8a94e45c.mesh", "res://.godot/imported/Flag_RoundArch.obj-2cd87aa9a5ac77162d1e9e8f8a94e45c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

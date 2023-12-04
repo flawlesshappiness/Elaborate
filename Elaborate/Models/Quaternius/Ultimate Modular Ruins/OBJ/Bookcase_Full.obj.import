@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://hco1q6juso7l"
+path="res://.godot/imported/Bookcase_Full.obj-b41b49dc4b0f8965fadf93da4a67abe0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bookcase_Full.obj-b41b49dc4b0f8965fadf93da4a67abe0.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Bookcase_Full.obj"
+dest_files=["res://.godot/imported/Bookcase_Full.obj-b41b49dc4b0f8965fadf93da4a67abe0.mesh", "res://.godot/imported/Bookcase_Full.obj-b41b49dc4b0f8965fadf93da4a67abe0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

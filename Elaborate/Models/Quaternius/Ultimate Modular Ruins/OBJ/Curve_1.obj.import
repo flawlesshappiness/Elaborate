@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bhqwa5ait5i1q"
+path="res://.godot/imported/Curve_1.obj-77e271ecf4e927efdf004531ea2dd754.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Curve_1.obj-77e271ecf4e927efdf004531ea2dd754.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Curve_1.obj"
+dest_files=["res://.godot/imported/Curve_1.obj-77e271ecf4e927efdf004531ea2dd754.mesh", "res://.godot/imported/Curve_1.obj-77e271ecf4e927efdf004531ea2dd754.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

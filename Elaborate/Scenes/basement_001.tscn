@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4i4sc0x56j3q"]
+
+[ext_resource type="Script" path="res://Scenes/basement_001.cs" id="1_38f1i"]
+[ext_resource type="PackedScene" uid="uid://bliu43jt3lg1v" path="res://Player/TopDown/TopDownPlayer.tscn" id="3_7t3gb"]
+[ext_resource type="Script" path="res://Camera/TopDownCameraFollow.cs" id="3_hxigx"]
+[ext_resource type="PackedScene" uid="uid://floc1fadytky" path="res://Models/Quaternius/Prefabs/dungeon/rooms/room_square_001.tscn" id="4_jlrrf"]
+
+[sub_resource type="Environment" id="Environment_kmv01"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.854902, 0.768627, 0.6, 1)
+fog_light_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+fog_density = 0.1467
+
+[node name="basement_001" type="Node3D"]
+script = ExtResource("1_38f1i")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kmv01")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 0, -2.2)
+visible = false
+
+[node name="TopDownPlayer" parent="." instance=ExtResource("3_7t3gb")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.45058e-08, 0, -4.76837e-07)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 1.19209e-07, 8, 4)
+script = ExtResource("3_hxigx")
+Speed = 4.0
+Offset = Vector3(0, 8, 2)
+
+[node name="room_square_001" parent="." instance=ExtResource("4_jlrrf")]

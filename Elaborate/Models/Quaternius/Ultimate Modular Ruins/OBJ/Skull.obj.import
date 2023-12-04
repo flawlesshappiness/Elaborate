@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://chiw68wgptb3w"
+path="res://.godot/imported/Skull.obj-693f1c23fff48939fc55eb41d21491ad.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Skull.obj-693f1c23fff48939fc55eb41d21491ad.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Skull.obj"
+dest_files=["res://.godot/imported/Skull.obj-693f1c23fff48939fc55eb41d21491ad.mesh", "res://.godot/imported/Skull.obj-693f1c23fff48939fc55eb41d21491ad.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

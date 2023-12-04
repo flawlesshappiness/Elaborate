@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://et3gr6vtq28c"
+path="res://.godot/imported/Chest.obj-d396cbae05617a4a9a26d02863031619.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Chest.obj-d396cbae05617a4a9a26d02863031619.mesh"]
+
+source_file="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Chest.obj"
+dest_files=["res://.godot/imported/Chest.obj-d396cbae05617a4a9a26d02863031619.mesh", "res://.godot/imported/Chest.obj-d396cbae05617a4a9a26d02863031619.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

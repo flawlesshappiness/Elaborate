@@ -17,16 +17,15 @@ public class LockData : IDataListItem<InteractableLock>
         Debug.Log($"LockData.Load");
         Debug.Indent++;
 
-        Debug.Log($"Path: {Path}");
-
         var node = Scene.Current.GetNode(Path) as InteractableLock;
         Debug.Log($"Lock: {node}");
 
         if (node != null)
         {
             node.Locked = Locked;
-            Debug.Log($"Locked: {node.Locked}");
         }
+
+        Log();
 
         Debug.Indent--;
     }
@@ -35,6 +34,9 @@ public class LockData : IDataListItem<InteractableLock>
     {
         Debug.Log($"LockData.Save");
         Debug.Indent++;
+
+        var path = reference.GetPath();
+        Path = path.ToString().Replace(Scene.Current.Name, Scene.Current.Data.SceneName);
 
         Locked = reference.Locked;
 
