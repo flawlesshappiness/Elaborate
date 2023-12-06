@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4i4sc0x56j3q"]
+[gd_scene load_steps=5 format=3 uid="uid://c4i4sc0x56j3q"]
 
 [ext_resource type="Script" path="res://Scenes/basement_001.cs" id="1_38f1i"]
 [ext_resource type="PackedScene" uid="uid://bliu43jt3lg1v" path="res://Player/TopDown/TopDownPlayer.tscn" id="3_7t3gb"]
 [ext_resource type="Script" path="res://Camera/TopDownCameraFollow.cs" id="3_hxigx"]
-[ext_resource type="PackedScene" uid="uid://floc1fadytky" path="res://Models/Quaternius/Prefabs/dungeon/rooms/room_square_001.tscn" id="4_jlrrf"]
 
 [sub_resource type="Environment" id="Environment_kmv01"]
 background_mode = 1
@@ -33,5 +32,3 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 script = ExtResource("3_hxigx")
 Speed = 4.0
 Offset = Vector3(0, 8, 2)
-
-[node name="room_square_001" parent="." instance=ExtResource("4_jlrrf")]

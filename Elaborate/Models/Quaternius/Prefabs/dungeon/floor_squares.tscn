@@ -3,7 +3,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bgx7ppxo0rkx3" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Floor_Squares.obj" id="1_47m6d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2531"]
-size = Vector3(2, 0.4, 2.2)
+size = Vector3(2, 0.4, 2)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jfdcg"]
 

@@ -5,6 +5,8 @@ using System.Reflection;
 
 public partial class NodeScript : Node
 {
+    private const bool DEBUG = false;
+
     public override void _Ready()
     {
         FindNodesFromAttribute(this, GetType());
@@ -14,7 +16,7 @@ public partial class NodeScript : Node
 
     public static void FindNodesFromAttribute(Node root, Type type)
     {
-        Debug.Log($"FindNodes_NodePathAttribute ({root.Name})");
+        Debug.Log(DEBUG, $"FindNodes_NodePathAttribute ({root.Name})");
         Debug.Indent++;
 
         var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
@@ -26,7 +28,7 @@ public partial class NodeScript : Node
             try
             {
                 FindNodeFromAttribute(root, field);
-                Debug.Log($"Found value for field: {field.Name}");
+                Debug.Log(DEBUG, $"Found value for field: {field.Name}");
             }
             catch (Exception e)
             {
@@ -56,7 +58,8 @@ public partial class NodeScript : Node
             return node;
         }
 
-        throw new NullReferenceException($"No valid attribute was found");
+        return null;
+        //throw new NullReferenceException($"No valid attribute was found");
     }
 
     public bool IsVisibleInTree()

@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_gw846")
-RoomPrefabs = PackedStringArray()
+DungeonPath = "res://Dungeon/Basement/"

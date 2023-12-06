@@ -25,7 +25,8 @@ public static class DungeonGenerator
             else
             {
                 position = empty_positions[random.RandiRange(0, empty_positions.Count - 1)];
-                empty_positions.Remove(position);
+                empty_positions.Where(p => p.X == position.X && p.Y == position.Y)
+                    .ToList().ForEach(p => empty_positions.Remove(p));
             }
 
             var room = new DungeonRoomInfo { X = position.X, Y = position.Y };
@@ -49,6 +50,10 @@ public class DungeonInfo
     public DungeonRoomInfo[,] Grid { get; set; }
 
     public List<DungeonRoomInfo> Rooms { get; set; } = new();
+
+    public int Width => Grid.GetLength(0);
+
+    public int Height => Grid.GetLength(1);
 
     private readonly List<Vector2I> _neighbor_offsets = new()
     {
@@ -74,6 +79,9 @@ public class DungeonInfo
 
     public bool HasRoom(int x, int y) =>
         IsValidRoom(x, y) && Grid[x, y] != null;
+
+    public DungeonRoomInfo GetRoom(int x, int y) =>
+        HasRoom(x, y) ? Grid[x, y] : null;
 
     public List<DungeonRoomInfo> GetRoomNeighbors(int x, int y)
     {
@@ -105,15 +113,14 @@ public class DungeonInfo
             for (int x = 0; x < Grid.GetLength(0); x++)
             {
                 var room = Grid[x, y];
-                s += room == null ? "." : "X";
+                var neis = GetRoomNeighbors(x, y);
+                s += room == null ? "." : neis.Count;
             }
 
             s += "|";
 
             Debug.Log(s);
         }
-
-        Debug.Log("");
     }
 }
 
@@ -121,4 +128,6 @@ public class DungeonRoomInfo
 {
     public int X { get; set; }
     public int Y { get; set; }
+
+    public DungeonRoom Room { get; set; }
 }
