@@ -32,3 +32,4 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 script = ExtResource("3_hxigx")
 Speed = 4.0
 Offset = Vector3(0, 8, 2)
+DebugOffset = Vector3(0, 20, 2)

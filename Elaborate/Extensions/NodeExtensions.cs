@@ -43,6 +43,26 @@ public static partial class NodeExtensions
         return null;
     }
 
+    public static List<T> GetNodesInChildren<T>(this Node node) where T : Node
+    {
+        var list = new List<T>();
+        Recursive(node);
+        return list;
+
+        void Recursive(Node current)
+        {
+            if (current.TryGetNode<T>(out var result))
+            {
+                list.Add(result);
+            }
+
+            foreach (var child in current.GetChildren())
+            {
+                Recursive(child);
+            }
+        }
+    }
+
     public static T GetNodeInParents<T>(this Node node) where T : Node
     {
         var current = node;
@@ -78,15 +98,28 @@ public static partial class NodeExtensions
 
     public static bool TryGetNode<T>(this Node parent, out T script) where T : Node
     {
-        script = null;
-
         try
         {
             script = parent.GetNode<T>(parent.GetPath());
-            return true;
+            return script != null;
         }
         catch
         {
+            script = null;
+            return false;
+        }
+    }
+
+    public static bool TryGetNode<T>(this Node parent, string path, out T script) where T : Node
+    {
+        try
+        {
+            script = parent.GetNodeOrNull<T>(path);
+            return script != null;
+        }
+        catch
+        {
+            script = null;
             return false;
         }
     }

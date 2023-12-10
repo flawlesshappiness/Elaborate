@@ -1,19 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://d38270ue8rpdi"]
 
-[ext_resource type="ArrayMesh" uid="uid://dl0hue462dsag" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Support_Tall.obj" id="1_ot5lt"]
+[ext_resource type="ArrayMesh" uid="uid://dsnsf4s3p0spw" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Column_Round_Short.obj" id="2_8tld6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4lia4"]
-size = Vector3(0.8, 2.4, 0.8)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ff02"]
+radius = 0.2
 
 [node name="pillar_corner" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0, 0)
-
-[node name="SupportTall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 0.6, 0, 0, 0, 1.5, 0.2, 0, 0)
-mesh = ExtResource("1_ot5lt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 1.2, 0)
-shape = SubResource("BoxShape3D_4lia4")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("CapsuleShape3D_3ff02")
+
+[node name="ColumnRoundShort" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+mesh = ExtResource("2_8tld6")

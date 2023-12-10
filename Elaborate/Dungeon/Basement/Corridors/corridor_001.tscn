@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx482uh6k1m22"]
+[gd_scene load_steps=4 format=3 uid="uid://cx482uh6k1m22"]
 
 [ext_resource type="Script" path="res://Dungeon/DungeonCorridor.cs" id="1_kp62a"]
 [ext_resource type="PackedScene" uid="uid://cyfkwl0oxwmoq" path="res://Models/Quaternius/Prefabs/dungeon/floor_squares.tscn" id="2_ll1on"]
+[ext_resource type="PackedScene" uid="uid://jvamsmug28kw" path="res://Models/Quaternius/Prefabs/dungeon/wall.tscn" id="3_3sh04"]
 
 [node name="corridor_001" type="Node3D"]
 script = ExtResource("1_kp62a")
@@ -9,4 +10,16 @@ script = ExtResource("1_kp62a")
 [node name="floor_squares" parent="." instance=ExtResource("2_ll1on")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.924622, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Wall_S" parent="." instance=ExtResource("3_3sh04")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Wall_N" parent="." instance=ExtResource("3_3sh04")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Wall_W" parent="." instance=ExtResource("3_3sh04")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, 0)
+
+[node name="Wall_E" parent="." instance=ExtResource("3_3sh04")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 0, 0)
