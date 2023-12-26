@@ -7,7 +7,6 @@
 
 [node name="room_square_001" type="Node3D"]
 script = ExtResource("1_yh642")
-Size = Vector2i(10, 10)
 
 [node name="walls" type="Node3D" parent="."]
 

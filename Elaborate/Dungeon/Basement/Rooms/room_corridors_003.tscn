@@ -1,0 +1,187 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhp5w80v7y5bb"]
+
+[ext_resource type="Script" path="res://Dungeon/DungeonRoom.cs" id="1_phywa"]
+[ext_resource type="PackedScene" uid="uid://cyfkwl0oxwmoq" path="res://Models/Quaternius/Prefabs/dungeon/floor_squares.tscn" id="2_clrqo"]
+[ext_resource type="PackedScene" uid="uid://jvamsmug28kw" path="res://Models/Quaternius/Prefabs/dungeon/wall.tscn" id="3_474qr"]
+[ext_resource type="PackedScene" uid="uid://d38270ue8rpdi" path="res://Models/Quaternius/Prefabs/dungeon/pillar_corner.tscn" id="4_qaf7b"]
+
+[node name="room_corridors_001" type="Node3D"]
+script = ExtResource("1_phywa")
+Size = Vector2i(10, 10)
+ChanceToSpawn = 0.1
+
+[node name="walls" type="Node3D" parent="."]
+
+[node name="floor_squares7" parent="walls" instance=ExtResource("2_clrqo")]
+
+[node name="floor_squares6" parent="walls" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="floor_squares3" parent="walls" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="floor_squares8" parent="walls" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="floor_squares9" parent="walls" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="floor_squares10" parent="walls" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="floor_squares11" parent="walls" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="floor_squares12" parent="walls" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="floor_squares13" parent="walls" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="wall" parent="walls" instance=ExtResource("3_474qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+
+[node name="wall2" parent="walls" instance=ExtResource("3_474qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+
+[node name="wall3" parent="walls" instance=ExtResource("3_474qr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 0, -2)
+
+[node name="wall4" parent="walls" instance=ExtResource("3_474qr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 0, 2)
+
+[node name="wall5" parent="walls" instance=ExtResource("3_474qr")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2, 0, 3)
+
+[node name="wall6" parent="walls" instance=ExtResource("3_474qr")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0, 3)
+
+[node name="wall7" parent="walls" instance=ExtResource("3_474qr")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3, 0, 2)
+
+[node name="wall8" parent="walls" instance=ExtResource("3_474qr")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3, 0, -2)
+
+[node name="pillar_corner" parent="walls" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
+
+[node name="pillar_corner2" parent="walls" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="pillar_corner3" parent="walls" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+
+[node name="pillar_corner4" parent="walls" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+
+[node name="N" type="Node3D" parent="."]
+
+[node name="Wall" parent="N" instance=ExtResource("3_474qr")]
+transform = Transform3D(1, 0, 1.90739e-07, 0, 1, 0, -1.90739e-07, 0, 1, 4.76837e-07, 0, -3)
+
+[node name="Door" type="Node3D" parent="N"]
+
+[node name="wall" parent="N/Door" instance=ExtResource("3_474qr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 0, -4)
+
+[node name="wall5" parent="N/Door" instance=ExtResource("3_474qr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, -4)
+
+[node name="floor_squares5" parent="N/Door" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="pillar_corner5" parent="N/Door" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
+
+[node name="pillar_corner4" parent="N/Door" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+
+[node name="E" type="Node3D" parent="."]
+
+[node name="Wall" parent="E" instance=ExtResource("3_474qr")]
+transform = Transform3D(1.47027e-07, 0, -1, 0, 1, 0, 1, 0, 1.47027e-07, 3, 0, 0)
+
+[node name="Door" type="Node3D" parent="E"]
+
+[node name="wall12" parent="E/Door" instance=ExtResource("3_474qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+
+[node name="wall16" parent="E/Door" instance=ExtResource("3_474qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1)
+
+[node name="floor_squares19" parent="E/Door" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="pillar_corner3" parent="E/Door" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
+
+[node name="pillar_corner4" parent="E/Door" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="S" type="Node3D" parent="."]
+
+[node name="Wall" parent="S" instance=ExtResource("3_474qr")]
+transform = Transform3D(1, 0, 1.90739e-07, 0, 1, 0, -1.90739e-07, 0, 1, 4.76837e-07, 0, 3)
+
+[node name="Door" type="Node3D" parent="S"]
+
+[node name="wall4" parent="S/Door" instance=ExtResource("3_474qr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 0, 4)
+
+[node name="wall8" parent="S/Door" instance=ExtResource("3_474qr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, 4)
+
+[node name="floor_squares23" parent="S/Door" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="pillar_corner" parent="S/Door" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+
+[node name="pillar_corner2" parent="S/Door" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+
+[node name="W" type="Node3D" parent="."]
+
+[node name="Wall" parent="W" instance=ExtResource("3_474qr")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, 0)
+
+[node name="Door" type="Node3D" parent="W"]
+
+[node name="wall9" parent="W/Door" instance=ExtResource("3_474qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
+
+[node name="wall13" parent="W/Door" instance=ExtResource("3_474qr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
+
+[node name="floor_squares15" parent="W/Door" instance=ExtResource("2_clrqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="pillar_corner4" parent="W/Door" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
+
+[node name="pillar_corner2" parent="W/Door" instance=ExtResource("4_qaf7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+
+[node name="NW" type="Node3D" parent="."]
+
+[node name="Wall" type="Node3D" parent="NW"]
+
+[node name="Door" type="Node3D" parent="NW"]
+
+[node name="NE" type="Node3D" parent="."]
+
+[node name="Wall" type="Node3D" parent="NE"]
+
+[node name="Door" type="Node3D" parent="NE"]
+
+[node name="SW" type="Node3D" parent="."]
+
+[node name="Wall" type="Node3D" parent="SW"]
+
+[node name="Door" type="Node3D" parent="SW"]
+
+[node name="SE" type="Node3D" parent="."]
+
+[node name="Wall" type="Node3D" parent="SE"]
+
+[node name="Door" type="Node3D" parent="SE"]

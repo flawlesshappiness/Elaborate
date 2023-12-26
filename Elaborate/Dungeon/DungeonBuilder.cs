@@ -8,7 +8,6 @@ public static class DungeonBuilder
         Debug.Indent++;
 
         CreateRooms(args);
-        //CreateCorridors(args);
 
         Debug.Indent--;
     }
@@ -27,21 +26,19 @@ public static class DungeonBuilder
     {
         //Debug.Log($"Creating room: {x}, {y}");
 
-        var resource = args.Resource;
-        var paths = resource.GetRooms();
-        var path = paths[args.Random.RandiRange(0, paths.Count - 1)];
-        var prefab = GD.Load(path) as PackedScene;
-        var node = prefab.Instantiate();
+        var resource = args.RoomRandomizer.Random();
+        var instance = GD.Load<PackedScene>(resource.Path).Instantiate();
+        var room = instance as DungeonRoom;
+        room.SetParent(Scene.Current);
+        room.Visible = true;
 
-        Scene.Current.AddChild(node);
-        var room = node.GetNodeInChildren<DungeonRoom>();
-        var position = new Vector3(x * args.RoomAreaSize, 0, y * args.RoomAreaSize);
+        var position = new Vector3(x * args.Resource.RoomSize, 0, y * args.Resource.RoomSize);
         room.GlobalPosition = position;
 
-        var nei_N = args.Info.GetRoom(x, y - 1);
-        var nei_E = args.Info.GetRoom(x + 1, y);
-        var nei_S = args.Info.GetRoom(x, y + 1);
-        var nei_W = args.Info.GetRoom(x - 1, y);
+        args.Info.Grid.TryGetNeighbour(x, y, Grid.Direction.North, out var nei_N);
+        args.Info.Grid.TryGetNeighbour(x, y, Grid.Direction.East, out var nei_E);
+        args.Info.Grid.TryGetNeighbour(x, y, Grid.Direction.South, out var nei_S);
+        args.Info.Grid.TryGetNeighbour(x, y, Grid.Direction.West, out var nei_W);
 
         room.Initialize();
         room.North.SetHasNeighbor(nei_N != null);
@@ -62,7 +59,19 @@ public class DungeonBuildArgs
 
     public RandomNumberGenerator Random { get; set; } = new();
 
+    public WeightedRandom<DungeonRoomResource> RoomRandomizer { get; set; } = new();
+
     public float TileSize = 2f;
 
-    public float RoomAreaSize = 16f;
+    public DungeonBuildArgs(DungeonResource resource, DungeonInfo info)
+    {
+        this.Resource = resource;
+        this.Info = info;
+
+        foreach (var path in Resource.RoomPaths)
+        {
+            var room = GD.Load<DungeonRoomResource>(path);
+            RoomRandomizer.AddElement(room, room.ChanceToSpawn);
+        }
+    }
 }

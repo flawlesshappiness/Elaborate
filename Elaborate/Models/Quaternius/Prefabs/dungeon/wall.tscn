@@ -2,8 +2,8 @@
 
 [ext_resource type="ArrayMesh" uid="uid://fpubmearrhdx" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Wall.obj" id="1_y4c4o"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_65e0y"]
-size = Vector3(2, 2, 0.2)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sy6tx"]
+points = PackedVector3Array(-1.01487, 2.01568, 0.048723, 0.92218, 2.01568, -0.26888, 0.985847, 0.0148548, -0.26888, -1.01487, 2.01568, -0.26888, 0.985847, 0.0148548, 0.048723, 0.985847, 1.98385, 0.048723, -0.983038, -0.0169802, -0.26888, -1.01487, 0.0783256, 0.048723, 1.01768, 0.0783256, -0.26888, 0.985847, 1.98385, -0.26888, -0.983038, -0.0169802, 0.048723, 1.01768, 0.0783256, 0.048723, -1.01487, 0.0783256, -0.26888, 0.92218, 2.01568, 0.048723)
 
 [node name="wall" type="Node3D"]
 
@@ -11,8 +11,7 @@ size = Vector3(2, 2, 0.2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 mesh = ExtResource("1_y4c4o")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_65e0y")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_sy6tx")

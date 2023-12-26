@@ -11,7 +11,7 @@ public static class DungeonGenerator
 
         var empty_positions = new List<Vector2I>();
 
-        var rooms_to_place = room_count;
+        var rooms_to_place = room_count - 2;
         while (rooms_to_place > 0)
         {
             Vector2I position = new Vector2I();
@@ -24,97 +24,89 @@ public static class DungeonGenerator
             }
             else
             {
-                position = empty_positions[random.RandiRange(0, empty_positions.Count - 1)];
-                empty_positions.Where(p => p.X == position.X && p.Y == position.Y)
-                    .ToList().ForEach(p => empty_positions.Remove(p));
+                position = empty_positions.Random();
+                empty_positions.RemoveAll(p => p.X == position.X && p.Y == position.Y);
             }
 
-            var room = new DungeonRoomInfo { X = position.X, Y = position.Y };
-            dungeon.Grid[position.X, position.Y] = room;
-            dungeon.Rooms.Add(room);
+            var room = AddRoom(position.X, position.Y);
 
-            var empty_neighbors = dungeon.GetNeighborPositions(position.X, position.Y)
-                .Where(p => dungeon.IsValidRoom(p.X, p.Y) && dungeon.Grid[p.X, p.Y] == null).ToList();
-
-            empty_positions.AddRange(empty_neighbors);
+            var empty_neighbors = dungeon.Grid.GetEmptyNeighbourPositions(position.X, position.Y);
+            empty_positions.AddRange(empty_neighbors.Values);
 
             rooms_to_place--;
         }
 
+        AddStartRoom();
+        AddEndRoom();
+
         return dungeon;
+
+        DungeonRoomInfo AddRoom(int x, int y)
+        {
+            var room = new DungeonRoomInfo { X = x, Y = y };
+            dungeon.Grid[x, y] = room;
+            dungeon.Rooms.Add(room);
+            return room;
+        }
+
+        void AddStartRoom()
+        {
+            var valid_positions = empty_positions
+                .Where(p => dungeon.Grid.GetNeighbours(p).Count(kvp => kvp.Value != null) == 1)
+                .ToList();
+            var position = valid_positions.Random();
+            empty_positions.RemoveAll(p => p.X == position.X && p.Y == position.Y);
+
+            var room = AddRoom(position.X, position.Y);
+            dungeon.StartRoom = room;
+        }
+
+        void AddEndRoom()
+        {
+            var position = empty_positions
+                .Where(p => dungeon.Grid.GetNeighbours(p).Count(kvp => kvp.Value != null) == 1 && p != dungeon.StartRoom.Position)
+                .OrderByDescending(p => p.DistanceTo(dungeon.StartRoom.Position))
+                .First();
+            empty_positions.RemoveAll(p => p.X == position.X && p.Y == position.Y);
+
+            var room = AddRoom(position.X, position.Y);
+            dungeon.EndRoom = room;
+        }
     }
 }
 
 public class DungeonInfo
 {
-    public DungeonRoomInfo[,] Grid { get; set; }
+    public Grid<DungeonRoomInfo> Grid { get; set; }
 
     public List<DungeonRoomInfo> Rooms { get; set; } = new();
 
-    public int Width => Grid.GetLength(0);
+    public DungeonRoomInfo StartRoom { get; set; }
 
-    public int Height => Grid.GetLength(1);
-
-    private readonly List<Vector2I> _neighbor_offsets = new()
-    {
-        new Vector2I(0, 1), // N
-        new Vector2I(1, 0), // E
-        new Vector2I(0, -1), // S
-        new Vector2I(-1, 0) // W
-    };
+    public DungeonRoomInfo EndRoom { get; set; }
 
     public DungeonInfo(int width, int height)
     {
-        Grid = new DungeonRoomInfo[width, height];
-    }
-
-    public List<Vector2I> GetNeighborPositions(int x, int y)
-    {
-        return _neighbor_offsets.Select(p => new Vector2I(p.X + x, p.Y + y)).ToList();
-    }
-
-    public bool IsValidRoom(int x, int y) =>
-        x >= 0 && x < Grid.GetLength(0) &&
-        y >= 0 && y < Grid.GetLength(1);
-
-    public bool HasRoom(int x, int y) =>
-        IsValidRoom(x, y) && Grid[x, y] != null;
-
-    public DungeonRoomInfo GetRoom(int x, int y) =>
-        HasRoom(x, y) ? Grid[x, y] : null;
-
-    public List<DungeonRoomInfo> GetRoomNeighbors(int x, int y)
-    {
-        var neighbors = new List<DungeonRoomInfo>();
-
-        foreach (var offset in _neighbor_offsets)
-        {
-            var nx = x + (int)offset.X;
-            var ny = y + (int)offset.Y;
-
-            if (!IsValidRoom(nx, ny)) continue;
-
-            var room = Grid[nx, ny];
-
-            if (room != null)
-            {
-                neighbors.Add(room);
-            }
-        }
-
-        return neighbors;
+        Grid = new Grid<DungeonRoomInfo>(width, height);
     }
 
     public void Log()
     {
-        for (int y = 0; y < Grid.GetLength(1); y++)
+        Debug.Log($"Dungeon: {Grid.Width},{Grid.Height}");
+        Debug.Log($"Rooms: {Rooms.Count}");
+
+        for (int y = 0; y < Grid.Height; y++)
         {
             var s = "|";
-            for (int x = 0; x < Grid.GetLength(0); x++)
+            for (int x = 0; x < Grid.Width; x++)
             {
                 var room = Grid[x, y];
-                var neis = GetRoomNeighbors(x, y);
-                s += room == null ? "." : neis.Count;
+                var neis = Grid.GetNeighbours(x, y).Select(kvp => kvp.Value).Where(n => n != null);
+                var v = room == null ? "." :
+                    room == StartRoom ? "S" :
+                    room == EndRoom ? "E" :
+                    neis.Count().ToString();
+                s += v;
             }
 
             s += "|";
@@ -128,6 +120,14 @@ public class DungeonRoomInfo
 {
     public int X { get; set; }
     public int Y { get; set; }
+    public Vector2I Position => new Vector2I(X, Y);
 
     public DungeonRoom Room { get; set; }
+
+    public override bool Equals(object obj)
+    {
+        var info = obj as DungeonRoomInfo;
+        if (info == null) return false;
+        return info.X == X && info.Y == Y;
+    }
 }

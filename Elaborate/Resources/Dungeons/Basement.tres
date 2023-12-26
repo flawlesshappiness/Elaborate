@@ -4,4 +4,6 @@
 
 [resource]
 script = ExtResource("1_gw846")
-DungeonPath = "res://Dungeon/Basement/"
+RoomSize = 10.0
+RoomPaths = PackedStringArray("res://Resources/Dungeons/Basement/room_corridors_001.tres", "res://Resources/Dungeons/Basement/room_corridors_002.tres", "res://Resources/Dungeons/Basement/room_corridors_003.tres", "res://Resources/Dungeons/Basement/room_square_001.tres")
+StartRoom = "res://Resources/Dungeons/Basement/room_start_001.tres"

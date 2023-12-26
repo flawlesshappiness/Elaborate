@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DungeonRoomResource" load_steps=2 format=3 uid="uid://bb5l8flswuac5"]
+
+[ext_resource type="Script" path="res://Dungeon/DungeonRoomResource.cs" id="1_se0w8"]
+
+[resource]
+script = ExtResource("1_se0w8")
+Path = "res://Dungeon/Basement/Rooms/room_corridors_001.tscn"
+ChanceToSpawn = 1.0

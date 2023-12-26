@@ -8,6 +8,7 @@
 [node name="room_corridors_001" type="Node3D"]
 script = ExtResource("1_s0311")
 Size = Vector2i(10, 10)
+ChanceToSpawn = 1.0
 
 [node name="walls" type="Node3D" parent="."]
 

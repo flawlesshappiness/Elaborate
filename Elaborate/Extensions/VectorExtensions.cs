@@ -30,4 +30,14 @@ public static class VectorExtensions
         return new Vector3 { X = v.X, Y = v.Y };
     }
     #endregion
+
+    #region VECTOR2I
+    public static float DistanceTo(this Vector2I v1, Vector2I v2)
+    {
+        float deltaX = v2.X - v1.X;
+        float deltaY = v2.Y - v1.Y;
+        float distance = (float)Mathf.Sqrt(deltaX * deltaX + deltaY * deltaY);
+        return distance;
+    }
+    #endregion
 }

@@ -2,9 +2,6 @@ using Godot;
 
 public partial class DungeonRoom : Node3DScript
 {
-    [Export]
-    public Vector2I Size;
-
     public DungeonRoomSection North { get; set; }
     public DungeonRoomSection East { get; set; }
     public DungeonRoomSection South { get; set; }
@@ -54,6 +51,8 @@ public class DungeonRoomSection
 
     public Node3D Door;
 
+    public Node3D Start;
+
     public DungeonRoomSection(DungeonRoom room, string prefix)
     {
         Room = room;
@@ -61,6 +60,7 @@ public class DungeonRoomSection
 
         room.TryGetNode($"{prefix}/Wall", out Wall);
         room.TryGetNode($"{prefix}/Door", out Door);
+        room.TryGetNode($"{prefix}/Start", out Start);
     }
 
     public void SetHasNeighbor(bool has_neighbor)

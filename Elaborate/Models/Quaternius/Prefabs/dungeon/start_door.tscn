@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvgnyr8ixw37y"]
+
+[ext_resource type="ArrayMesh" uid="uid://dvweu5ajflbcc" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Doors_RoundArch.obj" id="2_nnawr"]
+[ext_resource type="ArrayMesh" uid="uid://dfgcfrv6k5bm7" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Arch_Round.obj" id="3_e5gip"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgst6"]
+size = Vector3(2.5, 2.5, 0.3)
+
+[node name="start_door" type="Node3D"]
+
+[node name="ArchRound" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = ExtResource("3_e5gip")
+
+[node name="DoorsRoundArch" type="MeshInstance3D" parent="ArchRound"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+mesh = ExtResource("2_nnawr")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ArchRound"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArchRound/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.1)
+shape = SubResource("BoxShape3D_lgst6")

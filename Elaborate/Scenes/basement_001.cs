@@ -1,5 +1,3 @@
-using System.Linq;
-
 public partial class basement_001 : Scene
 {
     protected override void OnInitialize()
@@ -11,18 +9,15 @@ public partial class basement_001 : Scene
 
     private void GenerateDungeon()
     {
-        var dungeon = DungeonGenerator.GenerateDungeon(5, 5, 16);
+        var dungeon = DungeonGenerator.GenerateDungeon(8, 8, 25);
         var resource = DungeonResource.Load(DungeonResource.Type.Basement);
-        var args = new DungeonBuildArgs
-        {
-            Resource = resource,
-            Info = dungeon,
-            RoomAreaSize = 10
-        };
+        var args = new DungeonBuildArgs(resource, dungeon);
 
         DungeonBuilder.BuildDungeon(args);
 
         var player = Player.Instance as TopDownPlayer;
-        player.GlobalPosition = dungeon.Rooms.First().Room.GlobalPosition;
+        player.GlobalPosition = dungeon.StartRoom.Room.GlobalPosition;
+
+        dungeon.Log();
     }
 }
