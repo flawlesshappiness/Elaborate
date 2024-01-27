@@ -163,6 +163,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
 [node name="start_door" parent="N/Start" instance=ExtResource("5_y3fro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
+[node name="Position" type="Node3D" parent="N/Start"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.03661)
+
 [node name="E" type="Node3D" parent="."]
 
 [node name="Wall" parent="E" instance=ExtResource("2_ofpxq")]
@@ -180,6 +183,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
 
 [node name="start_door2" parent="E/Start" instance=ExtResource("5_y3fro")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 0)
+
+[node name="Position" type="Node3D" parent="E/Start"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="S" type="Node3D" parent="."]
 
@@ -199,6 +205,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 5)
 [node name="start_door3" parent="S/Start" instance=ExtResource("5_y3fro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
+[node name="Position" type="Node3D" parent="S/Start"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
 [node name="W" type="Node3D" parent="."]
 
 [node name="Wall" parent="W" instance=ExtResource("2_ofpxq")]
@@ -216,3 +225,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
 
 [node name="start_door3" parent="W/Start" instance=ExtResource("5_y3fro")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 0, 0)
+
+[node name="Position" type="Node3D" parent="W/Start"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)

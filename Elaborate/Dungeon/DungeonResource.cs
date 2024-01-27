@@ -10,6 +10,9 @@ public partial class DungeonResource : Resource
     [Export(PropertyHint.File)]
     public string StartRoom { get; set; }
 
+    [Export(PropertyHint.File)]
+    public string EndRoom { get; set; }
+
     [Export(PropertyHint.File, ".tres")]
     public string[] RoomPaths { get; set; }
 

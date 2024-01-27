@@ -11,7 +11,7 @@ public static class DungeonGenerator
 
         var empty_positions = new List<Vector2I>();
 
-        var rooms_to_place = room_count - 2;
+        var rooms_to_place = room_count;
         while (rooms_to_place > 0)
         {
             Vector2I position = new Vector2I();
@@ -51,25 +51,19 @@ public static class DungeonGenerator
 
         void AddStartRoom()
         {
-            var valid_positions = empty_positions
-                .Where(p => dungeon.Grid.GetNeighbours(p).Count(kvp => kvp.Value != null) == 1)
+            var valid_rooms = dungeon.Rooms
+                .OrderBy(room => dungeon.Grid.GetNeighbours(room.Position).Count(kvp => kvp.Value != null))
                 .ToList();
-            var position = valid_positions.Random();
-            empty_positions.RemoveAll(p => p.X == position.X && p.Y == position.Y);
-
-            var room = AddRoom(position.X, position.Y);
+            var room = valid_rooms.First();
             dungeon.StartRoom = room;
         }
 
         void AddEndRoom()
         {
-            var position = empty_positions
-                .Where(p => dungeon.Grid.GetNeighbours(p).Count(kvp => kvp.Value != null) == 1 && p != dungeon.StartRoom.Position)
-                .OrderByDescending(p => p.DistanceTo(dungeon.StartRoom.Position))
+            var room = dungeon.Rooms
+                .Where(room => dungeon.Grid.GetNeighbours(room.Position).Count(kvp => kvp.Value != null) < 4 && room != dungeon.StartRoom)
+                .OrderByDescending(room => room.Position.DistanceTo(dungeon.StartRoom.Position))
                 .First();
-            empty_positions.RemoveAll(p => p.X == position.X && p.Y == position.Y);
-
-            var room = AddRoom(position.X, position.Y);
             dungeon.EndRoom = room;
         }
     }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvgnyr8ixw37y"]
+[gd_scene load_steps=5 format=3 uid="uid://dvgnyr8ixw37y"]
 
 [ext_resource type="ArrayMesh" uid="uid://dvweu5ajflbcc" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Doors_RoundArch.obj" id="2_nnawr"]
 [ext_resource type="ArrayMesh" uid="uid://dfgcfrv6k5bm7" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Arch_Round.obj" id="3_e5gip"]
+[ext_resource type="Script" path="res://Interact/InteractableDungeonDoor.cs" id="3_mge7u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lgst6"]
 size = Vector3(2.5, 2.5, 0.3)
@@ -18,7 +19,14 @@ mesh = ExtResource("2_nnawr")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ArchRound"]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ArchRound/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.1)
 shape = SubResource("BoxShape3D_lgst6")
+
+[node name="DungeonFloor" type="Node3D" parent="ArchRound"]
+transform = Transform3D(1.42857, 0, 0, 0, 1.25, 0, 0, 0, 1, 0, 0, -0.1)
+script = ExtResource("3_mge7u")
+FloorDelta = -1
+DialogueNode = "DOOR_BASEMENT_START_001"

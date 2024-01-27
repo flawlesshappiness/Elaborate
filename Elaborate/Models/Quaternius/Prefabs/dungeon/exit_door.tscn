@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://j0meds7cidl5"]
+
+[ext_resource type="ArrayMesh" uid="uid://cv30ifjxvqrqb" path="res://Models/Quaternius/Ultimate Modular Ruins/OBJ/Trapdoor.obj" id="1_q67l0"]
+[ext_resource type="Script" path="res://Interact/InteractableDungeonDoor.cs" id="2_g6ap3"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jvc0k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ibv6y"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0pvlf"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kqd1r"]
+size = Vector3(2, 2, 2)
+
+[node name="exit_door" type="Node3D"]
+
+[node name="DungeonDoor" type="Node3D" parent="."]
+transform = Transform3D(1.42857, 0, 0, 0, 1.25, 0, 0, 0, 1, 0, 0, -0.1)
+script = ExtResource("2_g6ap3")
+FloorDelta = 1
+DialogueNode = "DOOR_BASEMENT_EXIT_001"
+
+[node name="Trapdoor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.386, 0, 0, 0)
+mesh = ExtResource("1_q67l0")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_jvc0k")
+surface_material_override/0 = SubResource("StandardMaterial3D_ibv6y")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_0pvlf")
+
+[node name="Trigger" type="StaticBody3D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_kqd1r")

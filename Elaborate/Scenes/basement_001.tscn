@@ -7,12 +7,14 @@
 [sub_resource type="Environment" id="Environment_kmv01"]
 background_mode = 1
 ambient_light_source = 2
-ambient_light_color = Color(0.854902, 0.768627, 0.6, 1)
+ambient_light_color = Color(0.607843, 0.85098, 0.596078, 1)
 fog_light_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 fog_density = 0.1467
 
 [node name="basement_001" type="Node3D"]
 script = ExtResource("1_38f1i")
+ExitSceneName = "corridor_001"
+ExitStartNode = "start_basement"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kmv01")

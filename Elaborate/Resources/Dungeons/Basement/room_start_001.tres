@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_oaurq")
-Path = "res://Dungeon/Basement/Rooms/room_square_001.tscn"
+Path = "res://Dungeon/Basement/Rooms/room_start_001.tscn"
 ChanceToSpawn = 0.1

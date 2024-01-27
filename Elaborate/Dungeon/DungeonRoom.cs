@@ -1,4 +1,6 @@
 using Godot;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class DungeonRoom : Node3DScript
 {
@@ -12,6 +14,12 @@ public partial class DungeonRoom : Node3DScript
     public DungeonRoomSection SouthWest { get; set; }
     public DungeonRoomSection SouthEast { get; set; }
 
+    public Node3D StartPosition { get; set; }
+
+    public List<DungeonRoomSection> Sections => new List<DungeonRoomSection> { North, East, South, West };
+
+    public List<DungeonRoomSection> Corners => new List<DungeonRoomSection> { NorthWest, NorthEast, SouthWest, SouthEast };
+
     public void Initialize()
     {
         North = new DungeonRoomSection(this, "N");
@@ -23,6 +31,50 @@ public partial class DungeonRoom : Node3DScript
         NorthEast = new DungeonRoomSection(this, "NE");
         SouthWest = new DungeonRoomSection(this, "SW");
         SouthEast = new DungeonRoomSection(this, "SE");
+
+        StartPosition = this;
+    }
+
+    public void SetNeighbours(DungeonRoomInfo north, DungeonRoomInfo east, DungeonRoomInfo south, DungeonRoomInfo west)
+    {
+        North.SetHasNeighbor(north != null);
+        East.SetHasNeighbor(east != null);
+        South.SetHasNeighbor(south != null);
+        West.SetHasNeighbor(west != null);
+    }
+
+    public void SetStartEnabled(bool is_start)
+    {
+        North.SetStartEnabled(false);
+        East.SetStartEnabled(false);
+        South.SetStartEnabled(false);
+        West.SetStartEnabled(false);
+
+        if (is_start)
+        {
+            var section = Sections
+                .Where(s => !s.HasNeighbor)
+                .ToList()
+                .Random();
+            section.SetStartEnabled(true);
+            section.SetWallEnabled(false);
+
+            if (section.Start.TryGetNode<Node3D>("Position", out var position))
+            {
+                StartPosition = position;
+            }
+        }
+    }
+
+    public void SetEndEnabled(bool is_end)
+    {
+        if (is_end)
+        {
+            if (this.TryGetNode<Node3D>("Position", out var position))
+            {
+                StartPosition = position;
+            }
+        }
     }
 
     public void UpdateCorners()
@@ -70,23 +122,28 @@ public class DungeonRoomSection
         SetDoorEnabled(has_neighbor);
     }
 
-    public void SetWallEnabled(bool enabled)
+    private void SetNodeEnabled(Node3D node, bool enabled)
     {
-        if (Wall != null)
+        if (node != null)
         {
-            Wall.Visible = enabled;
-            Wall.GetNodesInChildren<CollisionShape3D>()
+            node.Visible = enabled;
+            node.GetNodesInChildren<CollisionShape3D>()
                 .ForEach(c => c.Disabled = !enabled);
         }
     }
 
+    public void SetWallEnabled(bool enabled)
+    {
+        SetNodeEnabled(Wall, enabled);
+    }
+
     public void SetDoorEnabled(bool enabled)
     {
-        if (Door != null)
-        {
-            Door.Visible = enabled;
-            Door.GetNodesInChildren<CollisionShape3D>()
-                .ForEach(c => c.Disabled = !enabled);
-        }
+        SetNodeEnabled(Door, enabled);
+    }
+
+    public void SetStartEnabled(bool enabled)
+    {
+        SetNodeEnabled(Start, enabled);
     }
 }

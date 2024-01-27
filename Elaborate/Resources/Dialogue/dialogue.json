@@ -66,6 +66,15 @@
 	},
 
 	{
+		"id": "DOOR_BASEMENT_START_001",
+		"text": "The door leads up to [url=ENTER]the floor above[/url]."
+	},
+	{
+		"id": "DOOR_BASEMENT_EXIT_001",
+		"text": "The hatch leads down to [url=ENTER]the floor below[/url]."
+	},
+
+	{
 		"id": "DOOR_CORRIDOR_001",
 		"text": "The [url=ENTER]apartment corridor[/url]."
 	},
